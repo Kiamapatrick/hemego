@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — HEMEGO TECHPRISE</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1a3a6b;--blue-dark:#0e2247;--blue-light:#2d5499;--blue-pale:#e8eef7;--blue-mid:#4a6fa5;
+  --orange:#e8630a;--orange-pale:#fff0e8;
+  --white:#fff;--off-white:#f7f6f3;--gray-100:#f0eff0;--gray-200:#e2e1e3;
+  --gray-400:#9898a0;--gray-600:#5a5a64;--charcoal:#1c1c22;
+  --radius-xs:4px;--radius-sm:6px;--radius:12px;--radius-lg:20px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.05);--shadow:0 4px 16px rgba(0,0,0,.07);
+  --shadow-md:0 8px 32px rgba(0,0,0,.10);--shadow-lg:0 20px 60px rgba(0,0,0,.14);
+  --dark-bg:#060d1c;--dark-surface:#0b1628;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--charcoal);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.02em}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--blue-mid);border-radius:2px}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+
+/* FADE */
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .58s cubic-bezier(.4,0,.2,1),transform .58s cubic-bezier(.4,0,.2,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-up[data-delay="1"]{transition-delay:.1s}
+.fade-up[data-delay="2"]{transition-delay:.18s}
+.fade-up[data-delay="3"]{transition-delay:.26s}
+.fade-up[data-delay="4"]{transition-delay:.34s}
+.fade-up[data-delay="5"]{transition-delay:.42s}
+
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);padding:.72rem 1.4rem;font-size:.845rem;font-weight:600;cursor:pointer;transition:all .22s;font-family:'Space Grotesk',sans-serif;text-decoration:none}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(14,34,71,.25)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--orange);border:1.5px solid var(--orange);border-radius:var(--radius-sm);padding:.68rem 1.3rem;font-size:.845rem;font-weight:600;cursor:pointer;transition:all .22s;font-family:'Space Grotesk',sans-serif;text-decoration:none}
+.btn-secondary:hover{background:var(--orange-pale);transform:translateY(-1px)}
+.btn-wa{display:inline-flex;align-items:center;gap:.55rem;background:#25D366;color:#fff;border:none;border-radius:var(--radius-sm);padding:.72rem 1.4rem;font-size:.845rem;font-weight:600;cursor:pointer;transition:all .22s;font-family:'Space Grotesk',sans-serif;text-decoration:none}
+.btn-wa:hover{background:#1ebe5c;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
+.btn-ghost-dark{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:.72rem 1.4rem;font-size:.845rem;font-weight:600;cursor:pointer;transition:all .22s;font-family:'Space Grotesk',sans-serif;text-decoration:none}
+.btn-ghost-dark:hover{background:rgba(255,255,255,.12)}
+
+/* SECTION HELPERS */
+.section-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-pale);border:1px solid rgba(26,58,107,.1);border-radius:40px;padding:.28rem .8rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-family:'Space Grotesk',sans-serif;margin-bottom:.9rem}
+.section-eyebrow span{width:5px;height:5px;background:var(--orange);border-radius:50%}
+.section-eyebrow.on-dark{background:rgba(232,99,10,.12);border-color:rgba(232,99,10,.25);color:var(--orange)}
+.section-eyebrow.on-dark span{background:var(--orange)}
+.section-h2{font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.03em;margin-bottom:.75rem;line-height:1.1}
+.section-h2 em{font-style:normal;color:var(--orange)}
+.section-sub{font-size:.95rem;color:var(--gray-600);max-width:520px;margin:0 auto;line-height:1.75;font-weight:300}
+.section-sub.on-dark{color:rgba(255,255,255,.45)}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-header.left{text-align:left}
+.section-header.left .section-sub{margin:0}
+
+/* =========================================
+TOP NAV
+========================================= */
+.top-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(1,18,63,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+.top-nav.scrolled{background:rgba(6,13,28,.96)}
+.top-nav-inner{max-width:1400px;margin:auto;height:78px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;flex-direction:column;text-decoration:none}
+.brand-main{font-size:1rem;font-weight:700;letter-spacing:.14em;color:#fff}
+.brand-sub{font-size:.68rem;color:rgba(255,255,255,.45);letter-spacing:.18em;text-transform:uppercase}
+.desktop-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
+.desktop-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.86rem;font-weight:500;transition:.3s}
+.desktop-links a:hover,.desktop-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.nav-circle-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:.3s}
+.nav-circle-btn svg{width:18px;height:18px}
+.nav-circle-btn:hover{background:rgba(255,255,255,.08)}
+.wa-nav-btn{height:42px;padding:0 1.1rem;border-radius:999px;background:#e8630a;color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.82rem;font-weight:600;transition:all .22s}
+.wa-nav-btn:hover{background:#c44f06}
+.hamburger-btn{width:42px;height:42px;border:none;background:rgba(255,255,255,.03);border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer}
+.hamburger-btn span{width:16px;height:1.7px;background:#fff;border-radius:2px}
+
+/* DRAWER */
+.mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1200;opacity:0;visibility:hidden;transition:.3s}
+.mobile-drawer-overlay.active{opacity:1;visibility:visible}
+.mobile-drawer{position:fixed;top:0;right:-340px;width:320px;height:100vh;background:#07101f;z-index:1300;padding:2rem;overflow-y:auto;transition:.35s ease;border-left:1px solid rgba(255,255,255,.06)}
+.mobile-drawer.active{right:0}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
+.drawer-brand{color:#fff;font-weight:700;letter-spacing:.14em}
+.drawer-sub-text{font-size:.7rem;color:rgba(255,255,255,.4)}
+.drawer-close{background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+.drawer-section{margin-bottom:2rem}
+.drawer-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.35);margin-bottom:1rem}
+.drawer-section a{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.06);font-size:.92rem;transition:color .2s}
+.drawer-section a:hover{color:var(--orange)}
+
+/* BOTTOM MOBILE NAV */
+.bottom-mobile-nav{position:fixed;bottom:0;left:0;width:100%;height:72px;background:rgba(7,14,30,.92);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.06);display:none;align-items:center;justify-content:space-around;z-index:1500}
+.bottom-nav-item{background:none;border:none;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;color:rgba(255,255,255,.65);font-size:.68rem;cursor:pointer;font-family:'DM Sans',sans-serif}
+.bottom-nav-item svg{width:20px;height:20px}
+.bottom-nav-item.active{color:#fff}
+
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:500;width:50px;height:50px;border-radius:50%;background:var(--orange);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(232,99,10,.4);transition:all .22s;text-decoration:none;color:#fff}
+.float-wa:hover{transform:scale(1.1)}
+.float-wa-ping{position:absolute;top:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid white;animation:fp 2s ease-in-out infinite}
+@keyframes fp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.5}}
+
+/* FOOTER */
+footer{background:var(--blue-dark);color:white;padding:4.5rem 0 2rem;border-top:1px solid rgba(255,255,255,.06)}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.fbrand-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.02em}
+.fbrand-sub{font-size:.52rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-top:3px}
+.fbrand-desc{font-size:.8rem;color:rgba(255,255,255,.42);line-height:1.7;margin-top:1rem;max-width:270px}
+.fsocials{display:flex;gap:.5rem;margin-top:1.5rem}
+.fbtn{width:30px;height:30px;border-radius:var(--radius-sm);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:.7rem;color:rgba(255,255,255,.45);font-family:'Space Grotesk',sans-serif;font-weight:600}
+.fbtn:hover{background:rgba(255,255,255,.1);color:white}
+.fheading{font-family:'Space Grotesk',sans-serif;font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1.25rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.flinks a{color:rgba(255,255,255,.5);font-size:.8rem;transition:color .2s}
+.flinks a:hover{color:white}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:2rem;padding-top:1.5rem;flex-wrap:wrap;gap:1rem}
+.fcopy{font-size:.72rem;color:rgba(255,255,255,.28)}
+.fwa-link{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:.4rem .85rem;border-radius:var(--radius-sm);font-size:.72rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:500;text-decoration:none}
+.fwa-link:hover{background:rgba(255,255,255,.09);color:white}
+
+/* =========================================
+HERO
+========================================= */
+.services-hero{
+  position:relative;min-height:92vh;
+  background:var(--dark-bg);
+  display:flex;align-items:center;
+  overflow:hidden;padding-top:78px;
+}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:50px 50px}
+.hero-glow-a{position:absolute;width:700px;height:700px;border-radius:50%;background:rgba(26,58,107,.4);filter:blur(130px);top:-200px;left:-200px;pointer-events:none}
+.hero-glow-b{position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(232,99,10,.15);filter:blur(100px);bottom:-50px;right:0;pointer-events:none}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 480px;
+  gap:5rem;align-items:center;
+  padding:5rem 0;
+}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,99,10,.12);border:1px solid rgba(232,99,10,.25);border-radius:40px;padding:.3rem .85rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-family:'Space Grotesk',sans-serif;margin-bottom:1.5rem}
+.hero-eyebrow-pulse{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulseA 2s ease-in-out infinite}
+@keyframes pulseA{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-h1{font-size:clamp(2.6rem,4.8vw,4.2rem);color:#fff;line-height:1.04;letter-spacing:-.04em;margin-bottom:1.25rem}
+.hero-h1 em{font-style:normal;background:linear-gradient(120deg,var(--orange),#f5a228);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-p{font-size:1rem;color:rgba(255,255,255,.52);line-height:1.78;max-width:480px;font-weight:300;margin-bottom:2.5rem}
+.hero-ctas{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:3rem}
+.hero-stats{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07)}
+.hstat-n{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:#fff}
+.hstat-l{font-size:.72rem;color:rgba(255,255,255,.38);margin-top:2px}
+
+/* SERVICE STACK PREVIEW */
+.hero-right{position:relative}
+.svc-stack{display:flex;flex-direction:column;gap:.85rem}
+.svc-pill{
+  display:flex;align-items:center;gap:1rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius-lg);
+  padding:1.1rem 1.4rem;
+  backdrop-filter:blur(12px);
+  cursor:default;
+  transition:all .25s;
+}
+.svc-pill:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);transform:translateX(4px)}
+.svc-pill-icon{
+  width:40px;height:40px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.svc-pill-icon svg{width:18px;height:18px}
+.svc-pill-icon.blue{background:rgba(26,58,107,.45);border:1px solid rgba(74,111,165,.25);color:rgba(130,170,230,.9)}
+.svc-pill-icon.orange{background:rgba(232,99,10,.18);border:1px solid rgba(232,99,10,.28);color:var(--orange)}
+.svc-pill-icon.green{background:rgba(42,120,58,.2);border:1px solid rgba(42,120,58,.3);color:#5dd88a}
+.svc-pill-icon.purple{background:rgba(100,60,180,.2);border:1px solid rgba(120,80,200,.3);color:#b48ef5}
+.svc-pill-icon.teal{background:rgba(20,120,140,.2);border:1px solid rgba(20,120,140,.3);color:#5dcce8}
+.svc-pill-title{font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:600;color:#fff}
+.svc-pill-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.15rem}
+.svc-pill-tag{margin-left:auto;font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;background:rgba(232,99,10,.15);color:var(--orange);border:1px solid rgba(232,99,10,.22);border-radius:var(--radius-xs);padding:.2rem .5rem;white-space:nowrap;flex-shrink:0}
+.svc-pill-tag.blue-tag{background:rgba(26,58,107,.25);color:rgba(130,170,230,.9);border-color:rgba(74,111,165,.25)}
+
+/* =========================================
+SERVICES OVERVIEW GRID
+========================================= */
+.overview-section{padding:6rem 0;background:var(--white)}
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem}
+.ov-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);
+  padding:2rem 1.75rem;cursor:pointer;
+  transition:all .28s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:1rem;
+}
+.ov-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.ov-card:hover{box-shadow:0 12px 40px rgba(26,58,107,.1),0 0 0 1px rgba(26,58,107,.06);transform:translateY(-4px);border-color:rgba(26,58,107,.15)}
+.ov-card:hover::after{transform:scaleX(1)}
+.ov-card.c-blue::after{background:var(--blue)}
+.ov-card.c-orange::after{background:var(--orange)}
+.ov-card.c-green::after{background:#2a7a3a}
+.ov-card.c-purple::after{background:#6b3cb5}
+.ov-card.c-teal::after{background:#146e88}
+.ov-icon-wrap{
+  width:50px;height:50px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--gray-200);background:var(--gray-100);
+  transition:all .28s;
+}
+.ov-icon-wrap svg{width:22px;height:22px;stroke:var(--blue-mid)}
+.ov-card:hover .ov-icon-wrap{background:var(--blue-pale);border-color:rgba(26,58,107,.2)}
+.ov-card:hover .ov-icon-wrap svg{stroke:var(--blue)}
+.ov-card.c-orange:hover .ov-icon-wrap{background:rgba(232,99,10,.08);border-color:rgba(232,99,10,.2)}
+.ov-card.c-orange:hover .ov-icon-wrap svg{stroke:var(--orange)}
+.ov-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:var(--blue-dark)}
+.ov-desc{font-size:.82rem;color:var(--gray-600);line-height:1.68}
+.ov-meta{font-size:.7rem;color:var(--gray-400);font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:.4rem;margin-top:auto}
+.ov-meta-dot{width:4px;height:4px;border-radius:50%;background:var(--orange)}
+.ov-cta{font-size:.75rem;font-weight:600;color:var(--blue);font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:.3rem;margin-top:.25rem;transition:gap .22s}
+.ov-card:hover .ov-cta{gap:.55rem}
+
+/* =========================================
+DETAILED BREAKDOWN
+========================================= */
+.breakdown-section{padding:6rem 0;background:var(--off-white)}
+.breakdown-tabs{
+  display:flex;gap:.4rem;flex-wrap:wrap;
+  margin-bottom:3rem;
+  background:#fff;
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);
+  padding:.5rem;
+}
+.btab{
+  flex:1;min-width:120px;
+  padding:.6rem 1rem;border-radius:var(--radius-sm);
+  border:none;background:none;
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:500;
+  color:var(--gray-600);cursor:pointer;transition:all .22s;
+  white-space:nowrap;text-align:center;
+}
+.btab:hover{color:var(--blue)}
+.btab.active{background:var(--blue);color:#fff;box-shadow:0 2px 10px rgba(26,58,107,.2)}
+.breakdown-panel{display:none}
+.breakdown-panel.active{display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start}
+.panel-left{}
+.panel-intro{font-size:.95rem;color:var(--gray-600);line-height:1.78;font-weight:300;margin-bottom:2rem;max-width:560px}
+.service-list{display:flex;flex-direction:column;gap:.6rem}
+.svc-item{
+  display:flex;align-items:center;gap:.9rem;
+  padding:.9rem 1.1rem;
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-sm);
+  transition:all .22s;cursor:default;
+}
+.svc-item:hover{border-color:rgba(26,58,107,.18);box-shadow:var(--shadow-sm);transform:translateX(3px)}
+.svc-item-bar{width:3px;height:28px;border-radius:2px;flex-shrink:0}
+.svc-item-bar.blue{background:var(--blue)}
+.svc-item-bar.orange{background:var(--orange)}
+.svc-item-bar.green{background:#2a7a3a}
+.svc-item-bar.purple{background:#6b3cb5}
+.svc-item-bar.teal{background:#146e88}
+.svc-item-name{font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:600;color:var(--blue-dark)}
+.svc-item-note{font-size:.72rem;color:var(--gray-400);margin-top:.1rem}
+.svc-item-badge{margin-left:auto;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;padding:.2rem .55rem;border-radius:var(--radius-xs);flex-shrink:0}
+.svc-badge-fast{background:#e8f5ec;color:#2a7a3a}
+.svc-badge-popular{background:var(--orange-pale);color:var(--orange)}
+.svc-badge-same-day{background:rgba(26,58,107,.08);color:var(--blue)}
+.panel-cta-row{margin-top:2rem}
+.panel-right{}
+.panel-card{
+  background:var(--blue-dark);border-radius:var(--radius-lg);
+  padding:1.75rem;position:sticky;top:100px;
+}
+.panel-card-grid-bg{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:28px 28px}
+.panel-card{position:relative;overflow:hidden}
+.panel-card>*{position:relative;z-index:1}
+.panel-card-eyebrow{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem}
+.panel-card-title{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.6rem;letter-spacing:-.02em}
+.panel-card-sub{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.68;margin-bottom:1.5rem}
+.panel-card-points{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.5rem}
+.panel-point{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.6)}
+.panel-point-tick{width:16px;height:16px;border-radius:50%;background:rgba(42,120,58,.3);border:1px solid rgba(42,120,58,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.panel-point-tick svg{width:8px;height:8px;stroke:#5dd88a;stroke-width:2.5}
+.panel-card-ctas{display:flex;flex-direction:column;gap:.65rem}
+.panel-card-ctas .btn-wa{width:100%;justify-content:center}
+.panel-card-ctas .btn-ghost-dark{width:100%;justify-content:center}
+
+/* =========================================
+WHY HEMEGO
+========================================= */
+.why-section{padding:6rem 0;background:var(--dark-bg);position:relative;overflow:hidden}
+.why-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:44px 44px}
+.why-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(26,58,107,.3);filter:blur(120px);bottom:-200px;right:-100px;pointer-events:none}
+.why-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-top:3.5rem}
+.why-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius-lg);
+  padding:1.75rem;
+  transition:all .28s;position:relative;overflow:hidden;
+}
+.why-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
+.why-card-top-line{position:absolute;top:0;left:0;right:0;height:2px}
+.why-card-top-line.blue{background:linear-gradient(90deg,var(--blue),transparent)}
+.why-card-top-line.orange{background:linear-gradient(90deg,var(--orange),transparent)}
+.why-card-top-line.green{background:linear-gradient(90deg,#2a7a3a,transparent)}
+.why-card-top-line.purple{background:linear-gradient(90deg,#6b3cb5,transparent)}
+.why-card-top-line.teal{background:linear-gradient(90deg,#146e88,transparent)}
+.why-icon-box{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.1rem;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+}
+.why-icon-box svg{width:20px;height:20px;stroke:rgba(200,220,255,.7)}
+.why-card-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.5rem}
+.why-card-desc{font-size:.8rem;color:rgba(255,255,255,.42);line-height:1.7}
+.why-number{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700;color:rgba(255,255,255,.06);position:absolute;bottom:1rem;right:1.25rem;letter-spacing:-.04em}
+
+/* =========================================
+HOW IT WORKS
+========================================= */
+.how-section{padding:6rem 0;background:var(--white)}
+.how-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;margin-top:3.5rem;position:relative;
+}
+.how-steps::before{
+  content:'';position:absolute;
+  top:40px;left:calc(10% + 20px);right:calc(10% + 20px);
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue-pale) 20%,var(--blue-pale) 80%,transparent);
+}
+.how-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 .75rem;position:relative}
+.how-step-num-wrap{width:80px;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:1.6rem;position:relative}
+.how-step-ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--gray-200);transition:all .3s}
+.how-step-num{
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;border:1px solid var(--gray-200);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--blue-mid);
+  position:relative;z-index:1;transition:all .3s;
+  box-shadow:var(--shadow-sm);
+}
+.how-step:hover .how-step-num{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 0 24px rgba(26,58,107,.3)}
+.how-step:hover .how-step-ring{border-color:rgba(26,58,107,.2);transform:scale(1.1)}
+.how-step-title{font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:600;color:var(--blue-dark);margin-bottom:.45rem}
+.how-step-desc{font-size:.76rem;color:var(--gray-400);line-height:1.65}
+
+/* =========================================
+PRICING TEASER
+========================================= */
+.pricing-section{padding:6rem 0;background:var(--off-white)}
+.pricing-inner{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;
+  margin-top:3.5rem;
+}
+.price-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);
+  padding:1.75rem;transition:all .28s;
+}
+.price-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(26,58,107,.15)}
+.price-card.featured-price{
+  background:var(--blue-dark);border-color:transparent;
+  position:relative;overflow:hidden;
+}
+.price-card-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:28px 28px}
+.price-card.featured-price>*{position:relative;z-index:1}
+.price-cat{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem}
+.price-card.featured-price .price-cat{color:rgba(255,255,255,.5)}
+.price-card-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:var(--blue-dark);margin-bottom:.5rem}
+.price-card.featured-price .price-card-title{color:#fff}
+.price-range-tag{
+  display:inline-flex;align-items:baseline;gap:.3rem;
+  margin:1rem 0;
+}
+.price-from{font-size:.7rem;color:var(--gray-400);font-family:'Space Grotesk',sans-serif}
+.price-amount{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--blue-dark);letter-spacing:-.04em}
+.price-card.featured-price .price-amount{color:#fff}
+.price-card.featured-price .price-from{color:rgba(255,255,255,.4)}
+.price-currency{font-size:.8rem;color:var(--gray-400);font-weight:500}
+.price-card.featured-price .price-currency{color:rgba(255,255,255,.4)}
+.price-items{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.5rem}
+.price-items li{font-size:.8rem;color:var(--gray-600);display:flex;align-items:center;gap:.5rem}
+.price-items li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gray-400);flex-shrink:0}
+.price-card.featured-price .price-items li{color:rgba(255,255,255,.5)}
+.price-card.featured-price .price-items li::before{background:var(--orange)}
+.price-cta-btn{
+  width:100%;padding:.65rem;
+  background:var(--blue-pale);color:var(--blue);
+  border:1px solid rgba(26,58,107,.12);border-radius:var(--radius-sm);
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;
+  cursor:pointer;transition:all .22s;text-align:center;text-decoration:none;display:block;
+}
+.price-cta-btn:hover{background:var(--blue);color:#fff}
+.price-card.featured-price .price-cta-btn{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.15)}
+.price-card.featured-price .price-cta-btn:hover{background:var(--orange);border-color:var(--orange)}
+.pricing-disclaimer{text-align:center;margin-top:2rem;font-size:.78rem;color:var(--gray-400)}
+
+/* =========================================
+TESTIMONIALS
+========================================= */
+.testi-section{padding:6rem 0;background:var(--white)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem}
+.testi-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);
+  padding:1.75rem;transition:all .28s;position:relative;
+}
+.testi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.testi-quote-mark{font-size:3rem;line-height:.8;color:var(--blue-pale);font-family:Georgia,serif;margin-bottom:.75rem;display:block}
+.testi-text{font-size:.875rem;color:var(--gray-600);line-height:1.78;margin-bottom:1.25rem;font-style:italic}
+.testi-divider{height:1px;background:var(--gray-200);margin-bottom:1rem}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-pale),var(--gray-200));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:700;color:var(--blue);flex-shrink:0}
+.testi-name{font-family:'Space Grotesk',sans-serif;font-size:.83rem;font-weight:600;color:var(--blue-dark)}
+.testi-role{font-size:.7rem;color:var(--gray-400)}
+.testi-stars{display:flex;gap:2px;margin-left:auto}
+.testi-star{width:12px;height:12px;color:var(--orange)}
+
+/* =========================================
+FINAL CTA
+========================================= */
+.final-cta-section{padding:7rem 0;background:var(--blue-dark);position:relative;overflow:hidden;text-align:center}
+.fcta-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:40px 40px}
+.fcta-glow-a{position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(232,99,10,.14);filter:blur(100px);top:-100px;right:-100px;pointer-events:none}
+.fcta-glow-b{position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(26,58,107,.35);filter:blur(100px);bottom:-100px;left:-100px;pointer-events:none}
+.fcta-inner{position:relative;z-index:1}
+.fcta-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,99,10,.12);border:1px solid rgba(232,99,10,.25);border-radius:40px;padding:.3rem .85rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-family:'Space Grotesk',sans-serif;margin-bottom:1.5rem}
+.fcta-h2{font-size:clamp(2rem,4.2vw,3.4rem);color:#fff;letter-spacing:-.04em;margin-bottom:1rem;line-height:1.08}
+.fcta-h2 em{font-style:normal;color:var(--orange)}
+.fcta-p{font-size:.98rem;color:rgba(255,255,255,.48);max-width:460px;margin:0 auto 2.5rem;line-height:1.78;font-weight:300}
+.fcta-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.fcta-note{font-size:.76rem;color:rgba(255,255,255,.28)}
+.wa-icon-svg{display:inline-block;vertical-align:middle}
+
+/* =========================================
+RESPONSIVE
+========================================= */
+@media(max-width:980px){
+  .desktop-links,.wa-nav-btn{display:none}
+  .bottom-mobile-nav{display:flex}
+  body{padding-bottom:72px}
+  .hero-inner{grid-template-columns:1fr;gap:2rem}
+  .hero-right{display:none}
+  .overview-grid{grid-template-columns:repeat(2,1fr)}
+  .breakdown-panel.active{grid-template-columns:1fr}
+  .panel-right{display:none}
+  .how-steps{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .how-steps::before{display:none}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .pricing-inner{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .top-nav-inner{padding:0 1rem}
+  .mobile-drawer{width:100%;right:-100%}
+  .container{padding:0 1.25rem}
+  .overview-grid{grid-template-columns:1fr}
+  .breakdown-tabs{flex-direction:column}
+  .btab{text-align:left}
+  .why-grid{grid-template-columns:1fr}
+  .how-steps{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .fcta-btns{flex-direction:column;align-items:center}
+  .hero-ctas{flex-direction:column;align-items:flex-start}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav" id="topNav">
+  <div class="top-nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-main">HEMEGO</span>
+      <span class="brand-sub">Techprise</span>
+    </a>
+    <ul class="desktop-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="repairs.html">Repairs</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="journal.html">Journal</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-circle-btn">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20service" target="_blank" class="wa-nav-btn">WhatsApp</a>
+      <button class="hamburger-btn" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- DRAWER OVERLAY -->
+<div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+
+<!-- DRAWER -->
+<aside class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-top">
+    <div>
+      <div class="drawer-brand">HEMEGO</div>
+      <div class="drawer-sub-text">Techprise</div>
+    </div>
+    <button class="drawer-close" id="drawerClose">×</button>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-label">Navigation</div>
+    <a href="index.html">Home <span>→</span></a>
+    <a href="shop.html">Shop <span>→</span></a>
+    <a href="repair.html">Repairs <span>→</span></a>
+    <a href="services.html">Services <span>→</span></a>
+    <a href="journal.html">Journal <span>→</span></a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-label">Services</div>
+    <a href="#device-repair">Device Repairs <span>→</span></a>
+    <a href="#laptop-pc">Laptop & PC <span>→</span></a>
+    <a href="#gaming">Gaming <span>→</span></a>
+    <a href="#tech-support">Tech Support <span>→</span></a>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-label">Contact</div>
+    <a href="https://wa.me/254703768321" target="_blank">WhatsApp Us <span>→</span></a>
+    <a href="tel:+254703768321">Call Us <span>→</span></a>
+  </div>
+</aside>
+
+<!-- BOTTOM MOBILE NAV -->
+<nav class="bottom-mobile-nav">
+  <a href="index.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 11L12 4L21 11V20H15V14H9V20H3V11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="shop.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+    <span>Shop</span>
+  </a>
+  <a href="services.html" class="bottom-nav-item active">
+    <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>Services</span>
+  </a>
+  <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20service" target="_blank" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.₀₆₅ ２.₈₇₅ ₁.₂₁₃ ₃.₀₇₄ .₁₄₉ .₁₉₈ ₂.₀₉₆ ₃.₂ ₅.₀₇₇ ₄.₄₈₇ .₇₀₉ .₃₀₆ ₁.₂₶₂ .₄₈₉ ₁.?₉₄ .₶₂伍 .ₛ₁₂ .₂₂₇ ₁.?₶ .₁₉₅ ₁.?ₛ₁ .₁₁八年 .₵ᵦ₁ -․₀⼋伍 ₁.?₵ᵦ -․ᵦ₁九年 ₂₀₀六年 -₁。₋₁。四十三 -₀。₀七四 -₀。一二四 -₀。二七二 -₀。一九八 -₀。五七 -₀。三四七 z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</nav>
+
+<!-- =========================================
+HERO
+========================================= -->
+<section class="services-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left fade-up">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-pulse"></span>
+          Nairobi-Based Tech Services
+        </div>
+        <h1 class="hero-h1">
+          Tech Services<br>That Actually<br><em>Fix Things.</em>
+        </h1>
+        <p class="hero-p">
+          Repairs, support, software, gaming, data recovery — all done in-house by real engineers. No outsourcing. No guesswork. No inflated quotes.
+        </p>
+        <div class="hero-ctas">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20service%20quote" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.₀₉₆ ₃.₂ ₅.₀₇₇ ₄.₄₈₇ .₇₀₉ .₃₀₆ ₁.₂₆₂ .₄₈₉ ₁.?₉₄ .₆₂₅ .₇₁₂ .₂₂₇ ₁.?₆ .₁₉₅ ₁.?₇₁ .₁₁₈ .₅₇₁ -․₀₈₅ ₁.?₅₈ -․ᵦ₁₉ ₂₀₀₶ -₁。₋₁。四十三 -₀。₀七四 -₀。一二四 -₀。二七二 -₀。一九八 -₀。五七 -₀。三四七 z"/></svg>
+            WhatsApp Us Now
+          </a>
+          <a href="#services-overview" class="btn-ghost-dark">Explore Services</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hstat-n">2,400+</div>
+            <div class="hstat-l">Services Completed</div>
+          </div>
+          <div>
+            <div class="hstat-n">4.9 / 5</div>
+            <div class="hstat-l">Average Rating</div>
+          </div>
+          <div>
+            <div class="hstat-n">90 Days</div>
+            <div class="hstat-l">Service Warranty</div>
+          </div>
+          <div>
+            <div class="hstat-n">Same Day</div>
+            <div class="hstat-l">Emergency Available</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right fade-up" data-delay="2">
+        <div class="svc-stack">
+          <div class="svc-pill">
+            <div class="svc-pill-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+            </div>
+            <div>
+              <div class="svc-pill-title">Device Repair</div>
+              <div class="svc-pill-sub">Phones · screens · batteries · ports</div>
+            </div>
+            <div class="svc-pill-tag">From KES 1,500</div>
+          </div>
+          <div class="svc-pill">
+            <div class="svc-pill-icon teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="svc-pill-title">Laptop & PC</div>
+              <div class="svc-pill-sub">Repair · upgrades · OS install</div>
+            </div>
+            <div class="svc-pill-tag blue-tag">Popular</div>
+          </div>
+          <div class="svc-pill">
+            <div class="svc-pill-icon purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h2M6 14h4M16 10h2M16 14h2"/></svg>
+            </div>
+            <div>
+              <div class="svc-pill-title">Gaming Services</div>
+              <div class="svc-pill-sub">PS4 · PS5 · HDMI · controllers</div>
+            </div>
+            <div class="svc-pill-tag">Specialist</div>
+          </div>
+          <div class="svc-pill">
+            <div class="svc-pill-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </div>
+            <div>
+              <div class="svc-pill-title">Tech Support</div>
+              <div class="svc-pill-sub">Data recovery · virus · setup</div>
+            </div>
+            <div class="svc-pill-tag blue-tag">Available Now</div>
+          </div>
+          <div class="svc-pill">
+            <div class="svc-pill-icon orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <div class="svc-pill-title">Emergency Repair</div>
+              <div class="svc-pill-sub">Same-day · priority queue</div>
+            </div>
+            <div class="svc-pill-tag">Today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+SERVICES OVERVIEW
+========================================= -->
+<section class="overview-section" id="services-overview">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow"><span></span>What We Do</div>
+      <h2 class="section-h2" style="color:var(--blue-dark)">All Services, <em>One Workshop</em></h2>
+      <p class="section-sub">Everything you need for your devices — under one roof in Nairobi. No running between shops.</p>
+    </div>
+
+    <div class="overview-grid" id="services-overview-grid">
+
+      <div class="ov-card c-blue fade-up" data-delay="1" onclick="scrollToTab('device')">
+        <div class="ov-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="12" y2="15"/></svg>
+        </div>
+        <div class="ov-title">Device Repair</div>
+        <div class="ov-desc">Screen replacement, battery swap, charging ports, water damage recovery and software troubleshooting for all major phone brands.</div>
+        <div class="ov-meta"><span class="ov-meta-dot"></span> iPhone, Samsung, Xiaomi, Tecno, Infinix</div>
+        <div class="ov-cta">View services <span>→</span></div>
+      </div>
+
+      <div class="ov-card c-teal fade-up" data-delay="2" onclick="scrollToTab('laptop')">
+        <div class="ov-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="ov-title">Laptop & PC Services</div>
+        <div class="ov-desc">Full diagnostics, keyboard replacement, OS installation, performance optimization and hardware upgrades for all laptop brands.</div>
+        <div class="ov-meta"><span class="ov-meta-dot"></span> MacBook, HP, Lenovo, Dell, Asus</div>
+        <div class="ov-cta">View services <span>→</span></div>
+      </div>
+
+      <div class="ov-card c-purple fade-up" data-delay="3" onclick="scrollToTab('gaming')">
+        <div class="ov-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h2M7 9v2M14 10h4M17 13h1"/></svg>
+        </div>
+        <div class="ov-title">Gaming Services</div>
+        <div class="ov-desc">PlayStation 4 and 5 repairs, HDMI port soldering, overheating fixes, disc drive repair and controller restoration.</div>
+        <div class="ov-meta"><span class="ov-meta-dot"></span> PS4, PS5, Xbox</div>
+        <div class="ov-cta">View services <span>→</span></div>
+      </div>
+
+      <div class="ov-card c-green fade-up" data-delay="1" onclick="scrollToTab('support')">
+        <div class="ov-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="ov-title">Tech Support</div>
+        <div class="ov-desc">Data recovery, virus and malware removal, full system setup, device optimization and general IT support for individuals and businesses.</div>
+        <div class="ov-meta"><span class="ov-meta-dot"></span> All platforms and devices</div>
+        <div class="ov-cta">View services <span>→</span></div>
+      </div>
+
+      <div class="ov-card c-orange fade-up" data-delay="2" onclick="scrollToTab('special')">
+        <div class="ov-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="ov-title">Special Services</div>
+        <div class="ov-desc">Emergency same-day repair, device pickup and delivery within Nairobi, and bulk servicing contracts for businesses and institutions.</div>
+        <div class="ov-meta"><span class="ov-meta-dot"></span> Priority · Pickup · Business</div>
+        <div class="ov-cta">View services <span>→</span></div>
+      </div>
+
+      <!-- CTA card -->
+      <div class="ov-card fade-up" data-delay="3" style="background:var(--blue-dark);border-color:transparent;justify-content:space-between;cursor:default" id="ov-cta-card">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:28px 28px;border-radius:var(--radius-lg)"></div>
+        <div style="position:relative;z-index:1">
+          <div style="font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem">Not sure what you need?</div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.25;margin-bottom:.6rem">Describe your<br>issue to us</div>
+          <div style="font-size:.8rem;color:rgba(255,255,255,.42);line-height:1.65;margin-bottom:1.5rem">Send a message and our team will diagnose and quote you — no obligation.</div>
+        </div>
+        <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20have%20a%20tech%20issue%3A%20" target="_blank" class="btn-wa" style="position:relative;z-index:1;justify-content:center;font-size:.82rem">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３₀₆ １.２６₂ .₄₈₉ ₁.?₉₄ .₆₂₅ .₇₁₂ .₂₂₇ ₁.?₆ .₁₉₅ ₁.?₇₁ .₁₁₈ .₅₇₁ -․₀₈₅ ₁.?₅₈ -․₇₁₉ ₂₀₀₆ -₁。₋₁。四十三 -₀。₀七四 -₀。一二四 -₀。二七二 -₀。一九八 -₀。五七 -₀。三四七 z"/></svg>
+          Message Us
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+DETAILED BREAKDOWN
+========================================= -->
+<section class="breakdown-section" id="breakdown">
+  <div class="container">
+    <div class="section-header left fade-up">
+      <div class="section-eyebrow"><span></span>Service Breakdown</div>
+      <h2 class="section-h2" style="color:var(--blue-dark)">Every Service, <em>Explained</em></h2>
+      <p class="section-sub" style="margin:0">Select a category to see exactly what we offer and how to book.</p>
+    </div>
+
+    <div class="breakdown-tabs fade-up" data-delay="1" id="breakdownTabs">
+      <button class="btab active" onclick="switchTab(this,'device')" id="tab-device">Device Repair</button>
+      <button class="btab" onclick="switchTab(this,'laptop')" id="tab-laptop">Laptop & PC</button>
+      <button class="btab" onclick="switchTab(this,'gaming')" id="tab-gaming">Gaming</button>
+      <button class="btab" onclick="switchTab(this,'support')" id="tab-support">Tech Support</button>
+      <button class="btab" onclick="switchTab(this,'special')" id="tab-special">Special Services</button>
+    </div>
+
+    <!-- DEVICE REPAIR -->
+    <div class="breakdown-panel active fade-up" id="panel-device">
+      <div class="panel-left">
+        <p class="panel-intro">We repair all major smartphone brands using factory-grade tools and original-quality parts. Every repair is done by a certified technician and backed by our 90-day warranty.</p>
+        <div class="service-list">
+          <div class="svc-item">
+            <div class="svc-item-bar blue"></div>
+            <div><div class="svc-item-name">Phone Screen Repair</div><div class="svc-item-note">OLED & LCD · All major models · Original-grade panels</div></div>
+            <span class="svc-item-badge svc-badge-fast">1–2 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar blue"></div>
+            <div><div class="svc-item-name">Battery Replacement</div><div class="svc-item-note">Certified batteries · 80%+ original capacity · Same-day</div></div>
+            <span class="svc-item-badge svc-badge-popular">Popular</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar blue"></div>
+            <div><div class="svc-item-name">Charging Port Repair</div><div class="svc-item-note">USB-C & Lightning · Clean or replace · Fast service</div></div>
+            <span class="svc-item-badge svc-badge-fast">1–3 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar blue"></div>
+            <div><div class="svc-item-name">Water Damage Recovery</div><div class="svc-item-note">Ultrasonic cleaning · Board treatment · Best brought in fast</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Same Day</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar blue"></div>
+            <div><div class="svc-item-name">Software Troubleshooting</div><div class="svc-item-note">Bootloop · OS crash · App errors · Factory reset</div></div>
+            <span class="svc-item-badge svc-badge-fast">1 hr</span>
+          </div>
+        </div>
+        <div class="panel-cta-row">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20phone%20repair%20quote" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３₀₆ １.２６₂ .₄₈₉ ₁.?₉₄ .₆₂₅ .₇₁₂ .₂₂₇ ₁.?₆ .₁₉₅ ₁.?₇₁ .₁₁₈ .₅₇₁ -․₀₈₅ ₁.?₅₈ -․₇₁₉ ₂₀₀₆ -₁。₄₁₃ .₂₄₈ -․₶⁹⁴ .₂⁴⁸ -₁。₂八十九 .₁ seventy-three -₁。四十三 -₀。₀七四 -₀。一二四 -₀。二七二 -₀。一九八 -₀。五七 -₀。三四七 z"/></svg>
+            Book Device Repair
+          </a>
+        </div>
+      </div>
+      <div class="panel-right">
+        <div class="panel-card">
+          <div class="panel-card-grid-bg"></div>
+          <div class="panel-card-eyebrow">Device Repair</div>
+          <div class="panel-card-title">Certified. Warranted. Done Right.</div>
+          <div class="panel-card-sub">Every phone repair uses original-grade parts and comes with a written 90-day warranty. No surprise charges after drop-off.</div>
+          <div class="panel-card-points">
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Free diagnosis on drop-off</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Price agreed before work begins</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>M-Pesa accepted</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>90-day written warranty</div>
+          </div>
+          <div class="panel-card-ctas">
+            <a href="https://wa.me/254703768321?text=Hi%2C%20I%20need%20a%20phone%20repair%20quote" target="_blank" class="btn-wa" style="font-size:.82rem">WhatsApp for Estimate</a>
+            <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.82rem">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAPTOP & PC -->
+    <div class="breakdown-panel" id="panel-laptop">
+      <div class="panel-left">
+        <p class="panel-intro">From MacBook logic board repairs to routine Windows OS reinstalls — our laptop technicians handle it all. We stock common parts and can source others quickly.</p>
+        <div class="service-list">
+          <div class="svc-item">
+            <div class="svc-item-bar teal"></div>
+            <div><div class="svc-item-name">Laptop Repair & Diagnostics</div><div class="svc-item-note">Won't boot · power issues · display faults · motherboard</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Priority</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar teal"></div>
+            <div><div class="svc-item-name">Keyboard Replacement</div><div class="svc-item-note">All MacBook & Windows models · Full backlit keyboards</div></div>
+            <span class="svc-item-badge svc-badge-fast">3–6 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar teal"></div>
+            <div><div class="svc-item-name">OS Installation</div><div class="svc-item-note">Windows 10/11 · macOS · Ubuntu · Clean or alongside existing</div></div>
+            <span class="svc-item-badge svc-badge-fast">1–2 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar teal"></div>
+            <div><div class="svc-item-name">Performance Optimization</div><div class="svc-item-note">Slow laptop fix · thermal paste · bloatware removal · SSD upgrade</div></div>
+            <span class="svc-item-badge svc-badge-popular">Popular</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar teal"></div>
+            <div><div class="svc-item-name">Hardware Upgrades</div><div class="svc-item-note">RAM upgrade · SSD / HDD swap · screen replacement</div></div>
+            <span class="svc-item-badge svc-badge-fast">Same Day</span>
+          </div>
+        </div>
+        <div class="panel-cta-row">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20laptop%20service%20quote" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３₀₆ １.２６₂ .₄₈₉ ₁.?₉₄ .₆₂₅ .₇₁₂ .₂₂₇ ₁.?₆ .₁₉₅ ₁.?₇₁ .₁₁₈ .₅₇₁ -․₀₈₅ ₁.?₅₈ -․₇₁₉ ₂₀₀₆ -₁。₄₁₃ .₂₄₈ -․₆₉₄ .₂₄₈ -₁。₂八十九 .₁ seventy-three -₁。四十三 -₀。₀七四 -₀。一二四 -₀。二七二 -₀。一九八 -₀。五七 -₀。三四七 z"/></svg>
+            Book Laptop Service
+          </a>
+        </div>
+      </div>
+      <div class="panel-right">
+        <div class="panel-card">
+          <div class="panel-card-grid-bg"></div>
+          <div class="panel-card-eyebrow">Laptop & PC</div>
+          <div class="panel-card-title">Your Laptop Back at Full Speed</div>
+          <div class="panel-card-sub">We diagnose first, quote second. Whether it's a cracked screen or a failing drive, we fix it with honest pricing in KES.</div>
+          <div class="panel-card-points">
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>MacBook specialists</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>SSD upgrades from KES 3,500</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Data kept safe during repair</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>90-day warranty on all work</div>
+          </div>
+          <div class="panel-card-ctas">
+            <a href="https://wa.me/254703768321?text=Hi%2C%20I%20need%20a%20laptop%20service%20quote" target="_blank" class="btn-wa" style="font-size:.82rem">WhatsApp for Estimate</a>
+            <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.82rem">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAMING -->
+    <div class="breakdown-panel" id="panel-gaming">
+      <div class="panel-left">
+        <p class="panel-intro">Gaming console repairs require specialist skills. Our technicians are trained in PlayStation 4 and PS5 hardware, including HDMI port micro-soldering — the most common PS5 repair in Nairobi.</p>
+        <div class="service-list">
+          <div class="svc-item">
+            <div class="svc-item-bar purple"></div>
+            <div><div class="svc-item-name">PlayStation 4 Repair</div><div class="svc-item-note">HDMI · fan · overheating · disc drive · software errors</div></div>
+            <span class="svc-item-badge svc-badge-popular">Popular</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar purple"></div>
+            <div><div class="svc-item-name">PlayStation 5 Repair</div><div class="svc-item-note">HDMI port · disc drive · power issues · cooling system</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Specialist</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar purple"></div>
+            <div><div class="svc-item-name">HDMI Port Repair</div><div class="svc-item-note">Micro-soldering · broken pins · no signal · 4K output restore</div></div>
+            <span class="svc-item-badge svc-badge-fast">2–4 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar purple"></div>
+            <div><div class="svc-item-name">Controller Repair</div><div class="svc-item-note">Stick drift · USB-C port · button faults · vibration</div></div>
+            <span class="svc-item-badge svc-badge-fast">1–2 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar purple"></div>
+            <div><div class="svc-item-name">Software & System Issues</div><div class="svc-item-note">Corrupted database · crash loops · system software rebuild</div></div>
+            <span class="svc-item-badge svc-badge-fast">1 hr</span>
+          </div>
+        </div>
+        <div class="panel-cta-row">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20PlayStation%20repair%20quote" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３０６ １.２６２ .４８９ １.６９４ .６２５ .７１２ .２２７ １.３６ .１９５ １.８７１ .１₁₈ .５７₁ -․₀₈₅ ₁.?₅₈ -․₇₁₉ ₂₀₀₆ -₁。₄₁₃ .₂₄₈ -․₆₉₄ .₂₄₈ -₁。₂₈₉ .₁₇₃ -₁。₄₁₃ -₀。₀₇₄ -₀。₁₂₄ -₀。₂₇₂ -₀。₁₉₈ -₀。₅₇ -₀。₃₄₇ z"/></svg>
+            Book Gaming Repair
+          </a>
+        </div>
+      </div>
+      <div class="panel-right">
+        <div class="panel-card">
+          <div class="panel-card-grid-bg"></div>
+          <div class="panel-card-eyebrow">Gaming Services</div>
+          <div class="panel-card-title">Back in the Game, Fast</div>
+          <div class="panel-card-sub">HDMI micro-soldering is our specialty. Most PS5 HDMI repairs are completed same day with a 90-day warranty on the port.</div>
+          <div class="panel-card-points">
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>PS5 HDMI from KES 4,500</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Micro-soldering specialists</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Same-day in most cases</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>90-day port warranty</div>
+          </div>
+          <div class="panel-card-ctas">
+            <a href="https://wa.me/254703768321?text=Hi%2C%20I%20need%20a%20PS5%20HDMI%20repair%20quote" target="_blank" class="btn-wa" style="font-size:.82rem">WhatsApp for Estimate</a>
+            <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.82rem">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH SUPPORT -->
+    <div class="breakdown-panel" id="panel-support">
+      <div class="panel-left">
+        <p class="panel-intro">Sometimes the problem isn't physical. Software issues, data loss, viruses and misconfigurations are just as disruptive. We fix those too — remotely or in-store.</p>
+        <div class="service-list">
+          <div class="svc-item">
+            <div class="svc-item-bar green"></div>
+            <div><div class="svc-item-name">Data Recovery</div><div class="svc-item-note">Deleted files · failed drives · formatted storage recovery</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Priority</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar green"></div>
+            <div><div class="svc-item-name">Virus & Malware Removal</div><div class="svc-item-note">Full scan · removal · security hardening · clean install option</div></div>
+            <span class="svc-item-badge svc-badge-fast">1–2 hrs</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar green"></div>
+            <div><div class="svc-item-name">System Setup</div><div class="svc-item-note">New device setup · email · printer · network · account config</div></div>
+            <span class="svc-item-badge svc-badge-popular">Popular</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar green"></div>
+            <div><div class="svc-item-name">Device Optimization</div><div class="svc-item-note">Speed up slow phones and laptops without hardware changes</div></div>
+            <span class="svc-item-badge svc-badge-fast">1 hr</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar green"></div>
+            <div><div class="svc-item-name">General IT Support</div><div class="svc-item-note">Remote or on-site · individuals and small businesses</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Flexible</span>
+          </div>
+        </div>
+        <div class="panel-cta-row">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20tech%20support" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075 -.149 -.669 -1.612 -.916 -2.207 -.242 -.579 -.487 -.5 -.669 -.51 -.１７３ -.００８ -.３７１ -.０１ -.５７ -.０１ -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３０６ １.２６２ .４８９ １.６９４ .６２５ .７１２ .２２７ １.３６ .１９５ １.８７１ .１１８ .５７１ -.０８５ １.７５８ -.７₁₉ ₂₀₀₆ -₁。₄₁₃ .₂₄₈ -․₆₉₄ .₂₄₈ -₁。₂₈₉ .₁₇₃ -₁。₄₁₃ -₀。₀₇₄ -₀。₁₂₄ -₀。₂₇₂ -₀。₁₉₈ -₀。₅₇ -₀。₃₄₇ z"/></svg>
+            Get Tech Support
+          </a>
+        </div>
+      </div>
+      <div class="panel-right">
+        <div class="panel-card">
+          <div class="panel-card-grid-bg"></div>
+          <div class="panel-card-eyebrow">Tech Support</div>
+          <div class="panel-card-title">Your Data. Your Privacy. Handled with Care.</div>
+          <div class="panel-card-sub">We never access personal files unless necessary for recovery. All support work is transparent — we walk you through what we're doing.</div>
+          <div class="panel-card-points">
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Remote support available</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>No unnecessary data access</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Business contracts available</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>M-Pesa accepted</div>
+          </div>
+          <div class="panel-card-ctas">
+            <a href="https://wa.me/254703768321?text=Hi%2C%20I%20need%20tech%20support" target="_blank" class="btn-wa" style="font-size:.82rem">WhatsApp for Support</a>
+            <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.82rem">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIAL SERVICES -->
+    <div class="breakdown-panel" id="panel-special">
+      <div class="panel-left">
+        <p class="panel-intro">When standard options don't fit your situation — whether you need it done today, you can't leave the house, or you're managing multiple devices for a business — we have you covered.</p>
+        <div class="service-list">
+          <div class="svc-item">
+            <div class="svc-item-bar orange"></div>
+            <div><div class="svc-item-name">Emergency Same-Day Repair</div><div class="svc-item-note">Priority queue · faster turnaround · WhatsApp to check availability</div></div>
+            <span class="svc-item-badge svc-badge-popular">Popular</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar orange"></div>
+            <div><div class="svc-item-name">Pickup & Delivery</div><div class="svc-item-note">Nairobi-wide courier service · secure packaging · tracked</div></div>
+            <span class="svc-item-badge svc-badge-same-day">Nairobi</span>
+          </div>
+          <div class="svc-item">
+            <div class="svc-item-bar orange"></div>
+            <div><div class="svc-item-name">Bulk Business Servicing</div><div class="svc-item-note">10+ devices · schools · offices · discounted rates · SLA available</div></div>
+            <span class="svc-item-badge svc-badge-same-day">B2B</span>
+          </div>
+        </div>
+        <div class="panel-cta-row">
+          <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20special%20service%20quote" target="_blank" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52 -.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5 -.669 -.51 -.173 -.008 -.371 -.01 -.57 -.01 -.１９８ ０ -.５２ .０７４ -.７９２ .３７２ -.２７２ .２９７ -１.０４ １.０１６ -１.０４ ２.４７９ ０ １.４６２ １.０６５ ２.８７５ １.２１３ ３.０７４ .１４９ .１９８ ２.０９６ ３.２ ５.０７７ ４.４８７ .７０９ .３０６ １.２６２ .４８９ １.６９４ .６２５ .７１２ .２２７ １.３６ .１９５ １.８７１ .１１８ .５７１ -.０８５ １.７５８ -.７１９ ２.００６ -１。４１３ .２４８ -.６９４ .２４８ -１。２８９ .₁₇₃ -₁。₄₁₃ -₀。₀₇₄ -₀。₁₂₄ -₀。₂₇₂ -₀。₁₉₈ -₀。₅₇ -₀。₃₄₇ z"/></svg>
+            Book Special Service
+          </a>
+        </div>
+      </div>
+      <div class="panel-right">
+        <div class="panel-card">
+          <div class="panel-card-grid-bg"></div>
+          <div class="panel-card-eyebrow">Special Services</div>
+          <div class="panel-card-title">Fast, Flexible, Built Around You</div>
+          <div class="panel-card-sub">For businesses, schools, and anyone who needs their device back urgently — we offer flexible service arrangements across Nairobi.</div>
+          <div class="panel-card-points">
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Emergency same-day slots</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Nairobi-wide pickup available</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Bulk discounts for 10+ devices</div>
+            <div class="panel-point"><div class="panel-point-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Business SLA contracts</div>
+          </div>
+          <div class="panel-card-ctas">
+            <a href="https://wa.me/254703768321?text=Hi%2C%20I%20need%20a%20special%20service" target="_blank" class="btn-wa" style="font-size:.82rem">WhatsApp for Details</a>
+            <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.82rem">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================
+WHY HEMEGO
+========================================= -->
+<section class="why-section">
+  <div class="why-grid-bg"></div>
+  <div class="why-glow"></div>
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow on-dark"><span></span>Why Choose Us</div>
+      <h2 class="section-h2" style="color:#fff">Built Different.<br><em>Built for Nairobi.</em></h2>
+      <p class="section-sub on-dark">We're not a generic repair chain. We're a tech-first brand that actually cares about the quality of the work we put out.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up" data-delay="1">
+        <div class="why-card-top-line blue"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="why-card-title">Fast Turnaround</div>
+        <div class="why-card-desc">Most screen and battery repairs completed in 1–2 hours. We don't hold your device for days without reason. Time matters.</div>
+        <div class="why-number">01</div>
+      </div>
+      <div class="why-card fade-up" data-delay="2">
+        <div class="why-card-top-line orange"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="why-card-title">Skilled Technicians</div>
+        <div class="why-card-desc">Certified engineers, not apprentices. Every member of our repair team has been trained and tested on real hardware.</div>
+        <div class="why-number">02</div>
+      </div>
+      <div class="why-card fade-up" data-delay="3">
+        <div class="why-card-top-line green"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="why-card-title">Fair Pricing in KES</div>
+        <div class="why-card-desc">No dollar quotes, no import mark-ups. Our prices are in KES, agreed before any work begins, and never changed after drop-off.</div>
+        <div class="why-number">03</div>
+      </div>
+      <div class="why-card fade-up" data-delay="1">
+        <div class="why-card-top-line teal"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z"/></svg></div>
+        <div class="why-card-title">Genuine Parts</div>
+        <div class="why-card-desc">We use OEM-grade parts sourced directly. No generic knock-offs that fail within weeks. Quality you can actually feel.</div>
+        <div class="why-number">04</div>
+      </div>
+      <div class="why-card fade-up" data-delay="2">
+        <div class="why-card-top-line purple"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="why-card-title">Nairobi-Based Support</div>
+        <div class="why-card-desc">We are here. Walk in, call us, or WhatsApp. No bots, no overseas support desks. Real people in Nairobi who know your context.</div>
+        <div class="why-number">05</div>
+      </div>
+      <div class="why-card fade-up" data-delay="3">
+        <div class="why-card-top-line orange"></div>
+        <div class="why-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
+        <div class="why-card-title">90-Day Warranty</div>
+        <div class="why-card-desc">Every repair is covered for 90 days. If the same fault returns due to our work or parts, we fix it free. That is written policy, not a promise.</div>
+        <div class="why-number">06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+HOW IT WORKS
+========================================= -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow"><span></span>Process</div>
+      <h2 class="section-h2" style="color:var(--blue-dark)">How It <em>Works</em></h2>
+      <p class="section-sub">Five steps from problem to fixed. No surprises, no delays, no hidden costs along the way.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step fade-up" data-delay="1">
+        <div class="how-step-num-wrap"><div class="how-step-ring"></div><div class="how-step-num">01</div></div>
+        <div class="how-step-title">Contact Us</div>
+        <div class="how-step-desc">WhatsApp or call with your issue. Get a rough estimate before you even leave the house.</div>
+      </div>
+      <div class="how-step fade-up" data-delay="2">
+        <div class="how-step-num-wrap"><div class="how-step-ring"></div><div class="how-step-num">02</div></div>
+        <div class="how-step-title">Bring Device</div>
+        <div class="how-step-desc">Walk into our workshop in CBD or Westlands, or arrange a courier pickup in Nairobi.</div>
+      </div>
+      <div class="how-step fade-up" data-delay="3">
+        <div class="how-step-num-wrap"><div class="how-step-ring"></div><div class="how-step-num">03</div></div>
+        <div class="how-step-title">Diagnosis</div>
+        <div class="how-step-desc">Free inspection. We tell you exactly what is wrong and the final cost — before any work begins.</div>
+      </div>
+      <div class="how-step fade-up" data-delay="4">
+        <div class="how-step-num-wrap"><div class="how-step-ring"></div><div class="how-step-num">04</div></div>
+        <div class="how-step-title">Repair</div>
+        <div class="how-step-desc">Our technicians do the work. You get a text when it is ready. Most jobs done same day.</div>
+      </div>
+      <div class="how-step fade-up" data-delay="5">
+        <div class="how-step-num-wrap"><div class="how-step-ring"></div><div class="how-step-num">05</div></div>
+        <div class="how-step-title">Pickup or Delivery</div>
+        <div class="how-step-desc">Collect from the workshop or we send it back via courier. Pay via M-Pesa, cash, or card.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+PRICING TEASER
+========================================= -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow"><span></span>Pricing</div>
+      <h2 class="section-h2" style="color:var(--blue-dark)">Transparent Pricing, <em>No Guessing</em></h2>
+      <p class="section-sub">Prices depend on your specific device model and condition. These are starting ranges — WhatsApp us for an exact quote in 5 minutes.</p>
+    </div>
+    <div class="pricing-inner">
+      <div class="price-card fade-up" data-delay="1">
+        <div class="price-cat">Device Repair</div>
+        <div class="price-card-title">Phone Repairs</div>
+        <div class="price-range-tag">
+          <span class="price-from">from</span>
+          <span class="price-amount">1,500</span>
+          <span class="price-currency">KES</span>
+        </div>
+        <ul class="price-items">
+          <li>Screen replacement from KES 6,500</li>
+          <li>Battery replacement from KES 2,500</li>
+          <li>Charging port from KES 1,500</li>
+          <li>Water damage from KES 3,000</li>
+        </ul>
+        <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20phone%20repair%20price" target="_blank" class="price-cta-btn">Get Exact Quote</a>
+      </div>
+      <div class="price-card featured-price fade-up" data-delay="2">
+        <div class="price-card-grid"></div>
+        <div class="price-cat">Laptop & Gaming</div>
+        <div class="price-card-title">Laptop & Console Repairs</div>
+        <div class="price-range-tag">
+          <span class="price-from">from</span>
+          <span class="price-amount">3,500</span>
+          <span class="price-currency">KES</span>
+        </div>
+        <ul class="price-items">
+          <li>SSD upgrade from KES 3,500</li>
+          <li>OS installation from KES 2,500</li>
+          <li>PS5 HDMI repair from KES 4,500</li>
+          <li>MacBook keyboard from KES 8,000</li>
+        </ul>
+        <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20laptop%20or%20gaming%20repair%20price" target="_blank" class="price-cta-btn">Get Exact Quote</a>
+      </div>
+      <div class="price-card fade-up" data-delay="3">
+        <div class="price-cat">Tech Support</div>
+        <div class="price-card-title">Software & Support</div>
+        <div class="price-range-tag">
+          <span class="price-from">from</span>
+          <span class="price-amount">1,000</span>
+          <span class="price-currency">KES</span>
+        </div>
+        <ul class="price-items">
+          <li>Virus removal from KES 1,500</li>
+          <li>OS install from KES 2,500</li>
+          <li>Data recovery from KES 3,000</li>
+          <li>System setup from KES 1,000</li>
+        </ul>
+        <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20tech%20support%20price" target="_blank" class="price-cta-btn">Get Exact Quote</a>
+      </div>
+    </div>
+    <p class="pricing-disclaimer fade-up">All prices in KES and inclusive of labour. Parts cost confirmed before work begins. M-Pesa accepted.</p>
+  </div>
+</section>
+
+<!-- =========================================
+TESTIMONIALS
+========================================= -->
+<section class="testi-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow"><span></span>What People Say</div>
+      <h2 class="section-h2" style="color:var(--blue-dark)">Real Customers, <em>Real Results</em></h2>
+      <p class="section-sub">From students to business owners — here is what people actually said after using our services.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up" data-delay="1">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Brought in my PS5 with no HDMI signal. They diagnosed it in 20 minutes and fixed the port in 3 hours. Charged exactly what they quoted. No drama.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">BM</div>
+          <div>
+            <div class="testi-name">Brian M.</div>
+            <div class="testi-role">PS5 HDMI Repair · Westlands</div>
+          </div>
+          <div class="testi-stars">
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up" data-delay="2">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">iPhone screen was smashed and I needed it working before a meeting. I WhatsApped them, walked in, and had it back in 90 minutes. The screen quality is genuinely good.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">AW</div>
+          <div>
+            <div class="testi-name">Amina W.</div>
+            <div class="testi-role">iPhone 14 Screen · CBD</div>
+          </div>
+          <div class="testi-stars">
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up" data-delay="3">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Our company sent in 6 laptops for OS reinstalls and RAM upgrades. They did all of them in two days, invoiced cleanly, and even gave us a small discount. Will be using them going forward.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">JK</div>
+          <div>
+            <div class="testi-name">James K.</div>
+            <div class="testi-role">Bulk Laptop Service · Karen</div>
+          </div>
+          <div class="testi-stars">
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+            <svg class="testi-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+FINAL CTA
+========================================= -->
+<section class="final-cta-section">
+  <div class="fcta-grid-bg"></div>
+  <div class="fcta-glow-a"></div>
+  <div class="fcta-glow-b"></div>
+  <div class="container fcta-inner fade-up">
+    <div class="fcta-badge">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--orange);display:inline-block;animation:pulseA 2s ease-in-out infinite"></span>
+      Available Today
+    </div>
+    <h2 class="fcta-h2">Need Help With Your<br><em>Device Today?</em></h2>
+    <p class="fcta-p">Send us a message and get a response in minutes. No forms, no waiting — just real help from Nairobi's best tech team.</p>
+    <div class="fcta-btns">
+      <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20help%20with%20my%20device" target="_blank" class="btn-wa" style="font-size:.9rem;padding:.88rem 1.75rem">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+        WhatsApp Us Now
+      </a>
+      <a href="tel:+254703768321" class="btn-ghost-dark" style="font-size:.9rem;padding:.88rem 1.75rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.44 2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 极客时间
+      </a>
+    </div>
+    <div class="fcta-note">Walk-ins welcome &nbsp;·&nbsp; Nairobi CBD & Westlands &nbsp;·&nbsp; Mon–Sat 8am–7pm &nbsp;·&nbsp; Sunday 10am–4pm</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="fbrand-name">HEMEGO</div>
+        <div class="fbrand-sub">Techprise</div>
+        <p class="fbrand-desc">Nairobi's integrated tech ecosystem — premium devices, expert repairs, custom builds and professional support.</p>
+        <div class="fsocials">
+          <button class="fbtn">IG</button><button class="fbtn">TW</button>
+          <button class="fbtn">FB</button><button class="fbtn">YT</button>
+        </div>
+      </div>
+      <div>
+        <div class="fheading">Services</div>
+        <ul class="flinks">
+          <li><a href="#">Device Repair</a></li>
+          <li><a href="#">Laptop & PC</a></li>
+          <li><a href="#">Gaming Repair</a></li>
+          <li><a href="#">Tech Support</a></li>
+          <li><a href="#">Emergency Repair</a></li>
+          <li><a href="#">Business Bulk</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fheading">Shop</div>
+        <ul class="flinks">
+          <li><a href="shop.html">Smartphones</a></li>
+          <li><a href="shop.html">Laptops</a></li>
+          <li><a href="shop.html">Smartwatches</a></li>
+          <li><a href="shop.html">Audio</a></li>
+          <li><a href="shop.html">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fheading">Company</div>
+        <ul class="flinks">
+          <li><a href="#">About Hemego</a></li>
+          <li><a href="#">Our Workshop</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Warranty Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="fcopy">© 2025 Hemego Techprise. All rights reserved. Nairobi, Kenya.</div>
+      <a href="https://wa.me/254703768321" target="_blank" class="fwa-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5 -.669 -.51 -.173 -.008 -.371 -.01 -.57 -.01 -.198 0 -.52 .074 -.792 .372 -.272 .297 -1.04 1.0１６ -１．０４ ２．４７９ ０ １．４６２ １．０６５ ２．８７５ １．２１３ ３．０７４ .１４９ .１９８ ２．０９６ ３．２ ５．０７７ ４．４８７ .７０９ .３０６ １．２６２ .４８９ １．６９４ .６２５ .７１２ .２２７ １．３６ .１９５ １．８７１ .１１８ .５７１ -.０８５ １．７５８ -.７１９ ２．００６ -₁．４₁₃ .₂₄₈ -₀．₆₉₄ .₂₄₈ -₁．₂₈₉ .₁₇₃ -₁．₄₁₃ -₀．₀₇₄ -₀．₁₂₄ -₀．₂₇₂ -₀．₁₉₈ -₀．５₇ -₀．３₄₇z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Float WA -->
+<a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20help" target="_blank" class="float-wa">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+  <span class="float-wa-ping"></span>
+</a>
+
+<script>
+const WA='254703768321';
+function openWA(msg){window.open('https://wa.me/'+WA+(msg?'?text='+encodeURIComponent(msg):''),'_blank')}
+
+// NAV SCROLL
+const topNav=document.getElementById('topNav');
+window.addEventListener('scroll',()=>{topNav.classList.toggle('scrolled',scrollY>30)},{passive:true});
+
+// DRAWER
+const hamburgerBtn=document.getElementById('hamburgerBtn');
+const mobileDrawer=document.getElementById('mobileDrawer');
+const drawerOverlay=document.getElementById('drawerOverlay');
+const drawerClose=document.getElementById('drawerClose');
+function openDrawer(){mobileDrawer.classList.add('active');drawerOverlay.classList.add('active');document.body.style.overflow='hidden'}
+function closeDrawer(){mobileDrawer.classList.remove('active');drawerOverlay.classList.remove('active');document.body.style.overflow=''}
+if(hamburgerBtn) hamburgerBtn.addEventListener('click',openDrawer);
+if(drawerClose) drawerClose.addEventListener('click',closeDrawer);
+if(drawerOverlay) drawerOverlay.addEventListener('click',closeDrawer);
+
+// FADE UP
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:.06});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// BREAKDOWN TABS
+function switchTab(btn,id){
+  document.querySelectorAll('.btab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.breakdown-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel=document.getElementById('panel-'+id);
+  if(panel) panel.classList.add('active');
+}
+
+function scrollToTab(id){
+  const el=document.getElementById('breakdown');
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    const btn=document.getElementById('tab-'+id);
+    if(btn) switchTab(btn,id);
+  },400);
+}
+</script>
+</body>
+</html>

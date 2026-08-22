@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support &amp; Help Center | HEMEGO TECHPRISE</title>
+  <meta name="description" content="Get help from HEMEGO TECHPRISE — chat on WhatsApp, book a repair, check warranty status, or browse FAQs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/support.css">
+</head>
+<body>
+
+  <!-- ========== TOP NAV ========== -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-main">HEMEGO</span>
+        <span class="brand-sub">Techprise</span>
+      </a>
+      <ul class="desktop-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="repairs.html">Repairs</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-circle-btn" onclick="toggleCart()" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </button>
+        <a href="#" class="wa-nav-btn" onclick="openWA('Hi HEMEGO, I need support.')">Chat on WhatsApp</a>
+        <button class="hamburger-btn" onclick="toggleDrawer()" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MOBILE DRAWER ========== -->
+  <div class="mobile-drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-top">
+      <div>
+        <div class="drawer-brand">HEMEGO</div>
+        <div class="drawer-sub">TECHPRISE</div>
+      </div>
+      <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-label">Navigation</div>
+      <a href="index.html">Home <span>&rarr;</span></a>
+      <a href="shop.html">Shop <span>&rarr;</span></a>
+      <a href="repairs.html">Repairs <span>&rarr;</span></a>
+      <a href="services.html">Services <span>&rarr;</span></a>
+      <a href="journal.html">Journal <span>&rarr;</span></a>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-label">Categories</div>
+      <a href="shop.html#phones">Smartphones <span>&rarr;</span></a>
+      <a href="shop.html#laptops">Laptops <span>&rarr;</span></a>
+      <a href="shop.html#accessories">Accessories <span>&rarr;</span></a>
+      <a href="shop.html#gaming">Gaming PCs <span>&rarr;</span></a>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-label">Support</div>
+      <a href="support.html" class="active">Help Center <span>&rarr;</span></a>
+      <a href="repairs.html#booking">Book a Repair <span>&rarr;</span></a>
+      <a href="#" onclick="openWA('Hi HEMEGO, I need support.')">WhatsApp Us <span>&rarr;</span></a>
+    </div>
+  </aside>
+
+  <!-- ========== PAGE HERO ========== -->
+  <header class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-eyebrow"><span></span>Support</div>
+      <h1 class="page-hero-title fade-up">Need Help?</h1>
+      <p class="page-hero-sub fade-up">We're here for you. Message us on WhatsApp and get a reply from our Nairobi team, usually within minutes.</p>
+      <div class="page-hero-ctas fade-up">
+        <button class="btn-wa" style="width:auto; margin-top:0;" onclick="openWA('Hi HEMEGO, I need support.')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3 .79.8-2.93-.19-.3A7.95 7.95 0 1 1 12 20z"></path></svg>
+          Chat on WhatsApp
+        </button>
+        <a href="tel:+254703768321" class="btn-ghost-white">Call Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== CONTACT METHODS ========== -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title fade-up">Three ways to reach us</h2>
+
+      <div class="contact-grid stagger" style="margin-top:2.5rem;">
+
+        <div class="contact-card primary fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="#e8630a"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3 .79.8-2.93-.19-.3A7.95 7.95 0 1 1 12 20z"></path></svg>
+          </div>
+          <div class="contact-label">Fastest Response</div>
+          <div class="contact-title">WhatsApp</div>
+          <p class="contact-desc">Chat directly with our support team for repair updates, order help, or general questions.</p>
+          <button class="btn-wa" style="margin-top:0;" onclick="openWA('Hi HEMEGO, I need support.')">Message Us</button>
+        </div>
+
+        <div class="contact-card fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div class="contact-label">Mon&ndash;Sat, 8am&ndash;8pm</div>
+          <div class="contact-title">Call</div>
+          <p class="contact-desc">Speak with someone directly for urgent repair or order questions.</p>
+          <a href="tel:+254703768321" class="btn-secondary">+254 703 768 321</a>
+        </div>
+
+        <div class="contact-card fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="contact-label">Two Locations</div>
+          <div class="contact-title">Visit</div>
+          <p class="contact-desc">Our workshop, Nairobi CBD &amp; Westlands. Walk-ins welcome during business hours.</p>
+          <a href="#" class="btn-secondary">Get Directions</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUICK ACTIONS ========== -->
+  <section class="quick-actions-section">
+    <div class="container">
+      <div class="section-label">Quick Actions</div>
+      <h2 class="section-title fade-up">What do you need?</h2>
+
+      <div class="quick-actions-grid" style="margin-top:2.5rem;">
+
+        <a href="repairs.html#booking" class="qa-block">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <div class="qa-title">Book Repair</div>
+          <div class="qa-desc">Schedule a drop-off or pickup for your device.</div>
+        </a>
+
+        <a href="#" class="qa-block">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <div class="qa-title">Track Order</div>
+          <div class="qa-desc">Check the status of a recent shop order.</div>
+        </a>
+
+        <a href="#" class="qa-block">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="qa-title">Warranty Check</div>
+          <div class="qa-desc">Look up warranty coverage on a repair or device.</div>
+        </a>
+
+        <a href="#" class="qa-block" onclick="openWA('Hi HEMEGO, I would like to discuss a business or enterprise order.'); return false;">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <div class="qa-title">Business / Enterprise</div>
+          <div class="qa-desc">Bulk orders, device fleets, and corporate support.</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-label">FAQs</div>
+      <h2 class="section-title fade-up">Common questions</h2>
+
+      <div class="faq-list fade-up">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How long do repairs take?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most screen and battery repairs are done within 2&ndash;4 hours. Motherboard-level or water damage repairs typically take 2&ndash;5 working days, depending on parts availability.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do you use genuine parts?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. We source genuine and OEM-grade parts, and we'll always tell you upfront which option applies to your device before we start work.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What's your warranty policy?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Every repair comes with a warranty covering parts and labor. Warranty length depends on the repair type &mdash; we confirm the exact terms before you approve the job.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can you pick up my device?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, pickup and drop-off is available within Nairobi. Message us on WhatsApp with your location to arrange a time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do you repair water-damaged phones?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>We do. Bring the device in as soon as possible without powering it on &mdash; early intervention gives us the best chance of a full recovery.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BUSINESS HOURS ========== -->
+  <section class="hours-section">
+    <div class="container">
+      <div class="hours-card fade-up">
+        <div>
+          <div class="hours-label">Business Hours</div>
+          <div class="hours-title">When you can reach us</div>
+        </div>
+        <div class="hours-grid">
+          <div class="hours-row">
+            <div class="hours-day">Monday &ndash; Saturday</div>
+            <div class="hours-time">8:00 AM &ndash; 8:00 PM</div>
+          </div>
+          <div class="hours-row">
+            <div class="hours-day">Sunday</div>
+            <div class="hours-time">Closed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM MOBILE NAV ========== -->
+  <nav class="bottom-mobile-nav">
+    <a href="index.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Home
+    </a>
+    <a href="shop.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      Shop
+    </a>
+    <a href="repairs.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+      Repairs
+    </a>
+    <a href="#" class="bottom-nav-item" onclick="openWA('Hi HEMEGO, I need support.')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3 .79.8-2.93-.19-.3A7.95 7.95 0 1 1 12 20z"></path></svg>
+      WhatsApp
+    </a>
+  </nav>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="fbrand-name">HEMEGO</div>
+          <div class="fbrand-sub">Techprise</div>
+          <p class="fbrand-desc">Nairobi's trusted source for devices, accessories, and expert repairs — built on genuine parts and honest turnaround times.</p>
+          <div class="fsocials">
+            <a href="#" class="fbtn" aria-label="Instagram">IG</a>
+            <a href="#" class="fbtn" aria-label="X">X</a>
+            <a href="#" class="fbtn" aria-label="TikTok">TT</a>
+          </div>
+        </div>
+        <div>
+          <div class="fheading">Shop</div>
+          <ul class="flinks">
+            <li><a href="shop.html#phones">Smartphones</a></li>
+            <li><a href="shop.html#laptops">Laptops</a></li>
+            <li><a href="shop.html#accessories">Accessories</a></li>
+            <li><a href="shop.html#gaming">Gaming PCs</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fheading">Company</div>
+          <ul class="flinks">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="repairs.html">Repairs</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fheading">Support</div>
+          <ul class="flinks">
+            <li><a href="support.html">Help Center</a></li>
+            <li><a href="repairs.html#booking">Book a Repair</a></li>
+            <li><a href="support.html#faq">FAQs</a></li>
+            <li><a href="#" onclick="openWA('Hi HEMEGO, I need support.')">WhatsApp Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="fcopy">&copy; 2025 Hemego Techprise. All rights reserved.</div>
+        <button class="fwa" onclick="openWA('Hi HEMEGO, I need support.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3 .79.8-2.93-.19-.3A7.95 7.95 0 1 1 12 20z"></path></svg>
+          254 703 768 321
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== FLOATING WHATSAPP ========== -->
+  <button class="float-wa" onclick="openWA('Hi HEMEGO, I need support.')" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3 .79.8-2.93-.19-.3A7.95 7.95 0 1 1 12 20z"></path></svg>
+    <span class="float-wa-ping"></span>
+  </button>
+
+  <!-- ========== CART TOGGLE + PANEL ========== -->
+  <button class="cart-toggle" onclick="toggleCart()" aria-label="Open cart">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+  </button>
+
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-panel-header">
+      <div>
+        <div class="cart-panel-title">Your Cart</div>
+        <div class="cart-panel-count" id="cartCountLabel">Items you've added</div>
+      </div>
+      <button class="cart-panel-close" onclick="toggleCart()" aria-label="Close cart">&times;</button>
+    </div>
+    <ul class="cart-panel-list" id="cartPanelList"></ul>
+    <div class="cart-panel-total">
+      <span>Total</span>
+      <span id="cartPanelTotal">KES 0</span>
+    </div>
+    <div class="cart-panel-actions">
+      <button class="btn-wa" onclick="checkoutViaWhatsApp()">Checkout on WhatsApp</button>
+      <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="toggleCart()">Continue Browsing</button>
+    </div>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach((el) => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+</html>

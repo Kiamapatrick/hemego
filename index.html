@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEMEGO TECHPRISE — Nairobi's Premium Tech Ecosystem</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+
+
+  <nav class="top-nav" id="topNav">
+    <div class="top-nav-inner">
+
+      <!-- LEFT -->
+      <a href="index.html" class="brand">
+        <span class="brand-main">HEMEGO</span>
+        <span class="brand-sub">Techprise</span>
+      </a>
+
+      <!-- CENTER DESKTOP NAV -->
+      <ul class="desktop-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="repairs.html">Repairs</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+
+      <!-- RIGHT -->
+      <div class="nav-right">
+
+        <button class="nav-circle-btn" id="desktopSearchBtn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" />
+            <path d="M20 20L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <button class="nav-circle-btn">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="10" cy="20" r="1" />
+            <circle cx="18" cy="20" r="1" />
+          </svg>
+        </button>
+
+        <a href="https://wa.me/254703768321" class="wa-nav-btn">
+          WhatsApp
+        </a>
+
+        <!-- HAMBURGER -->
+        <button class="hamburger-btn" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- =========================
+MOBILE DRAWER
+========================= -->
+
+  <div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer">
+
+    <div class="drawer-top">
+      <div>
+        <div class="drawer-brand">HEMEGO</div>
+        <div class="drawer-sub">Techprise</div>
+      </div>
+
+      <button class="drawer-close" id="drawerClose">
+        ×
+      </button>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Navigation</div>
+
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="repairs.html">Repairs</a>
+      <a href="services.html">Services</a>
+      <a href="journal.html">Journal</a>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Categories</div>
+
+      <a href="#">Phones</a>
+      <a href="#">Laptops</a>
+      <a href="#">Gaming</a>
+      <a href="#">Audio</a>
+      <a href="#">Accessories</a>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Support</div>
+
+      <a href="#">Book Repair</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact</a>
+    </div>
+
+  </aside>
+
+  <!-- =========================
+BOTTOM MOBILE NAV
+========================= -->
+
+  <nav class="bottom-mobile-nav">
+
+    <a href="index.html" class="bottom-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 11L12 4L21 11V20H15V14H9V20H3V11Z" stroke="currentColor" stroke-width="1.8"
+          stroke-linejoin="round" />
+      </svg>
+      <span>Home</span>
+    </a>
+
+    <button class="bottom-nav-item" id="mobileSearchBtn">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" />
+        <path d="M20 20L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      <span>Search</span>
+    </button>
+
+    <button class="bottom-nav-item" id="mobileCartBtn">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="10" cy="20" r="1" />
+        <circle cx="18" cy="20" r="1" />
+      </svg>
+      <span>Cart</span>
+    </button>
+
+    <a href="https://wa.me/254703768321" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+
+  </nav>
+
+
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul class="drawer-links">
+      <li><a href="index.html" onclick="closeDrawer()">Home<span>→</span></a></li>
+      <li><a href="shop.html" onclick="closeDrawer()">Shop<span>→</span></a></li>
+      <li><a href="#accessories" onclick="closeDrawer()">Accessories<span>→</span></a></li>
+      <li><a href="#booking" onclick="closeDrawer()">Support<span>→</span></a></li>
+    </ul>
+    <div class="drawer-ctas">
+      <a href="#products" class="btn-primary" onclick="closeDrawer()">Shop Devices →</a>
+      <a href="#booking" class="btn-secondary" onclick="closeDrawer()">Book Repair</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow"><span></span> Nairobi's Premier Tech Ecosystem</div>
+        <h1 class="hero-h1">Smart Devices.<br><em>Expert Support.</em></h1>
+        <p class="hero-sub">Premium phones, laptops and accessories — paired with professional repair services, custom
+          builds and on-site technical support. One ecosystem, end to end.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn-primary">Shop Devices →</a>
+          <a href="#booking" class="btn-secondary">Book Repair</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">2,400+</div>
+            <div class="hero-stat-label">Devices Repaired</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">500+</div>
+            <div class="hero-stat-label">Products in Stock</div>
+          </div>
+          <div>
+            <div class="hero-stat-num"><span>4.9</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"
+                style="margin-left:.3rem">
+                <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+              </svg></div>
+            <div class="hero-stat-label">Customer Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-right-bg"></div>
+
+        <div class="hero-stage">
+
+          <!-- Flagship phone image -->
+          <img class="hero-phone-svg" src="img/iphone.png" alt="Hero iPhone" />
+
+          <!-- Floating badges -->
+          <div class="hero-badge badge-watch">
+            <span class="hero-badge-label">Wearables</span>
+            <span class="hero-badge-value"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="7" />
+                <path d="M12 8v4l2 1" />
+              </svg>Galaxy Watch 7</span>
+            <span class="hero-badge-sub">KES 19,500</span>
+          </div>
+          <div class="hero-badge badge-earbuds">
+            <span class="hero-badge-label">Audio</span>
+            <span class="hero-badge-value"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12V9a4 4 0 0 1 8 0v6a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-2z" />
+                <path d="M20 12V9a4 4 0 0 0-8 0v6a3 3 0 0 0 3 3h3a2 2 0 0 0 2-2v-2z" />
+              </svg>TWS Earbuds</span>
+            <span class="hero-badge-sub">From KES 3,500</span>
+          </div>
+          <div class="hero-badge badge-repair">
+            <span class="hero-badge-label">Repair Service</span>
+            <span class="hero-badge-value"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M21 3l-6 6m0 0A4 4 0 0 0 13 16l4.5 4.5a2 2 0 0 0 2.9 0l.6-.6a2 2 0 0 0 0-2.9L17 13a4 4 0 0 0-1-7z" />
+                <path d="M5 19l4-4" />
+              </svg>Screen Replaced</span>
+            <span class="hero-badge-sub">2hr turnaround</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="m-dot"></span>iPhone 16 Pro Max</span>
+      <span class="marquee-item"><span class="m-dot"></span>Samsung Galaxy S25</span>
+      <span class="marquee-item"><span class="m-dot"></span>MacBook Air M3</span>
+      <span class="marquee-item"><span class="m-dot"></span>Redmi Note 15 Pro+</span>
+      <span class="marquee-item"><span class="m-dot"></span>Screen Repairs</span>
+      <span class="marquee-item"><span class="m-dot"></span>Motherboard Diagnostics</span>
+      <span class="marquee-item"><span class="m-dot"></span>Custom PC Builds</span>
+      <span class="marquee-item"><span class="m-dot"></span>Software Setup</span>
+      <span class="marquee-item"><span class="m-dot"></span>Remote Support</span>
+      <span class="marquee-item"><span class="m-dot"></span>On-Site Services</span>
+      <span class="marquee-item"><span class="m-dot"></span>iPhone 16 Pro Max</span>
+      <span class="marquee-item"><span class="m-dot"></span>Samsung Galaxy S25</span>
+      <span class="marquee-item"><span class="m-dot"></span>MacBook Air M3</span>
+      <span class="marquee-item"><span class="m-dot"></span>Redmi Note 15 Pro+</span>
+      <span class="marquee-item"><span class="m-dot"></span>Screen Repairs</span>
+      <span class="marquee-item"><span class="m-dot"></span>Motherboard Diagnostics</span>
+      <span class="marquee-item"><span class="m-dot"></span>Custom PC Builds</span>
+      <span class="marquee-item"><span class="m-dot"></span>Software Setup</span>
+      <span class="marquee-item"><span class="m-dot"></span>Remote Support</span>
+      <span class="marquee-item"><span class="m-dot"></span>On-Site Services</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="products-header">
+        <div class="fade-up">
+          <div class="section-label">Featured Devices</div>
+          <h2 class="section-title">New Arrivals &amp; Best Sellers</h2>
+          <p class="section-sub">Genuine products · Competitive KES pricing · M-Pesa accepted</p>
+        </div>
+        <a href="shop.html" class="btn-primary fade-up">View All Products →</a>
+      </div>
+
+<div class="products-section-inner">
+
+  <!-- Featured strip: exactly the featured/hero items -->
+  <div class="featured-strip stagger">
+
+    <!-- Samsung S25 Ultra -->
+    <div class="pcard-feat">
+      <div class="pimg">
+        <img src="img/s25ultra.jpeg" alt="Samsung S25 Ultra 256GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge">Featured</span>
+
+      <button class="pwishlist">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21c-4.5-4-7-6.7-7-9.5 0-2.2 1.8-4 4-4 1.1 0 2.1.5 2.7 1.3.6-.8 1.6-1.3 2.7-1.3 2.2 0 4 1.8 4 4 0 2.8-2.5 5.5-7 9.5z" />
+        </svg>
+      </button>
+
+      <div class="pbody">
+        <div class="ptag">Flagship Smartphone</div>
+        <div class="pname">Samsung S25 Ultra 256GB</div>
+        <div class="pbrand">Samsung · 256GB</div>
+        <div class="pprice">
+          KES 122,000 
+          <span class="pprice-old">KES 145,000</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+          <span class="pstock">✓ In Stock</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- iPhone 13 Pro Max -->
+    <div class="pcard-feat">
+      <div class="pimg">
+        <img src="img/s24ultra.jpeg" alt="Samsung S24 Ultra 256GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge">Featured</span>
+
+      <button class="pwishlist">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21c-4.5-4-7-6.7-7-9.5 0-2.2 1.8-4 4-4 1.1 0 2.1.5 2.7 1.3.6-.8 1.6-1.3 2.7-1.3 2.2 0 4 1.8 4 4 0 2.8-2.5 5.5-7 9.5z" />
+        </svg>
+      </button>
+
+      <div class="pbody">
+        <div class="ptag">Flagship Smartphone</div>
+        <div class="pname">Samsung S24 Ultra 256GB</div>
+        <div class="pbrand">Samsung · 256GB Blue</div>
+
+        <div class="pprice">
+          KES 86,000
+          <span class="pprice-old">KES 90,500</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+          <span class="pstock">✓ In Stock</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Uniform grid: everything else -->
+  <div class="products-grid-uniform stagger">
+
+
+    <!-- iPhone 13 Pro -->
+    <div class="pcard-sm">
+      <div class="pimg">
+        <img src="img/img3.jpeg" alt="iPhone 13 Pro 256GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge pbadge-new">New</span>
+
+      <div class="pbody">
+        <div class="ptag">Flagship Smartphone</div>
+        <div class="pname">iPhone 13 Pro</div>
+        <div class="pbrand">Apple · 256GB</div>
+
+        <div class="pprice">
+          KES 58,000
+          <span class="pprice-old">KES 60,000</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- iPhone 13 -->
+    <div class="pcard-sm">
+      <div class="pimg">
+        <img src="img/img2.jpeg" alt="iPhone 13 256GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge" style="background:var(--orange)">11% Off</span>
+
+      <div class="pbody">
+        <div class="ptag">Smartphone</div>
+        <div class="pname">iPhone 13 256GB</div>
+        <div class="pbrand">Apple · 256GB</div>
+
+        <div class="pprice">
+          KES 47,000
+          <span class="pprice-old">KES 55,000</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- iPhone 13 128GB -->
+    <div class="pcard-sm">
+      <div class="pimg">
+        <img src="img/img1.jpeg" alt="iPhone 13 128GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge pbadge-new">New</span>
+
+      <div class="pbody">
+        <div class="ptag">Smartphone</div>
+        <div class="pname">iPhone 13 128GB</div>
+        <div class="pbrand">Apple · 128GB</div>
+
+        <div class="pprice">
+          KES 45,000
+          <span class="pprice-old">KES 47,500</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Samsung S24 Ultra -->
+    <div class="pcard-sm">
+      <div class="pimg">
+        <img src="img/img4.jpeg" alt="iPhone 13 Pro Max 256GB" style="max-width:100%;height:auto;" />
+      </div>
+
+      <span class="pbadge pbadge-new">New</span>
+
+      <div class="pbody">
+        <div class="ptag">Smartphone</div>
+        <div class="pname">iPhone 13 Pro Max 256GB</div>
+        <div class="pbrand">Apple · 256GB</div>
+
+        <div class="pprice">
+        KES 68,000
+          <span class="pprice-old">KES 70,000</span>
+        </div>
+
+        <div class="pcta">
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section fade-up" id="services">
+    <div class="container">
+      <div class="services-header">
+        <div>
+          <div class="section-label">Technical Services</div>
+          <h2 class="section-title">Repair. Upgrade. Support.</h2>
+          <p class="section-sub">Professional tech services with full diagnostic transparency</p>
+        </div>
+        <a href="#booking" class="btn-secondary">Book a Service</a>
+      </div>
+      <div class="services-grid stagger">
+        <div class="sblock dark">
+          <div class="stag">Most Popular</div>
+          <div class="sicon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="14" rx="3" stroke="rgba(255,255,255,.7)" stroke-width="1.5" />
+              <path d="M8 22h8M12 18v4" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="stitle">Screen &amp; Display Repairs</div>
+          <p class="sdesc">Phone and laptop screen replacements with OEM-grade components. Most repairs completed
+            same-day with a 3-month parts and labour warranty.</p>
+          <span class="slink">Get Estimate →</span>
+          <div class="sarrow">→</div>
+        </div>
+        <div class="sblock">
+          <div class="stag">Advanced Repair</div>
+          <div class="sicon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--blue)" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="stitle">Motherboard &amp; Port Repair</div>
+          <p class="sdesc">Component-level diagnostics and microsoldering. Charging ports, USB-C, and logic board
+            repairs for phones and laptops — with precision tools.</p>
+          <div class="sarrow">→</div>
+        </div>
+        <div class="sblock">
+          <div class="stag">Software Services</div>
+          <div class="sicon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M8 9l3 3-3 3M13 15h3" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--blue)" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div class="stitle">Software Installation &amp; Recovery</div>
+          <p class="sdesc">OS installation, driver updates, data recovery, virus removal and performance optimization —
+            available remotely or on-site across Nairobi.</p>
+          <div class="sarrow">→</div>
+        </div>
+        <div class="sblock">
+          <div class="stag">On-Site · Remote</div>
+          <div class="sicon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="var(--blue)" stroke-width="1.5" />
+              <path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18" stroke="var(--blue)"
+                stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="stitle">Remote &amp; On-Site Support</div>
+          <p class="sdesc">We come to you. Office setups, network configuration, IT audits and professional system
+            support — covering all major Nairobi zones.</p>
+          <div class="sarrow">→</div>
+        </div>
+      </div>
+      <!-- Service addon row -->
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;margin-top:1px">
+        <div class="sblock" style="padding:2rem">
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="sicon" style="margin-bottom:0;flex-shrink:0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="4" width="16" height="16" rx="2" stroke="var(--blue)" stroke-width="1.5" />
+                <path d="M8 2v3M16 2v3M8 19v3M16 19v3M2 8h3M2 16h3M19 8h3M19 16h3" stroke="var(--blue)"
+                  stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <div class="stag" style="margin-bottom:.2rem">Hardware</div>
+              <div class="stitle" style="font-size:.9rem;margin-bottom:.2rem">Battery Replacement</div>
+              <p class="sdesc" style="font-size:.78rem">Genuine batteries for all major brands. Full health restored,
+                warranty included.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sblock" style="padding:2rem">
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="sicon" style="margin-bottom:0;flex-shrink:0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12l7-7 7 7" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <div class="stag" style="margin-bottom:.2rem">Upgrade</div>
+              <div class="stitle" style="font-size:.9rem;margin-bottom:.2rem">RAM &amp; Storage Upgrades</div>
+              <p class="sdesc" style="font-size:.78rem">Breathe new life into your laptop with an SSD or RAM upgrade.
+                Noticeable gains, same device.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking-section fade-up" id="booking">
+    <div class="container">
+      <div class="booking-inner">
+        <div>
+          <div class="section-label">Repair Booking</div>
+          <h2 class="section-title">Book a Repair<br>in Minutes</h2>
+          <p class="section-sub" style="margin-top:.75rem">Describe your issue, get a transparent estimate and confirm
+            via WhatsApp. Fast, honest, professional.</p>
+          <div class="booking-flow">
+            <div class="bstep">
+              <div class="bnum active">1</div>
+              <div>
+                <div class="bstep-title">Select Your Device</div>
+                <div class="bstep-desc">Phone, laptop, tablet, accessory</div>
+              </div>
+            </div>
+            <div class="bstep">
+              <div class="bnum">2</div>
+              <div>
+                <div class="bstep-title">Describe the Issue</div>
+                <div class="bstep-desc">Screen, battery, port, software, other</div>
+              </div>
+            </div>
+            <div class="bstep">
+              <div class="bnum">3</div>
+              <div>
+                <div class="bstep-title">Upload a Photo</div>
+                <div class="bstep-desc">Optional but helps us quote accurately</div>
+              </div>
+            </div>
+            <div class="bstep">
+              <div class="bnum">4</div>
+              <div>
+                <div class="bstep-title">Get Your Estimate via WhatsApp</div>
+                <div class="bstep-desc">We reply within 30 minutes on weekdays</div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="margin-top:2rem;padding:1.25rem;background:var(--blue-pale);border-radius:var(--radius);border:1px solid rgba(26,58,107,.1)">
+            <div
+              style="font-size:.7rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-family:'Space Grotesk',sans-serif;margin-bottom:.35rem">
+              Warranty on all repairs</div>
+            <div style="font-size:.82rem;color:var(--gray-600);line-height:1.55">Every repair comes with a 3-month parts
+              and labour warranty. Genuine components, honest pricing, no hidden fees.</div>
+          </div>
+        </div>
+        <div class="booking-form-wrap">
+          <div class="form-title">Request a Repair Estimate</div>
+          <div class="frow">
+            <div class="fgroup">
+              <label class="flabel">Device Type</label>
+              <select class="fselect" id="deviceSelect">
+                <option>Select device...</option>
+                <option>Smartphone</option>
+                <option>Laptop</option>
+                <option>Tablet</option>
+                <option>Smartwatch</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label class="flabel">Brand &amp; Model</label>
+              <input type="text" class="finput" id="modelInput" placeholder="e.g. Galaxy S24">
+            </div>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Issue Type</label>
+            <select class="fselect" id="issueSelect">
+              <option>Select issue type...</option>
+              <option>Cracked / Broken Screen</option>
+              <option>Battery Not Charging</option>
+              <option>Charging Port Damaged</option>
+              <option>Motherboard / Logic Board</option>
+              <option>Software / OS Issue</option>
+              <option>Speaker / Microphone</option>
+              <option>Water Damage</option>
+              <option>Camera Fault</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Additional Details</label>
+            <textarea class="ftextarea" id="detailsInput"
+              placeholder="Describe the problem in more detail..."></textarea>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Your Phone Number</label>
+            <input type="tel" class="finput" id="phoneInput" placeholder="+254 7XX XXX XXX">
+          </div>
+          <button class="btn-wa" id="bookingWa">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            </svg>
+            Send via WhatsApp — Get Estimate
+          </button>
+          <div class="form-note">We respond within 30 minutes · Mon–Sat 8am–8pm<br>Walk-in to our Nairobi workshop — no
+            appointment needed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSORIES -->
+  <section class="accessories-section fade-up" id="accessories">
+    <div class="container">
+      <div class="acc-header">
+        <div>
+          <div class="section-label">Accessories</div>
+          <h2 class="section-title">Complete Your Setup</h2>
+        </div>
+        <a href="#" class="acc-link">Browse All →</a>
+      </div>
+      <div class="acc-grid stagger">
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12V9a4 4 0 0 1 8 0v6a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-2z" />
+              <path d="M20 12V9a4 4 0 0 0-8 0v6a3 3 0 0 0 3 3h3a2 2 0 0 0 2-2v-2z" />
+            </svg></div>
+          <div class="aname">TWS Earbuds</div>
+          <div class="aprice">From KES 2,500</div>
+          <div class="acount">24 products</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="7" width="16" height="10" rx="2" />
+              <path d="M9 6h6" />
+            </svg></div>
+          <div class="aname">Power Banks</div>
+          <div class="aprice">From KES 1,800</div>
+          <div class="acount">18 products</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="2" width="10" height="20" rx="3" />
+              <circle cx="12" cy="18" r="1" />
+            </svg></div>
+          <div class="aname">Phone Cases</div>
+          <div class="aprice">From KES 500</div>
+          <div class="acount">85+ options</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="10" rx="2" />
+              <path d="M7 11h1M10 11h1M13 11h1M16 11h1M7 15h1M10 15h1M13 15h1M16 15h1" />
+            </svg></div>
+          <div class="aname">Keyboards &amp; Mice</div>
+          <div class="aprice">From KES 1,200</div>
+          <div class="acount">32 products</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="5" width="16" height="12" rx="2" />
+              <path d="M8 17h8" />
+              <path d="M12 17v4" />
+            </svg></div>
+          <div class="aname">Monitors</div>
+          <div class="aprice">From KES 12,000</div>
+          <div class="acount">14 products</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 2v6" />
+              <path d="M17 2v6" />
+              <path d="M8 8h8v5a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V8z" />
+            </svg></div>
+          <div class="aname">Chargers &amp; Cables</div>
+          <div class="aprice">From KES 350</div>
+          <div class="acount">40+ options</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12c2-3 5-5 8-5s6 2 8 5" />
+              <path d="M5 16c2-2 4-3 7-3s5 1 7 3" />
+              <path d="M8 8a2 2 0 0 1 4 0" />
+            </svg></div>
+          <div class="aname">Networking</div>
+          <div class="aprice">From KES 3,000</div>
+          <div class="acount">20 products</div>
+        </a>
+        <a class="acard" href="#">
+          <div class="acc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 4h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+              <path d="M14 4v4h4" />
+            </svg></div>
+          <div class="aname">Storage &amp; Memory</div>
+          <div class="aprice">From KES 900</div>
+          <div class="acount">28 products</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- TRUST -->
+  <section class="trust-section fade-up">
+    <div class="container">
+      <div class="trust-grid stagger">
+        <div class="titem">
+          <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l7 3v5c0 5-3.134 8.5-7 9-3.866-.5-7-4-7-9V6l7-3z" />
+            </svg></div>
+          <div class="tnum">3 Months</div>
+          <div class="tlabel">Repair Warranty<br>on All Work</div>
+        </div>
+        <div class="titem">
+          <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />
+            </svg></div>
+          <div class="tnum">2 Hours</div>
+          <div class="tlabel">Average Screen<br>Repair Turnaround</div>
+        </div>
+        <div class="titem">
+          <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 12l4 4 8-8" />
+            </svg></div>
+          <div class="tnum">100%</div>
+          <div class="tlabel">Genuine Products<br>&amp; Components</div>
+        </div>
+        <div class="titem">
+          <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-6-4.35-6-10a6 6 0 0 1 12 0c0 5.65-6 10-6 10z" />
+              <circle cx="12" cy="9" r="1.5" />
+            </svg></div>
+          <div class="tnum">Nairobi</div>
+          <div class="tlabel">Walk-In, On-Site<br>&amp; Remote Support</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section fade-up">
+    <div class="container">
+      <div class="section-label">Client Reviews</div>
+      <h2 class="section-title">Trusted Across Nairobi</h2>
+      <div class="testimonials-grid stagger">
+        <div class="tcard featured-t">
+          <div class="tstars"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg></div>
+          <p class="tquote">"Took my water-damaged MacBook after another shop quoted full replacement. Hemego diagnosed
+            a repairable logic board issue and had it back in 48 hours. Truly honest and skilled work."</p>
+          <div class="tauthor">
+            <div class="tavatar">MK</div>
+            <div>
+              <div class="tname">Michael Kamau</div>
+              <div class="tloc">Westlands, Nairobi</div>
+            </div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tstars"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg></div>
+          <p class="tquote">"Bought a Samsung Galaxy S25 and accessories here. Competitive pricing, genuine warranty,
+            knowledgeable team. Zero pressure — just honest advice and great service."</p>
+          <div class="tauthor">
+            <div class="tavatar">AW</div>
+            <div>
+              <div class="tname">Amina Wanjiku</div>
+              <div class="tloc">Kilimani, Nairobi</div>
+            </div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tstars"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 17.5l-5.2 3 1.5-5.8L3 9.8l5.9-.5L12 4l2.1 5.2 5.9.5-4.3 4.9 1.5 5.8z" />
+            </svg></div>
+          <p class="tquote">"Had them build a custom video editing PC. They guided me through every component and kept
+            me under budget. The build was clean and fast — very professional outfit."</p>
+          <div class="tauthor">
+            <div class="tavatar">DO</div>
+            <div>
+              <div class="tname">Daniel Otieno</div>
+              <div class="tloc">Lavington, Nairobi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="blog-section fade-up">
+    <div class="container">
+      <div class="blog-header">
+        <div>
+          <div class="section-label">Tech Insights</div>
+          <h2 class="section-title">Hemego Journal</h2>
+        </div>
+        <a href="#" class="acc-link">All Articles →</a>
+      </div>
+      <div class="blog-grid stagger">
+        <div class="bcard bcard-hero">
+          <div class="bimg" style="align-items:center;justify-content:center">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity=".22">
+              <rect x="10" y="20" width="60" height="40" rx="6" stroke="var(--blue)" stroke-width="2" />
+              <circle cx="40" cy="40" r="12" stroke="var(--blue)" stroke-width="2" />
+              <path d="M10 32h60" stroke="var(--blue)" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div class="bbody">
+            <div class="bcat">Buying Guide</div>
+            <div class="btitle">Best Smartphones Under KES 60,000 in Kenya — Mid-Year 2025 Picks</div>
+            <div class="bmeta">June 2025 · 8 min read</div>
+          </div>
+        </div>
+        <div class="bcard">
+          <div class="bimg t2" style="align-items:center;justify-content:center">
+            <svg width="70" height="70" viewBox="0 0 80 80" fill="none" opacity=".22">
+              <path d="M30 20l-15 40M50 20l15 40M20 48h40" stroke="var(--orange)" stroke-width="2"
+                stroke-linecap="round" />
+              <circle cx="40" cy="56" r="5" stroke="var(--orange)" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="bbody">
+            <div class="bcat">Repair Tips</div>
+            <div class="btitle">5 Signs Your Laptop Battery Needs Replacing — Before It Fails</div>
+            <div class="bmeta">May 2025 · 5 min read</div>
+          </div>
+        </div>
+        <div class="bcard">
+          <div class="bimg t3" style="align-items:center;justify-content:center">
+            <svg width="70" height="70" viewBox="0 0 80 80" fill="none" opacity=".22">
+              <rect x="10" y="15" width="60" height="40" rx="4" stroke="#4a8ab0" stroke-width="2" />
+              <rect x="14" y="19" width="52" height="32" rx="2" stroke="#4a8ab0" stroke-width="1.5" />
+              <path d="M20 63h40" stroke="#4a8ab0" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="bbody">
+            <div class="bcat">Custom Builds</div>
+            <div class="btitle">What to Budget for a Mid-Range Gaming PC Build in Nairobi</div>
+            <div class="bmeta">April 2025 · 6 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="fbrand-name">HEMEGO</div>
+          <div class="fbrand-sub">Techprise</div>
+          <p class="fbrand-desc">Nairobi's integrated tech ecosystem — premium devices, expert repairs, custom builds
+            and professional support under one roof.</p>
+          <div class="fsocials">
+            <button class="fbtn">IG</button>
+            <button class="fbtn">TW</button>
+            <button class="fbtn">FB</button>
+            <button class="fbtn">YT</button>
+          </div>
+        </div>
+        <div>
+          <div class="fheading">Shop</div>
+          <ul class="flinks">
+            <li><a href="#">Smartphones</a></li>
+            <li><a href="#">Laptops</a></li>
+            <li><a href="#">Smartwatches</a></li>
+            <li><a href="#">Audio</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fheading">Services</div>
+          <ul class="flinks">
+            <li><a href="#">Screen Repairs</a></li>
+            <li><a href="#">Motherboard Repair</a></li>
+            <li><a href="#">Software Services</a></li>
+            <li><a href="#">Custom PC Builds</a></li>
+            <li><a href="#">Remote Support</a></li>
+            <li><a href="#">On-Site Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fheading">Company</div>
+          <ul class="flinks">
+            <li><a href="#">About Hemego</a></li>
+            <li><a href="#">Our Workshop</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Journal</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Warranty Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="fcopy">© 2025 Hemego Techprise. All rights reserved. Nairobi, Kenya.</div>
+        <button class="fwa" id="footerWa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 2H4a2 2 0 0 0-2 2v16l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
+            <path d="M8 10c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2h-4c-1.1 0-2-.9-2-2v-4z" />
+          </svg>WhatsApp Us</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <button class="cart-toggle" id="cartToggle" type="button" aria-label="Toggle cart">Cart</button>
+  <div class="cart-panel" id="cartPanel" aria-live="polite">
+    <div class="cart-panel-header">
+      <div>
+        <div class="cart-panel-title">Cart</div>
+        <div class="cart-panel-count" id="cartCount">0 items</div>
+      </div>
+      <button class="cart-panel-close" id="cartPanelClose" aria-label="Close cart">×</button>
+    </div>
+    <ul class="cart-panel-list" id="cartItems">
+      <li class="cart-empty">Your cart is empty. Add a product to begin.</li>
+    </ul>
+    <div class="cart-panel-total">
+      <span>Total</span>
+      <span id="cartTotal">KES 0</span>
+    </div>
+    <div class="cart-panel-actions">
+      <button class="btn-secondary" id="clearCartBtn" type="button">Clear Cart</button>
+      <button class="btn-primary" id="orderCartBtn" type="button">Order via WhatsApp</button>
+    </div>
+  </div>
+  <button class="float-wa" id="floatWa" title="WhatsApp Support"><svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z" />
+    </svg><span class="float-wa-ping"></span></button>
+
+  <script>
+
+    // =========================================
+    // NAV SCROLL
+    // =========================================
+
+    const nav = document.getElementById('topNav');
+
+    window.addEventListener(
+      'scroll',
+      () => nav?.classList.toggle('scrolled', scrollY > 20),
+      { passive: true }
+    );
+
+
+    // =========================================
+    // DRAWER / HAMBURGER
+    // =========================================
+
+    const hamburger = document.getElementById('hamburger');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+    const drawer = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+
+    const drawerClose = document.getElementById('drawerClose');
+
+    function closeDrawer() {
+
+      if (hamburger) {
+        hamburger.classList.remove('active');
+      }
+
+      if (hamburgerBtn) {
+        hamburgerBtn.classList.remove('active');
+      }
+
+      drawer.classList.remove('open');
+      drawer.classList.remove('active');
+
+      overlay.classList.remove('active');
+
+      document.body.style.overflow = '';
+
+    }
+
+    function openDrawer() {
+
+      if (hamburger) {
+        hamburger.classList.add('active');
+      }
+
+      if (hamburgerBtn) {
+        hamburgerBtn.classList.add('active');
+      }
+
+      drawer.classList.add('open');
+      drawer.classList.add('active');
+
+      overlay.classList.add('active');
+
+      document.body.style.overflow = 'hidden';
+
+    }
+
+
+    // OLD HAMBURGER
+    if (hamburger) {
+
+      hamburger.addEventListener('click', () => {
+
+        const open =
+          drawer.classList.contains('open') ||
+          drawer.classList.contains('active');
+
+        if (open) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+
+      });
+
+    }
+
+
+    // NEW HAMBURGER
+    if (hamburgerBtn) {
+
+      hamburgerBtn.addEventListener('click', () => {
+
+        const open =
+          drawer.classList.contains('open') ||
+          drawer.classList.contains('active');
+
+        if (open) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+
+      });
+
+    }
+
+
+    // CLOSE BUTTON
+    if (drawerClose) {
+      drawerClose.addEventListener('click', closeDrawer);
+    }
+
+
+    // OVERLAY
+    overlay.addEventListener('click', closeDrawer);
+
+
+    // =========================================
+    // SCROLL REVEAL
+    // =========================================
+
+    const observer = new IntersectionObserver((entries) => {
+
+      entries.forEach(e => {
+
+        if (e.isIntersecting) {
+
+          e.target.classList.add('visible');
+
+          observer.unobserve(e.target);
+
+        }
+
+      });
+
+    }, {
+      threshold: 0.06,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    document
+      .querySelectorAll('.fade-up, .stagger')
+      .forEach(el => observer.observe(el));
+
+
+    // =========================================
+    // WHATSAPP LINKS
+    // =========================================
+
+    const WA_NUMBER = '254703768321';
+
+    function openWA(msg) {
+
+      window.open(
+        'https://wa.me/' + WA_NUMBER +
+        (msg ? '?text=' + encodeURIComponent(msg) : ''),
+        '_blank'
+      );
+
+    }
+
+
+    // CART STORAGE
+    const CART_KEY = 'HEMEGO_CART';
+    const cart = loadCart();
+    const cartPanel = document.getElementById('cartPanel');
+    const cartToggle = document.getElementById('cartToggle');
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+    const orderCartBtn = document.getElementById('orderCartBtn');
+
+    function loadCart() {
+      const saved = localStorage.getItem(CART_KEY);
+      if (!saved) return [];
+      try { return JSON.parse(saved) || []; } catch { return []; }
+    }
+
+    function saveCart() {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function formatMoney(value) {
+      return 'KES ' + Number(value).toLocaleString('en-US');
+    }
+
+    function parsePrice(text) {
+      const match = text.replace(/,/g, '').match(/(\d+)/);
+      return match ? Number(match[1]) : 0;
+    }
+
+    function getProductFromButton(button) {
+      const card = button.closest('.pcard') || button.closest('.pcard-hero') || button.closest('.pcard-sm');
+      if (!card) return null;
+      const name = card.querySelector('.pname')?.textContent.trim() || 'Product';
+      const brand = card.querySelector('.pbrand')?.textContent.trim() || '';
+      const priceText = card.querySelector('.pprice')?.textContent || '';
+      const price = parsePrice(priceText);
+      return { name, brand, price };
+    }
+
+    function getCartQuantity() {
+      return cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    function renderCart() {
+      if (!cartItems || !cartTotal || !cartCount) return;
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<li class="cart-empty">Your cart is empty. Add a product to begin.</li>';
+        cartTotal.textContent = formatMoney(0);
+        cartCount.textContent = '0 items';
+        if (cartToggle) cartToggle.textContent = 'Cart';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map(item => {
+        const subtotal = item.price * item.qty;
+        return `
+      <li class="cart-panel-item">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-details">${item.brand || 'Item'} × ${item.qty}</div>
+        </div>
+        <div>${formatMoney(subtotal)}</div>
+      </li>
+    `;
+      }).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const count = getCartQuantity();
+      cartTotal.textContent = formatMoney(total);
+      cartCount.textContent = `${count} item${count === 1 ? '' : 's'}`;
+      if (cartToggle) cartToggle.textContent = `Cart (${count})`;
+    }
+
+    function addItemToCart(product) {
+      if (!product || product.price <= 0) return;
+      const existing = cart.find(item => item.name === product.name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart() {
+      cart.splice(0, cart.length);
+      saveCart();
+      renderCart();
+    }
+
+    function buildOrderMessage() {
+      const lines = [
+        'Hi Hemego Techprise,',
+        '',
+        'I would like to order the following items:'
+      ];
+
+      cart.forEach(item => {
+        const itemName = item.brand ? `${item.name} (${item.brand})` : item.name;
+        lines.push(`${item.qty} x ${itemName} — ${formatMoney(item.price * item.qty)}`);
+      });
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      lines.push('', `Total: ${formatMoney(total)}`, '', 'Please confirm availability and next steps. Thank you.');
+      return lines.join('\n');
+    }
+
+    function orderCart() {
+      if (cart.length === 0) {
+        alert('Your cart is empty. Add items before ordering.');
+        return;
+      }
+      openWA(buildOrderMessage());
+    }
+
+    if (cartToggle) {
+      cartToggle.addEventListener('click', () => cartPanel?.classList.toggle('open'));
+    }
+
+    const mobileCartBtn = document.getElementById('mobileCartBtn');
+    if (mobileCartBtn) {
+      mobileCartBtn.addEventListener('click', () => cartPanel?.classList.toggle('open'));
+    }
+
+    if (clearCartBtn) {
+      clearCartBtn.addEventListener('click', clearCart);
+    }
+
+    if (orderCartBtn) {
+      orderCartBtn.addEventListener('click', orderCart);
+    }
+
+    const addButtons = document.querySelectorAll('.btn-add');
+    const cartPanelClose = document.getElementById('cartPanelClose');
+
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const product = getProductFromButton(btn);
+        if (product) addItemToCart(product);
+      });
+    });
+
+    if (cartPanelClose) {
+      cartPanelClose.addEventListener('click', () => {
+        if (cartPanel) cartPanel.classList.remove('open');
+      });
+    }
+
+    renderCart();
+
+
+    // TOP NAV BUTTON
+    const navWa = document.getElementById('navWa');
+
+    if (navWa) {
+      navWa.addEventListener(
+        'click',
+        () => openWA('Hi Hemego Techprise, I\'d like some assistance.')
+      );
+    }
+
+
+    // FLOAT BUTTON
+    const floatWa = document.getElementById('floatWa');
+
+    if (floatWa) {
+      floatWa.addEventListener('click', () => openWA(''));
+    }
+
+
+    // FOOTER BUTTON
+    const footerWa = document.getElementById('footerWa');
+
+    if (footerWa) {
+      footerWa.addEventListener('click', () => openWA(''));
+    }
+
+
+    // BOOKING BUTTON
+    const bookingWa = document.getElementById('bookingWa');
+
+    if (bookingWa) {
+
+      bookingWa.addEventListener('click', () => {
+
+        const device = document.getElementById('deviceSelect').value;
+        const model = document.getElementById('modelInput').value;
+        const issue = document.getElementById('issueSelect').value;
+        const details = document.getElementById('detailsInput').value;
+        const phone = document.getElementById('phoneInput').value;
+
+        const msg =
+          `Hi Hemego Techprise,
+
+I need a repair estimate.
+
+Device: ${device}
+Model: ${model}
+Issue: ${issue}
+Details: ${details}
+My number: ${phone}
+
+Please advise. Thank you.`;
+
+        openWA(msg);
+
+      });
+
+    }
+
+
+    // =========================================
+    // PRODUCT CARD TILT
+    // =========================================
+
+    document.querySelectorAll('.pcard-hero, .pcard-sm').forEach(card => {
+
+      card.addEventListener('mousemove', e => {
+
+        const r = card.getBoundingClientRect();
+
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+
+        card.style.transform =
+          `translateY(-3px)
+      rotateX(${-y * 2.5}deg)
+      rotateY(${x * 2.5}deg)`;
+
+        card.style.transition = 'box-shadow .2s';
+
+      });
+
+      card.addEventListener('mouseleave', () => {
+
+        card.style.transform = '';
+
+        card.style.transition =
+          'all .35s cubic-bezier(.4,0,.2,1)';
+
+      });
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
