@@ -1,4 +1,4 @@
-/* HEMEGO TECHPRISE — shared behavior (nav, drawer, cart, fade-up, WhatsApp) */
+/* HEMEGO TECHPRISE — shared behavior (nav, drawer, cart, fade-up, WhatsApp, search) */
 
 const WA_NUMBER = '254703768321';
 
@@ -49,7 +49,7 @@ function toggleDrawer() {
 })();
 
 /* ---- Cart (shared across pages via localStorage) ---- */
-const CART_KEY = 'hemego_cart';
+const CART_KEY = 'HEMEGO_CART';
 
 function getCart() {
   try {
@@ -87,16 +87,20 @@ function cartTotal(cart) {
 }
 
 function renderCartBadge() {
-  const badge = document.getElementById('cartCount');
+  const badge = document.getElementById('cartCount') || document.getElementById('cartCountLabel');
   if (!badge) return;
   const count = getCart().reduce((sum, c) => sum + c.qty, 0);
-  badge.textContent = count;
-  badge.style.display = count > 0 ? 'flex' : 'none';
+  if (badge.id === 'cartCount') {
+    badge.textContent = count + (count === 1 ? ' item' : ' items');
+    badge.style.display = count > 0 ? 'flex' : 'none';
+  } else {
+    badge.textContent = count > 0 ? `${count} item${count !== 1 ? 's' : ''} in cart` : 'Your cart is empty';
+  }
 }
 
 function renderCartPanel() {
-  const list = document.getElementById('cartPanelList');
-  const totalEl = document.getElementById('cartPanelTotal');
+  const list = document.getElementById('cartPanelList') || document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartPanelTotal') || document.getElementById('cartTotal');
   if (!list) return;
   const cart = getCart();
 
@@ -137,4 +141,240 @@ function checkoutViaWhatsApp() {
   openWA(`Hi HEMEGO, I would like to order:\n${lines}\nTotal: KES ${cartTotal(cart).toLocaleString()}`);
 }
 
-document.addEventListener('DOMContentLoaded', renderCartBadge);
+/* ---- Search Overlay ---- */
+let searchProducts = [];
+
+function initSearchProducts() {
+  // Collect product data from shop page if present
+  const cards = document.querySelectorAll('[data-cat][data-price]');
+  searchProducts = Array.from(cards).map((card) => {
+    const nameEl = card.querySelector('.pname');
+    const brandEl = card.querySelector('.pbrand');
+    const priceEl = card.querySelector('.pprice');
+    const imgEl = card.querySelector('img');
+    const cat = card.dataset.cat;
+    const price = parseInt(card.dataset.price, 10);
+    return {
+      id: card.dataset.id || nameEl?.textContent?.toLowerCase().replace(/\s+/g, '-') || 'product',
+      name: nameEl?.textContent?.trim() || 'Product',
+      brand: brandEl?.textContent?.trim() || '',
+      category: cat,
+      price: price,
+      image: imgEl?.src || '',
+      element: card
+    };
+  });
+}
+
+function openSearch() {
+  let overlay = document.getElementById('searchOverlay');
+  if (!overlay) {
+    overlay = createSearchOverlay();
+    document.body.appendChild(overlay);
+  }
+  initSearchProducts();
+  
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  
+  // Focus the input after animation
+  setTimeout(() => {
+    const input = overlay.querySelector('.search-input');
+    if (input) input.focus();
+  }, 150);
+}
+
+function closeSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  
+  // Clear input and results
+  setTimeout(() => {
+    const input = overlay.querySelector('.search-input');
+    const results = overlay.querySelector('.search-results');
+    const suggestions = overlay.querySelector('.search-suggestions');
+    const clearBtn = overlay.querySelector('.search-input-clear');
+    if (input) input.value = '';
+    if (results) results.classList.remove('open');
+    if (suggestions) suggestions.style.display = 'block';
+    if (clearBtn) clearBtn.classList.remove('visible');
+  }, 300);
+}
+
+function createSearchOverlay() {
+  const overlay = document.createElement('div');
+  overlay.id = 'searchOverlay';
+  overlay.className = 'search-overlay';
+  overlay.innerHTML = `
+    <div class="search-overlay-header">
+      <span class="search-overlay-title">Search Products</span>
+      <button class="search-overlay-close" aria-label="Close search">&times;</button>
+    </div>
+    <div class="search-overlay-body">
+      <div class="search-input-wrap">
+        <input type="text" class="search-input" placeholder="Search phones, laptops, watches, accessories..." autocomplete="off" spellcheck="false">
+        <button class="search-input-clear" aria-label="Clear search">&times;</button>
+      </div>
+      <div class="search-results">
+        <div class="search-results-header">
+          <span class="search-results-count">0 results</span>
+        </div>
+        <div class="search-results-list"></div>
+        <div class="search-empty" style="display:none;">No products found matching your search.</div>
+      </div>
+      <div class="search-suggestions">
+        <div class="search-suggestions-title">Popular searches</div>
+        <div class="search-suggestions-grid">
+          <button class="search-suggestion" data-query="iPhone"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">iPhone</span></button>
+          <button class="search-suggestion" data-query="Samsung"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">Samsung</span></button>
+          <button class="search-suggestion" data-query="MacBook"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M1 19h22"/></svg><span class="search-suggestion-name">MacBook</span></button>
+          <button class="search-suggestion" data-query="Watch"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2 1"/></svg><span class="search-suggestion-name">Smart Watch</span></button>
+          <button class="search-suggestion" data-query="Earbuds"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12V9a4 4 0 0 1 8 0v6a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-2z"/><path d="M20 12V9a4 4 0 0 0-8 0v6a3 3 0 0 0 3 3h3a2 2 0 0 0 2-2v-2z"/></svg><span class="search-suggestion-name">Earbuds</span></button>
+          <button class="search-suggestion" data-query="Charger"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L6 14h5l-1 8 9-12h-5l1-8z"/></svg><span class="search-suggestion-name">Chargers</span></button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Event listeners
+  overlay.querySelector('.search-overlay-close').addEventListener('click', closeSearch);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeSearch();
+  });
+  
+  const input = overlay.querySelector('.search-input');
+  const clearBtn = overlay.querySelector('.search-input-clear');
+  const results = overlay.querySelector('.search-results');
+  const resultsList = overlay.querySelector('.search-results-list');
+  const resultsCount = overlay.querySelector('.search-results-count');
+  const emptyMsg = overlay.querySelector('.search-empty');
+  const suggestions = overlay.querySelector('.search-suggestions');
+  
+  input.addEventListener('input', () => {
+    const term = input.value.trim().toLowerCase();
+    clearBtn.classList.toggle('visible', term.length > 0);
+    
+    if (term.length === 0) {
+      results.classList.remove('open');
+      suggestions.style.display = 'block';
+      return;
+    }
+    
+    suggestions.style.display = 'none';
+    results.classList.add('open');
+    
+    // Filter products
+    const filtered = searchProducts.filter(p => 
+      p.name.toLowerCase().includes(term) ||
+      p.brand.toLowerCase().includes(term) ||
+      p.category.toLowerCase().includes(term)
+    );
+    
+    resultsCount.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+    
+    if (filtered.length === 0) {
+      resultsList.innerHTML = '';
+      emptyMsg.style.display = 'block';
+    } else {
+      emptyMsg.style.display = 'none';
+      resultsList.innerHTML = filtered.map(p => `
+        <a href="shop.html#product-${p.id}" class="search-result-card" data-id="${p.id}">
+          <div class="search-result-image">
+            ${p.image ? `<img src="${p.image}" alt="${p.name}">` : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>'}
+          </div>
+          <div class="search-result-info">
+            <div class="search-result-name">${p.name}</div>
+            <div class="search-result-brand">${p.brand}</div>
+          </div>
+          <div class="search-result-price">KES ${p.price.toLocaleString()}</div>
+        </a>
+      `).join('');
+    }
+  });
+  
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    clearBtn.classList.remove('visible');
+    results.classList.remove('open');
+    suggestions.style.display = 'block';
+    input.focus();
+  });
+  
+  // Suggestion clicks
+  overlay.querySelectorAll('.search-suggestion').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const query = btn.dataset.query;
+      input.value = query;
+      clearBtn.classList.add('visible');
+      suggestions.style.display = 'none';
+      results.classList.add('open');
+      input.dispatchEvent(new Event('input'));
+    });
+  });
+  
+  // Keyboard: Escape to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeSearch();
+    }
+  });
+  
+  return overlay;
+}
+
+function runSearch(term) {
+  const trimmed = term.trim();
+  if (!trimmed) return;
+  
+  // If on shop page, filter in place
+  if (window.location.pathname.includes('shop.html')) {
+    openSearch();
+    const input = document.querySelector('.search-input');
+    if (input) {
+      input.value = trimmed;
+      input.dispatchEvent(new Event('input'));
+    }
+  } else {
+    // Redirect to shop with query param
+    window.location.href = `shop.html?q=${encodeURIComponent(trimmed)}`;
+  }
+}
+
+// Initialize search buttons
+function initSearchButtons() {
+  const desktopBtn = document.getElementById('desktopSearchBtn');
+  const mobileBtn = document.getElementById('mobileSearchBtn');
+  
+  if (desktopBtn) {
+    desktopBtn.addEventListener('click', openSearch);
+  }
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', openSearch);
+  }
+  
+  // Check for search query param on shop page
+  if (window.location.pathname.includes('shop.html')) {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      // Wait for DOM to be ready
+      setTimeout(() => runSearch(q), 100);
+    }
+  }
+}
+
+/* ---- FAQ Toggle ---- */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  if (!item) return;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach((el) => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCartBadge();
+  initSearchButtons();
+});

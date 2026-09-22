@@ -156,24 +156,7 @@ BOTTOM MOBILE NAV
       </svg>
       <span>WhatsApp</span>
     </a>
-
-  </nav>
-
-
-
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-  <div class="mobile-drawer" id="mobileDrawer">
-    <ul class="drawer-links">
-      <li><a href="index.html" onclick="closeDrawer()">Home<span>→</span></a></li>
-      <li><a href="shop.html" onclick="closeDrawer()">Shop<span>→</span></a></li>
-      <li><a href="#accessories" onclick="closeDrawer()">Accessories<span>→</span></a></li>
-      <li><a href="#booking" onclick="closeDrawer()">Support<span>→</span></a></li>
-    </ul>
-    <div class="drawer-ctas">
-      <a href="#products" class="btn-primary" onclick="closeDrawer()">Shop Devices →</a>
-      <a href="#booking" class="btn-secondary" onclick="closeDrawer()">Book Repair</a>
-    </div>
-  </div>
+</nav>
 
   <!-- HERO -->
   <section class="hero">
@@ -1056,353 +1039,17 @@ BOTTOM MOBILE NAV
       <button class="btn-primary" id="orderCartBtn" type="button">Order via WhatsApp</button>
     </div>
   </div>
-  <button class="float-wa" id="floatWa" title="WhatsApp Support"><svg viewBox="0 0 24 24" fill="none"
+<button class="float-wa" id="floatWa" title="WhatsApp Support"><svg viewBox="0 0 24 24" fill="none"
       stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z" />
     </svg><span class="float-wa-ping"></span></button>
 
+  <script src="js/shared.js"></script>
   <script>
-
     // =========================================
-    // NAV SCROLL
-    // =========================================
-
-    const nav = document.getElementById('topNav');
-
-    window.addEventListener(
-      'scroll',
-      () => nav?.classList.toggle('scrolled', scrollY > 20),
-      { passive: true }
-    );
-
-
-    // =========================================
-    // DRAWER / HAMBURGER
+    // PAGE-SPECIFIC: Booking form WhatsApp
     // =========================================
 
-    const hamburger = document.getElementById('hamburger');
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-
-    const drawer = document.getElementById('mobileDrawer');
-    const overlay = document.getElementById('drawerOverlay');
-
-    const drawerClose = document.getElementById('drawerClose');
-
-    function closeDrawer() {
-
-      if (hamburger) {
-        hamburger.classList.remove('active');
-      }
-
-      if (hamburgerBtn) {
-        hamburgerBtn.classList.remove('active');
-      }
-
-      drawer.classList.remove('open');
-      drawer.classList.remove('active');
-
-      overlay.classList.remove('active');
-
-      document.body.style.overflow = '';
-
-    }
-
-    function openDrawer() {
-
-      if (hamburger) {
-        hamburger.classList.add('active');
-      }
-
-      if (hamburgerBtn) {
-        hamburgerBtn.classList.add('active');
-      }
-
-      drawer.classList.add('open');
-      drawer.classList.add('active');
-
-      overlay.classList.add('active');
-
-      document.body.style.overflow = 'hidden';
-
-    }
-
-
-    // OLD HAMBURGER
-    if (hamburger) {
-
-      hamburger.addEventListener('click', () => {
-
-        const open =
-          drawer.classList.contains('open') ||
-          drawer.classList.contains('active');
-
-        if (open) {
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
-
-      });
-
-    }
-
-
-    // NEW HAMBURGER
-    if (hamburgerBtn) {
-
-      hamburgerBtn.addEventListener('click', () => {
-
-        const open =
-          drawer.classList.contains('open') ||
-          drawer.classList.contains('active');
-
-        if (open) {
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
-
-      });
-
-    }
-
-
-    // CLOSE BUTTON
-    if (drawerClose) {
-      drawerClose.addEventListener('click', closeDrawer);
-    }
-
-
-    // OVERLAY
-    overlay.addEventListener('click', closeDrawer);
-
-
-    // =========================================
-    // SCROLL REVEAL
-    // =========================================
-
-    const observer = new IntersectionObserver((entries) => {
-
-      entries.forEach(e => {
-
-        if (e.isIntersecting) {
-
-          e.target.classList.add('visible');
-
-          observer.unobserve(e.target);
-
-        }
-
-      });
-
-    }, {
-      threshold: 0.06,
-      rootMargin: '0px 0px -20px 0px'
-    });
-
-    document
-      .querySelectorAll('.fade-up, .stagger')
-      .forEach(el => observer.observe(el));
-
-
-    // =========================================
-    // WHATSAPP LINKS
-    // =========================================
-
-    const WA_NUMBER = '254703768321';
-
-    function openWA(msg) {
-
-      window.open(
-        'https://wa.me/' + WA_NUMBER +
-        (msg ? '?text=' + encodeURIComponent(msg) : ''),
-        '_blank'
-      );
-
-    }
-
-
-    // CART STORAGE
-    const CART_KEY = 'HEMEGO_CART';
-    const cart = loadCart();
-    const cartPanel = document.getElementById('cartPanel');
-    const cartToggle = document.getElementById('cartToggle');
-    const cartCount = document.getElementById('cartCount');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const clearCartBtn = document.getElementById('clearCartBtn');
-    const orderCartBtn = document.getElementById('orderCartBtn');
-
-    function loadCart() {
-      const saved = localStorage.getItem(CART_KEY);
-      if (!saved) return [];
-      try { return JSON.parse(saved) || []; } catch { return []; }
-    }
-
-    function saveCart() {
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }
-
-    function formatMoney(value) {
-      return 'KES ' + Number(value).toLocaleString('en-US');
-    }
-
-    function parsePrice(text) {
-      const match = text.replace(/,/g, '').match(/(\d+)/);
-      return match ? Number(match[1]) : 0;
-    }
-
-    function getProductFromButton(button) {
-      const card = button.closest('.pcard') || button.closest('.pcard-hero') || button.closest('.pcard-sm');
-      if (!card) return null;
-      const name = card.querySelector('.pname')?.textContent.trim() || 'Product';
-      const brand = card.querySelector('.pbrand')?.textContent.trim() || '';
-      const priceText = card.querySelector('.pprice')?.textContent || '';
-      const price = parsePrice(priceText);
-      return { name, brand, price };
-    }
-
-    function getCartQuantity() {
-      return cart.reduce((sum, item) => sum + item.qty, 0);
-    }
-
-    function renderCart() {
-      if (!cartItems || !cartTotal || !cartCount) return;
-      if (cart.length === 0) {
-        cartItems.innerHTML = '<li class="cart-empty">Your cart is empty. Add a product to begin.</li>';
-        cartTotal.textContent = formatMoney(0);
-        cartCount.textContent = '0 items';
-        if (cartToggle) cartToggle.textContent = 'Cart';
-        return;
-      }
-
-      cartItems.innerHTML = cart.map(item => {
-        const subtotal = item.price * item.qty;
-        return `
-      <li class="cart-panel-item">
-        <div>
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-details">${item.brand || 'Item'} × ${item.qty}</div>
-        </div>
-        <div>${formatMoney(subtotal)}</div>
-      </li>
-    `;
-      }).join('');
-
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      const count = getCartQuantity();
-      cartTotal.textContent = formatMoney(total);
-      cartCount.textContent = `${count} item${count === 1 ? '' : 's'}`;
-      if (cartToggle) cartToggle.textContent = `Cart (${count})`;
-    }
-
-    function addItemToCart(product) {
-      if (!product || product.price <= 0) return;
-      const existing = cart.find(item => item.name === product.name);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ ...product, qty: 1 });
-      }
-      saveCart();
-      renderCart();
-    }
-
-    function clearCart() {
-      cart.splice(0, cart.length);
-      saveCart();
-      renderCart();
-    }
-
-    function buildOrderMessage() {
-      const lines = [
-        'Hi Hemego Techprise,',
-        '',
-        'I would like to order the following items:'
-      ];
-
-      cart.forEach(item => {
-        const itemName = item.brand ? `${item.name} (${item.brand})` : item.name;
-        lines.push(`${item.qty} x ${itemName} — ${formatMoney(item.price * item.qty)}`);
-      });
-
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      lines.push('', `Total: ${formatMoney(total)}`, '', 'Please confirm availability and next steps. Thank you.');
-      return lines.join('\n');
-    }
-
-    function orderCart() {
-      if (cart.length === 0) {
-        alert('Your cart is empty. Add items before ordering.');
-        return;
-      }
-      openWA(buildOrderMessage());
-    }
-
-    if (cartToggle) {
-      cartToggle.addEventListener('click', () => cartPanel?.classList.toggle('open'));
-    }
-
-    const mobileCartBtn = document.getElementById('mobileCartBtn');
-    if (mobileCartBtn) {
-      mobileCartBtn.addEventListener('click', () => cartPanel?.classList.toggle('open'));
-    }
-
-    if (clearCartBtn) {
-      clearCartBtn.addEventListener('click', clearCart);
-    }
-
-    if (orderCartBtn) {
-      orderCartBtn.addEventListener('click', orderCart);
-    }
-
-    const addButtons = document.querySelectorAll('.btn-add');
-    const cartPanelClose = document.getElementById('cartPanelClose');
-
-    document.querySelectorAll('.btn-add').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const product = getProductFromButton(btn);
-        if (product) addItemToCart(product);
-      });
-    });
-
-    if (cartPanelClose) {
-      cartPanelClose.addEventListener('click', () => {
-        if (cartPanel) cartPanel.classList.remove('open');
-      });
-    }
-
-    renderCart();
-
-
-    // TOP NAV BUTTON
-    const navWa = document.getElementById('navWa');
-
-    if (navWa) {
-      navWa.addEventListener(
-        'click',
-        () => openWA('Hi Hemego Techprise, I\'d like some assistance.')
-      );
-    }
-
-
-    // FLOAT BUTTON
-    const floatWa = document.getElementById('floatWa');
-
-    if (floatWa) {
-      floatWa.addEventListener('click', () => openWA(''));
-    }
-
-
-    // FOOTER BUTTON
-    const footerWa = document.getElementById('footerWa');
-
-    if (footerWa) {
-      footerWa.addEventListener('click', () => openWA(''));
-    }
-
-
-    // BOOKING BUTTON
     const bookingWa = document.getElementById('bookingWa');
 
     if (bookingWa) {
@@ -1436,7 +1083,7 @@ Please advise. Thank you.`;
 
 
     // =========================================
-    // PRODUCT CARD TILT
+    // PAGE-SPECIFIC: Product card tilt effect
     // =========================================
 
     document.querySelectorAll('.pcard-hero, .pcard-sm').forEach(card => {
@@ -1450,8 +1097,8 @@ Please advise. Thank you.`;
 
         card.style.transform =
           `translateY(-3px)
-      rotateX(${-y * 2.5}deg)
-      rotateY(${x * 2.5}deg)`;
+        rotateX(${-y * 2.5}deg)
+        rotateY(${x * 2.5}deg)`;
 
         card.style.transition = 'box-shadow .2s';
 
