@@ -120,16 +120,57 @@ function saveCart(cart) {
   renderCartBadge();
 }
 
+function parsePrice(text) {
+  if (!text) return 0;
+  const m = String(text).replace(/,/g, '').match(/(\d+)/);
+  return m ? Number(m[1]) : 0;
+}
+
 function addToCart(item) {
   const cart = getCart();
-  const existing = cart.find((c) => c.id === item.id);
+  const itemId = item.id || (item.name ? item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'product');
+  const existing = cart.find((c) => c.id === itemId);
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ ...item, qty: 1 });
+    cart.push({ ...item, id: itemId, qty: 1 });
   }
   saveCart(cart);
   renderCartPanel();
+}
+
+function showCartToast(itemName) {
+  let toast = document.getElementById('cartToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'cartToast';
+    toast.className = 'cart-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `
+    <div class="cart-toast-icon">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <div class="cart-toast-content">
+      <div class="cart-toast-title">Added to Cart!</div>
+      <div class="cart-toast-name">${itemName}</div>
+    </div>
+  `;
+  toast.classList.add('show');
+
+  const floatingBadge = document.getElementById('cartFloatingBadge');
+  if (floatingBadge) {
+    floatingBadge.classList.remove('bump');
+    void floatingBadge.offsetWidth;
+    floatingBadge.classList.add('bump');
+  }
+
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
 }
 
 function removeFromCart(id) {
@@ -143,15 +184,30 @@ function cartTotal(cart) {
 }
 
 function renderCartBadge() {
-  const badge = document.getElementById('cartCount') || document.getElementById('cartCountLabel');
-  if (!badge) return;
   const count = getCart().reduce((sum, c) => sum + c.qty, 0);
-  if (badge.id === 'cartCount') {
-    badge.textContent = count + (count === 1 ? ' item' : ' items');
-    badge.style.display = count > 0 ? 'flex' : 'none';
-  } else {
-    badge.textContent = count > 0 ? `${count} item${count !== 1 ? 's' : ''} in cart` : 'Your cart is empty';
+
+  // Floating button badge
+  const floatingBadge = document.getElementById('cartFloatingBadge');
+  if (floatingBadge) {
+    floatingBadge.textContent = count;
+    floatingBadge.style.display = count > 0 ? 'flex' : 'none';
   }
+
+  // Panel count
+  const badge = document.getElementById('cartCount') || document.getElementById('cartCountLabel');
+  if (badge) {
+    if (badge.id === 'cartCount') {
+      badge.textContent = count + (count === 1 ? ' item' : ' items');
+    } else {
+      badge.textContent = count > 0 ? `${count} item${count !== 1 ? 's' : ''} in cart` : 'Your cart is empty';
+    }
+  }
+
+  // Desktop & mobile navigation cart badges
+  document.querySelectorAll('.cart-badge-count, #navCartBadge, #mobileCartBadge').forEach(el => {
+    el.textContent = count;
+    el.style.display = count > 0 ? 'inline-flex' : 'none';
+  });
 }
 
 function renderCartPanel() {
@@ -517,10 +573,43 @@ function initCartUI() {
   }
 }
 
+function initAddToCartButtons() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-add');
+    if (!btn || btn.disabled || btn.classList.contains('btn-disabled')) return;
+    e.preventDefault();
+
+    const card = btn.closest('[data-cat], .pcard, .pcard-sm, .pcard-hero, .pcard-feat');
+    if (!card) return;
+
+    const name = card.querySelector('.pname')?.textContent.trim() || 'Product';
+    const brand = card.querySelector('.pbrand')?.textContent.trim() || '';
+    const priceEl = card.querySelector('.pprice');
+    const price = priceEl ? parsePrice(priceEl.textContent || '') : (parseInt(card.dataset.price, 10) || 0);
+    const id = (card.dataset.id || name).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+    addToCart({ id, name, brand, price });
+    showCartToast(name);
+
+    // Button visual feedback animation
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '✓ Added';
+    btn.style.background = 'var(--blue-dark, #0d1e3c)';
+    btn.style.color = '#fff';
+
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 1200);
+  });
+}
+
 function initAllShared() {
   initDrawer();
   renderCartBadge();
   initCartUI();
+  initAddToCartButtons();
   initSearchButtons();
   initProductTilt();
   initBookingForm();
