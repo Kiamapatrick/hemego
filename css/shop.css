@@ -895,12 +895,31 @@ footer {
   }
   .page-hero-meta {
     gap: 1.25rem;
+    flex-wrap: wrap;
   }
   .container {
     padding: 0 1.25rem;
   }
   .promo-right {
     display: none;
+  }
+  /* Product image containers shorter on mobile */
+  .pcard-hero .pimg {
+    min-height: 160px;
+  }
+  /* Footer single column */
+  .footer-top {
+    grid-template-columns: 1fr !important;
+  }
+  /* Filter bar wraps */
+  .filter-bar {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  /* Sort/filter buttons full width on tiny screens */
+  .sort-select,
+  .filter-btn {
+    width: 100%;
   }
 }
 

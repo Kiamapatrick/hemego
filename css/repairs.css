@@ -4,6 +4,49 @@
    Only repairs-specific patterns live here.
    ========================================================== */
 
+/* BUTTONS (repairs-specific variants) */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: .72rem 1.4rem;
+  font-size: .845rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .22s;
+  font-family: 'Space Grotesk', sans-serif;
+  text-decoration: none;
+}
+.btn-wa:hover {
+  background: #1ebe5c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, .3);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--radius-sm);
+  padding: .72rem 1.4rem;
+  font-size: .845rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .22s;
+  font-family: 'Space Grotesk', sans-serif;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, .14);
+}
+
 /* REPAIR HERO */
 .repair-hero {
   position: relative;
@@ -695,9 +738,19 @@
   .trust-grid { grid-template-columns: 1fr }
   .repairs-grid { grid-template-columns: 1fr }
   .process-steps { grid-template-columns: 1fr }
-  .hero-stats { gap: 1.5rem }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap }
   .hero-right { display: none }
-  .hero-ctas { flex-direction: column; align-items: flex-start }
-  .fcta-btns { flex-direction: column; align-items: center }
-  .footer-top { grid-template-columns: 1fr }
+  .hero-ctas { flex-direction: column; align-items: stretch }
+  .hero-ctas a { text-align: center; width: 100%; justify-content: center; }
+  .fcta-btns { flex-direction: column; align-items: stretch }
+  .fcta-btns a { text-align: center; width: 100%; justify-content: center; }
+  .rcard-cta { flex-direction: column; gap: .5rem; }
+  .rcard-cta a { width: 100%; text-align: center; justify-content: center; }
+  .footer-top { grid-template-columns: 1fr !important }
+  /* Before-after section */
+  .ba-grid { grid-template-columns: 1fr }
+  /* Category cards */
+  .cats-grid { grid-template-columns: 1fr 1fr }
+  /* Repair cards image area */
+  .rcard-img { min-height: 100px }
 }

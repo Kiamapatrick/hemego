@@ -15,6 +15,9 @@
   --orange: #e8630a;
   --orange-light: #f07a32;
   --orange-pale: #fff0e8;
+  --dark-bg: #060d1c;
+  --dark-surface: #0b1628;
+  --dark-border: rgba(255, 255, 255, .06);
   --white: #ffffff;
   --off-white: #f7f6f3;
   --gray-100: #f0eff0;
@@ -43,6 +46,13 @@ body {
   color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden
+}
+
+/* Global image reset — prevents overflow on all pages */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 h1,
@@ -493,6 +503,60 @@ RESPONSIVE
   .mobile-drawer {
     width: 100%;
     right: -100%;
+  }
+
+  /* Hero — hide right panel, stack CTAs */
+  .hero-right {
+    display: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-ctas a,
+  .hero-ctas button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-stats {
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  /* Product image containers — shorter on mobile */
+  .pcard-hero .pimg {
+    min-height: 200px;
+  }
+
+  .pcard-sm .pimg {
+    min-height: 120px;
+  }
+
+  /* Footer — single column */
+  .footer-top {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Accessories grid */
+  .acc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Trust grid */
+  .trust-grid {
+    grid-template-columns: 1fr;
   }
 
 }

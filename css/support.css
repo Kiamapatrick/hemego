@@ -546,4 +546,12 @@
   .hours-card {
     padding: 2rem 1.5rem;
   }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr !important;
+  }
 }

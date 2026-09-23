@@ -1,4 +1,4 @@
-/* HEMEGO TECHPRISE — shared behavior (nav, drawer, cart, fade-up, WhatsApp, search) */
+/* HEMEGO TECHPRISE — shared behavior (nav, drawer, cart, fade-up, WhatsApp, search, product tilt, booking form) */
 
 const WA_NUMBER = '254703768321';
 
@@ -365,16 +365,68 @@ function initSearchButtons() {
   }
 }
 
-/* ---- FAQ Toggle ---- */
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
+/* ---- FAQ Toggle (unified for both button and item element) ---- */
+function toggleFaq(el) {
+  // Handle both button (faq-question) and item (faq-item) elements
+  const item = el.closest('.faq-item');
   if (!item) return;
   const wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach((el) => el.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }
 
+/* ---- Product card tilt effect ---- */
+function initProductTilt() {
+  const cards = document.querySelectorAll('.pcard-hero, .pcard-sm, .pcard-feat, .pcard');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform =
+        `translateY(-3px)
+      rotateX(${-y * 2.5}deg)
+      rotateY(${x * 2.5}deg)`;
+      card.style.transition = 'box-shadow .2s';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'all .35s cubic-bezier(.4,0,.2,1)';
+    });
+  });
+}
+
+/* ---- Booking form WhatsApp handler ---- */
+function initBookingForm() {
+  const bookingWa = document.getElementById('bookingWa');
+  if (!bookingWa) return;
+  
+  bookingWa.addEventListener('click', () => {
+    const device = document.getElementById('deviceSelect')?.value || '';
+    const model = document.getElementById('modelInput')?.value || '';
+    const issue = document.getElementById('issueSelect')?.value || '';
+    const details = document.getElementById('detailsInput')?.value || '';
+    const phone = document.getElementById('phoneInput')?.value || '';
+    
+    const msg = `Hi Hemego Techprise,
+
+I need a repair estimate.
+
+Device: ${device}
+Model: ${model}
+Issue: ${issue}
+Details: ${details}
+My number: ${phone}
+
+Please advise. Thank you.`;
+    
+    openWA(msg);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderCartBadge();
   initSearchButtons();
+  initProductTilt();
+  initBookingForm();
 });
