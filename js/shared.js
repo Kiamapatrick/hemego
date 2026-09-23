@@ -20,11 +20,67 @@ function openWA(msg) {
 function toggleDrawer() {
   const drawer = document.getElementById('mobileDrawer');
   const overlay = document.getElementById('drawerOverlay');
-  if (!drawer || !overlay) return;
+  if (!drawer) return;
   const opening = !drawer.classList.contains('active');
   drawer.classList.toggle('active', opening);
-  overlay.classList.toggle('active', opening);
+  if (overlay) overlay.classList.toggle('active', opening);
   document.body.style.overflow = opening ? 'hidden' : '';
+}
+
+function openDrawer() {
+  const drawer = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  if (!drawer) return;
+  drawer.classList.add('active');
+  if (overlay) overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  const drawer = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  if (!drawer) return;
+  drawer.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function initDrawer() {
+  const hamburgerBtns = document.querySelectorAll('#hamburgerBtn, .hamburger-btn, [data-drawer-toggle]');
+  const closeBtns = document.querySelectorAll('#drawerClose, .drawer-close, [data-drawer-close]');
+  const overlays = document.querySelectorAll('#drawerOverlay, .mobile-drawer-overlay');
+
+  hamburgerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDrawer();
+    });
+  });
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeDrawer();
+    });
+  });
+
+  overlays.forEach(overlay => {
+    overlay.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Close drawer when clicking nav links inside
+  document.querySelectorAll('#mobileDrawer a').forEach(link => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
 }
 
 /* ---- Fade-up / stagger scroll reveal ---- */
@@ -424,9 +480,54 @@ Please advise. Thank you.`;
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+/* ---- Cart UI Handlers (panel toggling, mobile cart button) ---- */
+function initCartUI() {
+  const toggles = document.querySelectorAll('#cartToggle, #mobileCartBtn, [data-cart-toggle]');
+  const closes = document.querySelectorAll('#cartPanelClose, [data-cart-close]');
+  const clearBtn = document.getElementById('clearCartBtn');
+  const orderBtn = document.getElementById('orderCartBtn');
+
+  toggles.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleCart();
+    });
+  });
+
+  closes.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const panel = document.getElementById('cartPanel');
+      if (panel) panel.classList.remove('open');
+    });
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      localStorage.removeItem(CART_KEY);
+      renderCartBadge();
+      renderCartPanel();
+    });
+  }
+
+  if (orderBtn) {
+    orderBtn.addEventListener('click', () => {
+      checkoutViaWhatsApp();
+    });
+  }
+}
+
+function initAllShared() {
+  initDrawer();
   renderCartBadge();
+  initCartUI();
   initSearchButtons();
   initProductTilt();
   initBookingForm();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllShared);
+} else {
+  initAllShared();
+}

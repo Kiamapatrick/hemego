@@ -29,7 +29,7 @@
         <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
       <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20service" target="_blank" class="wa-nav-btn">WhatsApp</a>
-      <button class="hamburger-btn" id="hamburgerBtn">
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -37,7 +37,7 @@
 </nav>
 
 <!-- DRAWER OVERLAY -->
-<div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+<div class="mobile-drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
 
 <!-- DRAWER -->
 <aside class="mobile-drawer" id="mobileDrawer">
@@ -46,7 +46,7 @@
       <div class="drawer-brand">HEMEGO</div>
       <div class="drawer-sub-text">Techprise</div>
     </div>
-    <button class="drawer-close" id="drawerClose">×</button>
+    <button class="drawer-close" id="drawerClose" onclick="toggleDrawer()" aria-label="Close menu">×</button>
   </div>
   <div class="drawer-section">
     <div class="drawer-label">Navigation</div>

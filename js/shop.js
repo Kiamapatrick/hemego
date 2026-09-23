@@ -1,12 +1,5 @@
 /* HEMEGO TECHPRISE — Shop page specific behavior */
 
-const WA_NUMBER = '254703768321';
-
-function openWA(msg) {
-  const text = encodeURIComponent(msg || 'Hi HEMEGO, I have a question.');
-  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
-}
-
 // =========================================
 // CART (uses shared.js functions, but shop-specific additions)
 // =========================================

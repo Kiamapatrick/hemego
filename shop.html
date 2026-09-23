@@ -60,7 +60,7 @@ Place directly inside <body>
       </a>
 
       <!-- HAMBURGER -->
-      <button class="hamburger-btn" id="hamburgerBtn">
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()" aria-label="Open menu">
         <span></span>
         <span></span>
         <span></span>
@@ -75,7 +75,7 @@ Place directly inside <body>
 MOBILE DRAWER
 ========================= -->
 
-<div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+<div class="mobile-drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
 
 <aside class="mobile-drawer" id="mobileDrawer">
 
@@ -85,7 +85,7 @@ MOBILE DRAWER
       <div class="drawer-sub">Techprise</div>
     </div>
 
-    <button class="drawer-close" id="drawerClose">
+    <button class="drawer-close" id="drawerClose" onclick="toggleDrawer()" aria-label="Close menu">
       ×
     </button>
   </div>

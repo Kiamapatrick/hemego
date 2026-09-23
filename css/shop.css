@@ -345,9 +345,11 @@
 }
 
 /* PRODUCTS GRID */
-.products-grid {
+.products-grid,
+.products-grid-uniform,
+#productsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
 
@@ -875,9 +877,6 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 900px) {
@@ -886,9 +885,33 @@ footer {
   }
 }
 
-@media (max-width: 600px) {
-  .products-grid {
-    grid-template-columns: 1fr;
+/* ALL MOBILE / PHONE SCREENS: 1 PHONE IN A ROW */
+@media (max-width: 768px) {
+  .top-nav-inner {
+    padding: 0 1rem;
+  }
+  .mobile-drawer {
+    width: 100%;
+    right: -100%;
+  }
+  .mobile-drawer.active {
+    right: 0 !important;
+  }
+  .products-grid,
+  .products-grid-uniform,
+  #productsGrid,
+  .featured-strip {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .pcard-feat,
+  .pcard-hero,
+  .pcard-sm {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .sidebar {
     grid-template-columns: 1fr;
@@ -903,9 +926,29 @@ footer {
   .promo-right {
     display: none;
   }
-  /* Product image containers shorter on mobile */
-  .pcard-hero .pimg {
-    min-height: 160px;
+  /* Product image containers on mobile */
+  .pcard-hero .pimg,
+  .pcard-feat .pimg {
+    min-height: 200px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pcard-sm .pimg {
+    min-height: 180px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pcard-hero .pimg img,
+  .pcard-feat .pimg img,
+  .pcard-sm .pimg img {
+    max-height: 200px;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto;
   }
   /* Footer single column */
   .footer-top {
@@ -916,7 +959,7 @@ footer {
     flex-wrap: wrap;
     gap: .5rem;
   }
-  /* Sort/filter buttons full width on tiny screens */
+  /* Sort/filter buttons full width on screens */
   .sort-select,
   .filter-btn {
     width: 100%;

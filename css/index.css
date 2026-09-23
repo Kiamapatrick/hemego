@@ -505,6 +505,18 @@ RESPONSIVE
     right: -100%;
   }
 
+  .mobile-drawer.active {
+    right: 0 !important;
+  }
+
+  /* Products grid — 1 phone per row on mobile */
+  .products-grid,
+  .products-grid-uniform,
+  #productsGrid,
+  .featured-strip {
+    grid-template-columns: 1fr !important;
+  }
+
   /* Hero — hide right panel, stack CTAs */
   .hero-right {
     display: none;
@@ -541,7 +553,7 @@ RESPONSIVE
   }
 
   .pcard-sm .pimg {
-    min-height: 120px;
+    min-height: 140px;
   }
 
   /* Footer — single column */
@@ -558,7 +570,6 @@ RESPONSIVE
   .trust-grid {
     grid-template-columns: 1fr;
   }
-
 }
 
 
@@ -1159,9 +1170,9 @@ RESPONSIVE
   }
 }
 
-@media(max-width:520px) {
+@media(max-width:768px) {
   .products-grid-uniform {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -2236,13 +2247,20 @@ footer {
   }
 }
 
-@media(max-width:520px) {
-  .products-grid {
-    grid-template-columns: 1fr
+@media(max-width:768px) {
+  .products-grid,
+  .products-grid-uniform,
+  #productsGrid,
+  .featured-strip {
+    grid-template-columns: 1fr !important;
   }
 
-  .pcard-hero {
-    grid-column: 1
+  .pcard-hero,
+  .pcard-feat,
+  .pcard-sm {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    width: 100% !important;
   }
 
   .hero-h1 {
