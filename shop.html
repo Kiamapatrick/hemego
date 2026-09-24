@@ -84,9 +84,7 @@ MOBILE DRAWER
         <div class="drawer-sub">Techprise</div>
       </div>
 
-      <button class="drawer-close" id="drawerClose" onclick="toggleDrawer()" aria-label="Close menu">
-
-      </button>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
 
     <div class="drawer-section">
@@ -119,20 +117,24 @@ MOBILE DRAWER
 
   </aside>
 
-  <!-- =========================
-BOTTOM MOBILE NAV
-========================= -->
-
+    <!-- BOTTOM MOBILE NAV -->
   <nav class="bottom-mobile-nav">
-
-    <a href="index.html" class="bottom-nav-item active">
+    <a href="index.html" class="bottom-nav-item">
       <svg viewBox="0 0 24 24" fill="none">
         <path d="M3 11L12 4L21 11V20H15V14H9V20H3V11Z" stroke="currentColor" stroke-width="1.8"
           stroke-linejoin="round" />
       </svg>
       <span>Home</span>
     </a>
-
+    <a href="shop.html" class="bottom-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="10" cy="20" r="1" />
+        <circle cx="18" cy="20" r="1" />
+      </svg>
+      <span>Shop</span>
+    </a>
     <button class="bottom-nav-item" id="mobileSearchBtn">
       <svg viewBox="0 0 24 24" fill="none">
         <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" />
@@ -140,42 +142,22 @@ BOTTOM MOBILE NAV
       </svg>
       <span>Search</span>
     </button>
-
-    <button class="bottom-nav-item" id="mobileCartBtn">
+    <a href="repairs.html" class="bottom-nav-item">
       <svg viewBox="0 0 24 24" fill="none">
-        <path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round" />
-        <circle cx="10" cy="20" r="1" />
-        <circle cx="18" cy="20" r="1" />
+        <path
+          d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
-      <span>Cart</span>
-    </button>
-
-    <a href="https://wa.me/254703768321" class="bottom-nav-item">
+      <span>Repairs</span>
+    </a>
+    <a href="https://wa.me/254703768321" class="bottom-nav-item" target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path
           d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
       </svg>
       <span>WhatsApp</span>
     </a>
-
   </nav>
-
-
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-  <div class="mobile-drawer" id="mobileDrawer">
-    <ul class="drawer-links">
-      <li><a href="shop.html" onclick="closeDrawer()">Shop<span>→</span></a></li>
-      <li><a href="repairs.html" onclick="closeDrawer()">Repairs<span>→</span></a></li>
-      <li><a href="accessories.html" onclick="closeDrawer()">Accessories<span>→</span></a></li>
-      <li><a href="custom-pcs.html" onclick="closeDrawer()">Custom PCs<span>→</span></a></li>
-      <li><a href="support.html" onclick="closeDrawer()">Support<span>→</span></a></li>
-    </ul>
-    <div class="drawer-ctas">
-      <a href="shop.html" class="btn-primary" onclick="closeDrawer()">Shop Devices →</a>
-      <a href="repairs.html" class="btn-secondary" onclick="closeDrawer()">Book Repair</a>
-    </div>
-  </div>
 
   <!-- PAGE HERO -->
   <div class="page-hero">
@@ -301,7 +283,7 @@ BOTTOM MOBILE NAV
         <div class="featured-strip stagger">
 
           <!-- Samsung S26 Ultra 512GB -->
-          <div class="pcard-feat fade-up" data-cat="phones" data-price="162000">
+          <div class="pcard-feat fade-up" id="product-s26-ultra-512gb" data-id="s26-ultra-512gb" data-cat="phones" data-price="162000">
             <div class="pimg">
               <img src="img/s26.png" alt="Samsung S26 Ultra 512GB" style="max-width:100%;height:auto;" />
             </div>
@@ -325,7 +307,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung S26 Ultra 256GB -->
-          <div class="pcard-feat fade-up" data-cat="phones" data-price="130000">
+          <div class="pcard-feat fade-up" id="product-s26-ultra-256gb" data-id="s26-ultra-256gb" data-cat="phones" data-price="130000">
             <div class="pimg">
               <img src="img/s26ultra.jpeg" alt="Samsung S26 Ultra 256GB" style="max-width:100%;height:auto;" />
             </div>
@@ -349,7 +331,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung S25 Ultra -->
-          <div class="pcard-feat fade-up" data-cat="phones" data-price="122000">
+          <div class="pcard-feat fade-up" id="product-s25-ultra-256gb" data-id="s25-ultra-256gb" data-cat="phones" data-price="122000">
             <div class="pimg">
               <img src="img/s25ultra.jpeg" alt="Samsung S25ultra 256gb brand new" style="max-width:100%;height:auto;" />
             </div>
@@ -371,7 +353,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Hero product card iPhone 13 Pro Max -->
-          <div class="pcard-feat fade-up" data-cat="phones" data-price="68000">
+          <div class="pcard-feat fade-up" id="product-iphone-13-promax-256gb" data-id="iphone-13-promax-256gb" data-cat="phones" data-price="68000">
             <div class="pimg">
               <img src="img/img4.jpeg" alt="Iphone 13promax 256gb" style="max-width:100%;height:auto;" />
             </div>
@@ -398,7 +380,7 @@ BOTTOM MOBILE NAV
         <div class="products-grid-uniform stagger" id="productsGrid">
 
           <!-- iPhone 13 Pro -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="58000">
+          <div class="pcard-sm fade-up" id="product-iphone-13-pro-256gb" data-id="iphone-13-pro-256gb" data-cat="phones" data-price="58000">
             <div class="pimg">
               <img src="img/img3.jpeg" alt="iphone 13 pro" style="max-width:100%;height:auto;" />
             </div>
@@ -417,7 +399,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- iPhone 13 256GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="47000">
+          <div class="pcard-sm fade-up" id="product-iphone-13-256gb" data-id="iphone-13-256gb" data-cat="phones" data-price="47000">
             <div class="pimg">
               <img src="img/img2.jpeg" alt="Iphone 13 256gb" style="max-width:100%;height:auto;" />
             </div>
@@ -436,7 +418,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- iPhone 13 128GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="45000">
+          <div class="pcard-sm fade-up" id="product-iphone-13-128gb" data-id="iphone-13-128gb" data-cat="phones" data-price="45000">
             <div class="pimg">
               <img src="img/img1.jpeg" alt="Iphone 13 128gb" style="max-width:100%;height:auto;" />
             </div>
@@ -451,7 +433,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung S24 Ultra -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="86000">
+          <div class="pcard-sm fade-up" id="product-samsung-s24-ultra-256gb" data-id="samsung-s24-ultra-256gb" data-cat="phones" data-price="86000">
             <div class="pimg">
               <img src="img/s24ultra.jpeg" alt="Ex uk Samsung s24 ultra 256gb" style="max-width:100%;height:auto;" />
             </div>
@@ -463,8 +445,10 @@ BOTTOM MOBILE NAV
               <div class="pprice">KES 86,000 <span class="pprice-old">KES 90,500</span></div>
               <div class="pcta"><button class="btn-add">Add to Cart</button></div>
             </div>
-          </div> <!-- Samsung Galaxy Watch 7 -->
-          <div class="pcard-sm fade-up" data-cat="watches" data-price="16000">
+          </div>
+
+          <!-- Samsung Galaxy Watch 7 -->
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-watch-7" data-id="samsung-galaxy-watch-7" data-cat="watches" data-price="16000">
             <div class="pimg">
               <img src="img/galaxy7.jpeg" alt="Samsung Galaxy Watch 7" style="max-width:100%;height:auto;" />
             </div>
@@ -485,7 +469,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A07 64+4GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="14700">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a07-64gb" data-id="samsung-galaxy-a07-64gb" data-cat="phones" data-price="14700">
             <div class="pimg">
               <img src="img/ao7.jpeg" alt="Samsung Galaxy A07 64GB" style="max-width:100%;height:auto;" />
             </div>
@@ -506,7 +490,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A07 128+4GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="15600">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a07-128gb" data-id="samsung-galaxy-a07-128gb" data-cat="phones" data-price="15600">
             <div class="pimg">
               <img src="img/ao72.jpeg" alt="Samsung Galaxy A07 128GB" style="max-width:100%;height:auto;" />
             </div>
@@ -527,7 +511,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A17 128+4GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="20500">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a17-128gb" data-id="samsung-galaxy-a17-128gb" data-cat="phones" data-price="20500">
             <div class="pimg">
               <img src="img/a17.jpeg" alt="Samsung Galaxy A17 128GB" style="max-width:100%;height:auto;" />
             </div>
@@ -548,7 +532,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A37 256+8GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="44000">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a37-256gb" data-id="samsung-galaxy-a37-256gb" data-cat="phones" data-price="44000">
             <div class="pimg">
               <img src="img/a37.jpeg" alt="Samsung Galaxy A37 256GB" style="max-width:100%;height:auto;" />
             </div>
@@ -569,7 +553,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A57 128+8GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="46000">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a57-128gb" data-id="samsung-galaxy-a57-128gb" data-cat="phones" data-price="46000">
             <div class="pimg">
               <img src="img/a57.jpeg" alt="Samsung Galaxy A57 128GB" style="max-width:100%;height:auto;" />
             </div>
@@ -590,7 +574,7 @@ BOTTOM MOBILE NAV
           </div>
 
           <!-- Samsung A57 256+8GB -->
-          <div class="pcard-sm fade-up" data-cat="phones" data-price="50000">
+          <div class="pcard-sm fade-up" id="product-samsung-galaxy-a57-256gb" data-id="samsung-galaxy-a57-256gb" data-cat="phones" data-price="50000">
             <div class="pimg">
               <img src="img/a572.jpeg" alt="Samsung Galaxy A57 256GB" style="max-width:100%;height:auto;" />
             </div>

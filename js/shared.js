@@ -17,40 +17,41 @@ function openWA(msg) {
 })();
 
 /* ---- Mobile drawer ---- */
-function toggleDrawer() {
-  const drawer = document.getElementById('mobileDrawer');
-  const overlay = document.getElementById('drawerOverlay');
-  if (!drawer) return;
-  const opening = !drawer.classList.contains('active');
-  drawer.classList.toggle('active', opening);
-  if (overlay) overlay.classList.toggle('active', opening);
+function toggleDrawer(force) {
+  const drawers = document.querySelectorAll('#mobileDrawer, .mobile-drawer');
+  const overlays = document.querySelectorAll('#drawerOverlay, .mobile-drawer-overlay, .drawer-overlay');
+  if (!drawers.length) return;
+  
+  const isCurrentlyActive = drawers[0].classList.contains('active');
+  const opening = typeof force === 'boolean' ? force : !isCurrentlyActive;
+  
+  drawers.forEach(drawer => drawer.classList.toggle('active', opening));
+  overlays.forEach(overlay => overlay.classList.toggle('active', opening));
   document.body.style.overflow = opening ? 'hidden' : '';
 }
 
 function openDrawer() {
-  const drawer = document.getElementById('mobileDrawer');
-  const overlay = document.getElementById('drawerOverlay');
-  if (!drawer) return;
-  drawer.classList.add('active');
-  if (overlay) overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  toggleDrawer(true);
 }
 
 function closeDrawer() {
-  const drawer = document.getElementById('mobileDrawer');
-  const overlay = document.getElementById('drawerOverlay');
-  if (!drawer) return;
-  drawer.classList.remove('active');
-  if (overlay) overlay.classList.remove('active');
-  document.body.style.overflow = '';
+  toggleDrawer(false);
 }
+
+window.toggleDrawer = toggleDrawer;
+window.openDrawer = openDrawer;
+window.closeDrawer = closeDrawer;
 
 function initDrawer() {
   const hamburgerBtns = document.querySelectorAll('#hamburgerBtn, .hamburger-btn, [data-drawer-toggle]');
   const closeBtns = document.querySelectorAll('#drawerClose, .drawer-close, [data-drawer-close]');
-  const overlays = document.querySelectorAll('#drawerOverlay, .mobile-drawer-overlay');
+  const overlays = document.querySelectorAll('#drawerOverlay, .mobile-drawer-overlay, .drawer-overlay');
 
   hamburgerBtns.forEach(btn => {
+    // Remove inline onclick if present to prevent double toggling on a single tap
+    if (btn.getAttribute('onclick')) {
+      btn.removeAttribute('onclick');
+    }
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -59,14 +60,23 @@ function initDrawer() {
   });
 
   closeBtns.forEach(btn => {
+    if (btn.getAttribute('onclick')) {
+      btn.removeAttribute('onclick');
+    }
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       closeDrawer();
     });
   });
 
   overlays.forEach(overlay => {
-    overlay.addEventListener('click', () => {
+    if (overlay.getAttribute('onclick')) {
+      overlay.removeAttribute('onclick');
+    }
+    overlay.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       closeDrawer();
     });
   });
@@ -76,11 +86,18 @@ function initDrawer() {
   });
 
   // Close drawer when clicking nav links inside
-  document.querySelectorAll('#mobileDrawer a').forEach(link => {
+  document.querySelectorAll('#mobileDrawer a, .mobile-drawer a').forEach(link => {
     link.addEventListener('click', () => {
       closeDrawer();
     });
   });
+
+  // Automatically close on desktop resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) {
+      closeDrawer();
+    }
+  }, { passive: true });
 }
 
 /* ---- Fade-up / stagger scroll reveal ---- */
@@ -253,29 +270,177 @@ function checkoutViaWhatsApp() {
   openWA(`Hi HEMEGO, I would like to order:\n${lines}\nTotal: KES ${cartTotal(cart).toLocaleString()}`);
 }
 
-/* ---- Search Overlay ---- */
+/* ---- Master Product Catalog & Search ---- */
+const MASTER_PRODUCTS = [
+  {
+    id: 's26-ultra-512gb',
+    name: 'Samsung S26 Ultra 512GB',
+    brand: 'Samsung · 512GB Phantom Black',
+    category: 'phones',
+    price: 162000,
+    image: 'img/s26.png',
+    tag: 'Flagship Smartphone'
+  },
+  {
+    id: 's26-ultra-256gb',
+    name: 'Samsung S26 Ultra 256GB',
+    brand: 'Samsung · 256GB Titanium Gray',
+    category: 'phones',
+    price: 130000,
+    image: 'img/s26ultra.jpeg',
+    tag: 'Flagship Smartphone'
+  },
+  {
+    id: 's25-ultra-256gb',
+    name: 'Samsung S25 Ultra 256GB',
+    brand: 'Samsung · 256GB Brand New',
+    category: 'phones',
+    price: 122000,
+    image: 'img/s25ultra.jpeg',
+    tag: 'Flagship Smartphone'
+  },
+  {
+    id: 'iphone-13-promax-256gb',
+    name: 'iPhone 13 Pro Max 256GB',
+    brand: 'Apple · 256GB Sierra Blue',
+    category: 'phones',
+    price: 68000,
+    image: 'img/img4.jpeg',
+    tag: 'Flagship Smartphone'
+  },
+  {
+    id: 'iphone-13-pro-256gb',
+    name: 'iPhone 13 Pro 256GB',
+    brand: 'Apple · 256GB Graphite',
+    category: 'phones',
+    price: 58000,
+    image: 'img/img3.jpeg',
+    tag: 'Flagship Smartphone'
+  },
+  {
+    id: 'iphone-13-256gb',
+    name: 'iPhone 13 256GB',
+    brand: 'Apple · 256GB Midnight',
+    category: 'phones',
+    price: 47000,
+    image: 'img/img2.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'iphone-13-128gb',
+    name: 'iPhone 13 128GB',
+    brand: 'Apple · 128GB Starlight',
+    category: 'phones',
+    price: 45000,
+    image: 'img/img1.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-s24-ultra-256gb',
+    name: 'Ex UK Samsung S24 Ultra 256GB',
+    brand: 'Samsung · 256GB Titanium Blue',
+    category: 'phones',
+    price: 86000,
+    image: 'img/s24ultra.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-watch-7',
+    name: 'Samsung Galaxy Watch 7',
+    brand: 'Samsung · 32GB · Brand New',
+    category: 'watches',
+    price: 16000,
+    image: 'img/galaxy7.jpeg',
+    tag: 'Smart Watch'
+  },
+  {
+    id: 'samsung-galaxy-a07-64gb',
+    name: 'Samsung Galaxy A07 64GB',
+    brand: 'Samsung · 64GB + 4GB RAM',
+    category: 'phones',
+    price: 14700,
+    image: 'img/ao7.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-a07-128gb',
+    name: 'Samsung Galaxy A07 128GB',
+    brand: 'Samsung · 128GB + 4GB RAM',
+    category: 'phones',
+    price: 15600,
+    image: 'img/ao72.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-a17-128gb',
+    name: 'Samsung Galaxy A17 128GB',
+    brand: 'Samsung · 128GB + 4GB RAM',
+    category: 'phones',
+    price: 20500,
+    image: 'img/a17.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-a37-256gb',
+    name: 'Samsung Galaxy A37 256GB',
+    brand: 'Samsung · 256GB + 8GB RAM',
+    category: 'phones',
+    price: 44000,
+    image: 'img/a37.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-a57-128gb',
+    name: 'Samsung Galaxy A57 128GB',
+    brand: 'Samsung · 128GB + 8GB RAM',
+    category: 'phones',
+    price: 46000,
+    image: 'img/a57.jpeg',
+    tag: 'Smartphone'
+  },
+  {
+    id: 'samsung-galaxy-a57-256gb',
+    name: 'Samsung Galaxy A57 256GB',
+    brand: 'Samsung · 256GB + 8GB RAM',
+    category: 'phones',
+    price: 50000,
+    image: 'img/a572.jpeg',
+    tag: 'Smartphone'
+  }
+];
+
 let searchProducts = [];
 
 function initSearchProducts() {
-  // Collect product data from shop page if present
+  const map = new Map();
+  
+  // Seed with master catalog
+  MASTER_PRODUCTS.forEach(p => map.set(p.id, p));
+
+  // Merge with any DOM cards present on current page
   const cards = document.querySelectorAll('[data-cat][data-price]');
-  searchProducts = Array.from(cards).map((card) => {
+  cards.forEach(card => {
     const nameEl = card.querySelector('.pname');
     const brandEl = card.querySelector('.pbrand');
-    const priceEl = card.querySelector('.pprice');
     const imgEl = card.querySelector('img');
     const cat = card.dataset.cat;
-    const price = parseInt(card.dataset.price, 10);
-    return {
-      id: card.dataset.id || nameEl?.textContent?.toLowerCase().replace(/\s+/g, '-') || 'product',
-      name: nameEl?.textContent?.trim() || 'Product',
-      brand: brandEl?.textContent?.trim() || '',
-      category: cat,
-      price: price,
-      image: imgEl?.src || '',
-      element: card
-    };
+    const price = parseInt(card.dataset.price, 10) || 0;
+    const rawId = card.id ? card.id.replace('product-', '') : (card.dataset.id || nameEl?.textContent?.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+    
+    if (rawId) {
+      map.set(rawId, {
+        id: rawId,
+        name: nameEl?.textContent?.trim() || 'Product',
+        brand: brandEl?.textContent?.trim() || '',
+        category: cat || 'all',
+        price: price,
+        image: imgEl?.getAttribute('src') || '',
+        element: card
+      });
+    }
   });
+
+  searchProducts = Array.from(map.values());
 }
 
 function openSearch() {
@@ -289,11 +454,13 @@ function openSearch() {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
   
-  // Focus the input after animation
   setTimeout(() => {
     const input = overlay.querySelector('.search-input');
-    if (input) input.focus();
-  }, 150);
+    if (input) {
+      input.focus();
+      input.dispatchEvent(new Event('input'));
+    }
+  }, 100);
 }
 
 function closeSearch() {
@@ -301,18 +468,61 @@ function closeSearch() {
   if (!overlay) return;
   overlay.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function scrollToAndHighlightProduct(productId) {
+  if (!productId) return;
   
-  // Clear input and results
-  setTimeout(() => {
-    const input = overlay.querySelector('.search-input');
-    const results = overlay.querySelector('.search-results');
-    const suggestions = overlay.querySelector('.search-suggestions');
-    const clearBtn = overlay.querySelector('.search-input-clear');
-    if (input) input.value = '';
-    if (results) results.classList.remove('open');
-    if (suggestions) suggestions.style.display = 'block';
-    if (clearBtn) clearBtn.classList.remove('visible');
-  }, 300);
+  // Find element by id (with or without 'product-' prefix) or data-id
+  let target = document.getElementById(`product-${productId}`) || 
+               document.getElementById(productId) ||
+               document.querySelector(`[data-id="${productId}"]`);
+  
+  if (target) {
+    // If on shop page and category filter is active, reset to show target
+    if (typeof activeCategory !== 'undefined') {
+      if (target.dataset.cat && target.dataset.cat !== activeCategory && activeCategory !== 'all') {
+        const tab = document.querySelector(`.ftab[onclick*="'${target.dataset.cat}'"]`);
+        if (tab && typeof setTab === 'function') {
+          setTab(tab, target.dataset.cat);
+        } else if (typeof clearFilters === 'function') {
+          clearFilters();
+        }
+      }
+    }
+    
+    // Ensure display is visible
+    target.style.display = '';
+
+    // Scroll into view with margin
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Remove any previous highlight
+      document.querySelectorAll('.product-highlight').forEach(el => el.classList.remove('product-highlight'));
+      
+      // Trigger new highlight pulse
+      target.classList.add('product-highlight');
+      
+      setTimeout(() => {
+        target.classList.remove('product-highlight');
+      }, 3200);
+    }, 150);
+  }
+}
+
+function navigateToProduct(productId) {
+  closeSearch();
+  const isOnShop = window.location.pathname.endsWith('shop.html') || window.location.pathname.includes('/shop');
+  
+  if (isOnShop) {
+    if (window.location.hash !== `#product-${productId}`) {
+      history.pushState(null, '', `#product-${productId}`);
+    }
+    scrollToAndHighlightProduct(productId);
+  } else {
+    window.location.href = `shop.html#product-${productId}`;
+  }
 }
 
 function createSearchOverlay() {
@@ -341,10 +551,10 @@ function createSearchOverlay() {
         <div class="search-suggestions-grid">
           <button class="search-suggestion" data-query="iPhone"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">iPhone</span></button>
           <button class="search-suggestion" data-query="Samsung"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">Samsung</span></button>
-          <button class="search-suggestion" data-query="MacBook"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M1 19h22"/></svg><span class="search-suggestion-name">MacBook</span></button>
-          <button class="search-suggestion" data-query="Watch"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2 1"/></svg><span class="search-suggestion-name">Smart Watch</span></button>
-          <button class="search-suggestion" data-query="Earbuds"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12V9a4 4 0 0 1 8 0v6a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-2z"/><path d="M20 12V9a4 4 0 0 0-8 0v6a3 3 0 0 0 3 3h3a2 2 0 0 0 2-2v-2z"/></svg><span class="search-suggestion-name">Earbuds</span></button>
-          <button class="search-suggestion" data-query="Charger"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L6 14h5l-1 8 9-12h-5l1-8z"/></svg><span class="search-suggestion-name">Chargers</span></button>
+          <button class="search-suggestion" data-query="S26"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">S26 Ultra</span></button>
+          <button class="search-suggestion" data-query="Watch"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2 1"/></svg><span class="search-suggestion-name">Galaxy Watch</span></button>
+          <button class="search-suggestion" data-query="Ultra"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">Ultra Series</span></button>
+          <button class="search-suggestion" data-query="A57"><svg class="search-suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg><span class="search-suggestion-name">Galaxy A57</span></button>
         </div>
       </div>
     </div>
@@ -365,10 +575,10 @@ function createSearchOverlay() {
   const suggestions = overlay.querySelector('.search-suggestions');
   
   input.addEventListener('input', () => {
-    const term = input.value.trim().toLowerCase();
-    clearBtn.classList.toggle('visible', term.length > 0);
+    const raw = input.value.trim().toLowerCase();
+    clearBtn.classList.toggle('visible', raw.length > 0);
     
-    if (term.length === 0) {
+    if (raw.length === 0) {
       results.classList.remove('open');
       suggestions.style.display = 'block';
       return;
@@ -377,14 +587,14 @@ function createSearchOverlay() {
     suggestions.style.display = 'none';
     results.classList.add('open');
     
-    // Filter products
-    const filtered = searchProducts.filter(p => 
-      p.name.toLowerCase().includes(term) ||
-      p.brand.toLowerCase().includes(term) ||
-      p.category.toLowerCase().includes(term)
-    );
+    // Multi-term search match
+    const terms = raw.split(/\s+/).filter(Boolean);
+    const filtered = searchProducts.filter(p => {
+      const searchBlob = `${p.name} ${p.brand} ${p.category} ${p.tag || ''} ${p.id}`.toLowerCase();
+      return terms.every(t => searchBlob.includes(t));
+    });
     
-    resultsCount.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+    resultsCount.textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''} found`;
     
     if (filtered.length === 0) {
       resultsList.innerHTML = '';
@@ -398,11 +608,21 @@ function createSearchOverlay() {
           </div>
           <div class="search-result-info">
             <div class="search-result-name">${p.name}</div>
-            <div class="search-result-brand">${p.brand}</div>
+            <div class="search-result-brand">${p.brand || p.category}</div>
           </div>
           <div class="search-result-price">KES ${p.price.toLocaleString()}</div>
         </a>
       `).join('');
+    }
+  });
+
+  // Intercept search card clicks to provide seamless highlight & scroll
+  resultsList.addEventListener('click', (e) => {
+    const card = e.target.closest('.search-result-card');
+    if (card) {
+      e.preventDefault();
+      const pid = card.dataset.id;
+      navigateToProduct(pid);
     }
   });
   
@@ -414,7 +634,7 @@ function createSearchOverlay() {
     input.focus();
   });
   
-  // Suggestion clicks
+  // Suggestion buttons
   overlay.querySelectorAll('.search-suggestion').forEach(btn => {
     btn.addEventListener('click', () => {
       const query = btn.dataset.query;
@@ -426,7 +646,7 @@ function createSearchOverlay() {
     });
   });
   
-  // Keyboard: Escape to close
+  // Keyboard Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('open')) {
       closeSearch();
@@ -437,44 +657,35 @@ function createSearchOverlay() {
 }
 
 function runSearch(term) {
-  const trimmed = term.trim();
-  if (!trimmed) return;
-  
-  // If on shop page, filter in place
-  if (window.location.pathname.includes('shop.html')) {
-    openSearch();
-    const input = document.querySelector('.search-input');
-    if (input) {
-      input.value = trimmed;
-      input.dispatchEvent(new Event('input'));
-    }
-  } else {
-    // Redirect to shop with query param
-    window.location.href = `shop.html?q=${encodeURIComponent(trimmed)}`;
+  openSearch();
+  const input = document.querySelector('.search-input');
+  if (input) {
+    input.value = term;
+    input.dispatchEvent(new Event('input'));
   }
 }
 
-// Initialize search buttons
+// Initialize search triggers on all pages
 function initSearchButtons() {
-  const desktopBtn = document.getElementById('desktopSearchBtn');
-  const mobileBtn = document.getElementById('mobileSearchBtn');
+  const triggers = document.querySelectorAll('#desktopSearchBtn, #mobileSearchBtn, [data-search-toggle], .nav-circle-btn[aria-label="Search"]');
   
-  if (desktopBtn) {
-    desktopBtn.addEventListener('click', openSearch);
-  }
-  if (mobileBtn) {
-    mobileBtn.addEventListener('click', openSearch);
-  }
-  
-  // Check for search query param on shop page
-  if (window.location.pathname.includes('shop.html')) {
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get('q');
-    if (q) {
-      // Wait for DOM to be ready
-      setTimeout(() => runSearch(q), 100);
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  });
+
+  // Hash check on load
+  const handleHash = () => {
+    if (window.location.hash && window.location.hash.startsWith('#product-')) {
+      const productId = window.location.hash.replace('#product-', '');
+      setTimeout(() => scrollToAndHighlightProduct(productId), 300);
     }
-  }
+  };
+
+  window.addEventListener('hashchange', handleHash);
+  handleHash();
 }
 
 /* ---- FAQ Toggle (unified for both button and item element) ---- */

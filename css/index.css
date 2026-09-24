@@ -327,12 +327,13 @@ TOP NAV
   border: none;
   background: rgba(255, 255, 255, .03);
   border-radius: 50%;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  z-index: 1001;
 }
 
 .hamburger-btn span {
@@ -340,25 +341,32 @@ TOP NAV
   height: 1.7px;
   background: #fff;
   border-radius: 2px;
+  pointer-events: none;
 }
 
 /* =========================================
-DRAWER
+DRAWER & OVERLAY
 ========================================= */
 
-.mobile-drawer-overlay {
+.mobile-drawer-overlay,
+.drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, .55);
+  background: rgba(0, 0, 0, .6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 1200;
   opacity: 0;
   visibility: hidden;
-  transition: .3s;
+  pointer-events: none;
+  transition: opacity .3s ease, visibility .3s ease;
 }
 
-.mobile-drawer-overlay.active {
+.mobile-drawer-overlay.active,
+.drawer-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer {
@@ -367,16 +375,31 @@ DRAWER
   right: -340px;
   width: 320px;
   height: 100vh;
+  height: 100dvh;
   background: #07101f;
   z-index: 1300;
   padding: 2rem;
   overflow-y: auto;
-  transition: .35s ease;
+  transition: right .35s cubic-bezier(0.4, 0, 0.2, 1);
   border-left: 1px solid rgba(255, 255, 255, .06);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-drawer.active {
   right: 0;
+}
+
+@media (min-width: 981px) {
+  .hamburger-btn,
+  .nav-hamburger,
+  .mobile-drawer-overlay,
+  .drawer-overlay,
+  .mobile-drawer {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 }
 
 .drawer-top {
@@ -482,6 +505,20 @@ RESPONSIVE
 
   .wa-nav-btn {
     display: none;
+  }
+
+  .hamburger-btn,
+  .nav-hamburger {
+    display: flex !important;
+  }
+
+  .mobile-drawer-overlay,
+  .drawer-overlay {
+    display: block !important;
+  }
+
+  .mobile-drawer {
+    display: block !important;
   }
 
   .bottom-mobile-nav {
@@ -2359,12 +2396,14 @@ footer {
     grid-template-columns: 1fr 1fr
   }
 
+  .desktop-links,
   .nav-links {
-    display: none
+    display: none;
   }
 
+  .hamburger-btn,
   .nav-hamburger {
-    display: flex
+    display: flex;
   }
 }
 
@@ -3034,4 +3073,32 @@ footer {
   .search-suggestions-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* =========================================
+   PRODUCT FOCUS / SEARCH HIGHLIGHT
+   ========================================= */
+@keyframes productGlow {
+  0% {
+    outline: 3px solid #e8630a;
+    box-shadow: 0 0 0 4px rgba(232, 99, 10, 0.4), 0 0 35px rgba(232, 99, 10, 0.7);
+    transform: translateY(-4px) scale(1.02);
+  }
+  50% {
+    outline: 3px solid #2563eb;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.4), 0 0 45px rgba(37, 99, 235, 0.8);
+    transform: translateY(-4px) scale(1.02);
+  }
+  100% {
+    outline: 2px solid transparent;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+.product-highlight {
+  animation: productGlow 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  z-index: 50 !important;
+  position: relative !important;
+  scroll-margin-top: 100px;
 }
