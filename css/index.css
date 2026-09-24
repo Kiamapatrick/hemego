@@ -307,13 +307,44 @@ TOP NAV
   background: rgba(255, 255, 255, .08);
 }
 
+/* Nav cart button — hidden on desktop, shown on mobile (badge version) */
+.nav-cart-btn {
+  position: relative;
+  display: none;
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--orange);
+  color: white;
+  font-size: .62rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 10px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(1, 18, 63, 0.78);
+  box-shadow: 0 2px 6px rgba(232, 99, 10, 0.45);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-cart-badge.bump {
+  animation: cartBadgeBump 0.35s ease-out;
+}
+
 .wa-nav-btn {
   height: 42px;
   padding: 0 1.1rem;
   border-radius: 999px;
   background: #e8630a;
   color: #fff;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   text-decoration: none;
@@ -2581,16 +2612,60 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .float-wa {
-    bottom: 5.25rem !important;
-    left: 1rem !important;
-    right: auto !important;
-  }
+  /* Hide floating action buttons — bottom nav bar handles these on mobile */
+  .float-wa,
   .cart-toggle {
-    bottom: 5.25rem !important;
-    right: 1rem !important;
-    left: auto !important;
+    display: none !important;
   }
+
+  /* Hide desktop search button; Search tab in bottom nav handles it on mobile */
+  #desktopSearchBtn,
+  .nav-search-btn {
+    display: none !important;
+  }
+
+  /* ── Mobile nav cart button ── */
+  #navCartBtn,
+  .nav-cart-btn {
+    display: flex !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(26, 58, 107, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    transition: background 0.22s, transform 0.18s;
+  }
+
+  #navCartBtn:hover,
+  #navCartBtn:active {
+    background: rgba(26, 58, 107, 0.8);
+    transform: scale(0.94);
+  }
+
+  #navCartBtn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ── Mobile nav cart badge ── */
+  #navCartBadge,
+  .nav-cart-badge {
+    top: -7px;
+    right: -7px;
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.67rem;
+    padding: 0 5px;
+    border-radius: 12px;
+    border: 2.5px solid rgba(1, 18, 63, 0.9);
+    box-shadow: 0 2px 8px rgba(232, 99, 10, 0.55),
+                0 0 0 3px rgba(232, 99, 10, 0.12);
+    background: linear-gradient(135deg, #f07a32, #e8630a);
+  }
+
   .cart-toast {
     bottom: 5.5rem;
     width: calc(100% - 2rem);
@@ -2732,14 +2807,6 @@ footer {
 }
 
 @media(max-width:768px) {
-  .cart-toggle {
-    bottom: 80px;
-    right: 16px;
-    width: 50px;
-    height: 50px;
-    font-size: .75rem;
-  }
-
   .cart-panel {
     width: 100%;
     right: -100%;
@@ -2768,13 +2835,6 @@ footer {
 
   .cart-panel-actions {
     padding: .75rem 1rem;
-  }
-
-  .cart-toggle {
-    bottom: 70px;
-    right: 12px;
-    width: 48px;
-    height: 48px;
   }
 }
 

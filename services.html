@@ -25,8 +25,18 @@
       <li><a href="journal.html">Journal</a></li>
     </ul>
     <div class="nav-right">
-      <button class="nav-circle-btn" id="desktopSearchBtn">
+      <!-- Desktop search button — hidden on mobile (<=768px) -->
+      <button class="nav-circle-btn nav-search-btn" id="desktopSearchBtn" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <!-- Cart button — replaces search btn on mobile (<=768px) -->
+      <button class="nav-circle-btn nav-cart-btn" id="navCartBtn" onclick="toggleCart()" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="10" cy="20" r="1" fill="currentColor" />
+          <circle cx="18" cy="20" r="1" fill="currentColor" />
+        </svg>
+        <span class="nav-cart-badge" id="navCartBadge"></span>
       </button>
       <a href="https://wa.me/254703768321?text=Hi%20HEMEGO%2C%20I%20need%20a%20service" target="_blank" class="wa-nav-btn">WhatsApp</a>
       <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleDrawer()" aria-label="Open menu">

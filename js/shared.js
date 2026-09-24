@@ -184,6 +184,14 @@ function showCartToast(itemName) {
     floatingBadge.classList.add('bump');
   }
 
+  // Also bump the top-nav cart badge
+  const navBadge = document.getElementById('navCartBadge');
+  if (navBadge) {
+    navBadge.classList.remove('bump');
+    void navBadge.offsetWidth;
+    navBadge.classList.add('bump');
+  }
+
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => {
     toast.classList.remove('show');
