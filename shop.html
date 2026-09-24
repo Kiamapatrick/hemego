@@ -120,6 +120,59 @@ MOBILE DRAWER
 
   </aside>
 
+    <!-- MOBILE FILTER DRAWER -->
+    <div class="filter-drawer-overlay" id="filterDrawerOverlay" onclick="toggleFilterDrawer()"></div>
+
+    <aside class="filter-drawer" id="filterDrawer">
+      <div class="filter-drawer-header">
+        <div class="filter-drawer-title">Filters</div>
+        <button class="filter-drawer-close" id="filterDrawerClose" aria-label="Close filters">&times;</button>
+      </div>
+      <div class="filter-drawer-body">
+        <!-- Filter Tabs -->
+        <div class="filter-drawer-section">
+          <div class="filter-drawer-section-title">Categories</div>
+          <div class="filter-drawer-tabs">
+            <button class="ftab active" onclick="setTab(this,'all'); closeFilterDrawer()">All Products</button>
+            <button class="ftab" onclick="setTab(this,'phones'); closeFilterDrawer()">Smartphones</button>
+            <button class="ftab" onclick="setTab(this,'laptops'); closeFilterDrawer()">Laptops</button>
+            <button class="ftab" onclick="setTab(this,'watches'); closeFilterDrawer()">Smartwatches</button>
+            <button class="ftab" onclick="setTab(this,'audio'); closeFilterDrawer()">Audio</button>
+            <button class="ftab" onclick="setTab(this,'accessories'); closeFilterDrawer()">Accessories</button>
+          </div>
+        </div>
+
+        <div class="filter-drawer-divider"></div>
+
+        <!-- Price Range -->
+        <div class="filter-drawer-section">
+          <div class="filter-drawer-section-title">Price Range (KES)</div>
+          <div class="price-range">
+            <div class="range-slider">
+              <div class="slider-track" id="mobileSliderTrack"></div>
+              <input type="range" class="range-min" id="mobileRangeMin" min="0" max="200000" value="0" step="1000" aria-label="Minimum price">
+              <input type="range" class="range-max" id="mobileRangeMax" min="0" max="200000" value="200000" step="1000" aria-label="Maximum price">
+            </div>
+            <div class="price-inputs">
+              <div class="price-field">
+                <span class="price-field-label">Min</span>
+                <input type="text" class="price-input" id="mobilePriceMin" value="0" placeholder="0" inputmode="numeric">
+              </div>
+              <div class="price-field">
+                <span class="price-field-label">Max</span>
+                <input type="text" class="price-input" id="mobilePriceMax" value="200,000" placeholder="200,000" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-drawer-divider"></div>
+
+        <!-- Clear Filters -->
+        <button class="filter-drawer-clear" onclick="clearFilters(); closeFilterDrawer()">Clear all filters</button>
+      </div>
+    </aside>
+
     <!-- BOTTOM MOBILE NAV -->
   <nav class="bottom-mobile-nav">
     <a href="index.html" class="bottom-nav-item">
@@ -210,6 +263,14 @@ MOBILE DRAWER
             <option value="newest">Newest First</option>
             <option value="rating">Best Rated</option>
           </select>
+          <button class="filter-mobile-btn" id="mobileFilterBtn" aria-label="Open filters" onclick="toggleFilterDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+            <span>Filters</span>
+          </button>
         </div>
       </div>
     </div>

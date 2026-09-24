@@ -11,7 +11,8 @@ const MIN_GAP = 1000;
 
 function setTab(el, cat) {
   document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+  // Activate all tabs with matching category (desktop + mobile)
+  document.querySelectorAll(`.ftab[onclick*="'${cat}'"]`).forEach(t => t.classList.add('active'));
   activeCategory = cat;
   applyFilters();
 }
@@ -107,7 +108,18 @@ function clearFilters() {
   if (inputMin) inputMin.value = '0';
   if (inputMax) inputMax.value = MAX_POSSIBLE.toLocaleString();
 
+  // Clear mobile filter inputs
+  const mobileRangeMin = document.getElementById('mobileRangeMin');
+  const mobileRangeMax = document.getElementById('mobileRangeMax');
+  const mobileInputMin = document.getElementById('mobilePriceMin');
+  const mobileInputMax = document.getElementById('mobilePriceMax');
+  if (mobileRangeMin) mobileRangeMin.value = 0;
+  if (mobileRangeMax) mobileRangeMax.value = MAX_POSSIBLE;
+  if (mobileInputMin) mobileInputMin.value = '0';
+  if (mobileInputMax) mobileInputMax.value = MAX_POSSIBLE.toLocaleString();
+
   updateSliderTrack(0, MAX_POSSIBLE);
+  updateMobileSliderTrack(0, MAX_POSSIBLE);
   applyFilters();
 }
 
@@ -131,6 +143,7 @@ function initPriceRangeFilter() {
       rangeMin.value = minVal;
     }
     inputMin.value = minVal.toLocaleString();
+    syncMobilePriceRange(minVal, maxVal);
     updateSliderTrack(minVal, maxVal);
     applyFilters();
   });
@@ -144,6 +157,7 @@ function initPriceRangeFilter() {
       rangeMax.value = maxVal;
     }
     inputMax.value = maxVal.toLocaleString();
+    syncMobilePriceRange(minVal, maxVal);
     updateSliderTrack(minVal, maxVal);
     applyFilters();
   });
@@ -154,6 +168,7 @@ function initPriceRangeFilter() {
     const minVal = Math.min(rawVal, MAX_POSSIBLE);
     const maxVal = parseInt(rangeMax.value, 10) || MAX_POSSIBLE;
     rangeMin.value = minVal;
+    syncMobilePriceRange(minVal, maxVal);
     updateSliderTrack(minVal, maxVal);
     applyFilters();
   });
@@ -164,6 +179,7 @@ function initPriceRangeFilter() {
     const maxVal = Math.min(rawVal, MAX_POSSIBLE);
     const minVal = parseInt(rangeMin.value, 10) || 0;
     rangeMax.value = maxVal;
+    syncMobilePriceRange(minVal, maxVal);
     updateSliderTrack(minVal, maxVal);
     applyFilters();
   });
@@ -185,6 +201,7 @@ function initPriceRangeFilter() {
     rangeMax.value = maxVal;
     inputMin.value = minVal.toLocaleString();
     inputMax.value = maxVal.toLocaleString();
+    syncMobilePriceRange(minVal, maxVal);
     updateSliderTrack(minVal, maxVal);
     applyFilters();
   };
@@ -209,8 +226,213 @@ function initPriceRangeFilter() {
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   initPriceRangeFilter();
+  initMobileFilterDrawer();
   applyFilters();
 });
+
+/* ---- Mobile Filter Drawer ---- */
+function toggleFilterDrawer(force) {
+  const drawer = document.getElementById('filterDrawer');
+  const overlay = document.getElementById('filterDrawerOverlay');
+  if (!drawer || !overlay) return;
+
+  const isActive = drawer.classList.contains('active');
+  const opening = typeof force === 'boolean' ? force : !isActive;
+
+  drawer.classList.toggle('active', opening);
+  overlay.classList.toggle('active', opening);
+  document.body.style.overflow = opening ? 'hidden' : '';
+}
+
+function openFilterDrawer() {
+  toggleFilterDrawer(true);
+}
+
+function closeFilterDrawer() {
+  toggleFilterDrawer(false);
+}
+
+function initMobileFilterDrawer() {
+  const btn = document.getElementById('mobileFilterBtn');
+  const closeBtn = document.getElementById('filterDrawerClose');
+  const overlay = document.getElementById('filterDrawerOverlay');
+
+  if (btn) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleFilterDrawer();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeFilterDrawer();
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeFilterDrawer();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeFilterDrawer();
+  });
+
+  // Initialize mobile price range filter
+  initMobilePriceRangeFilter();
+}
+
+function initMobilePriceRangeFilter() {
+  const rangeMin = document.getElementById('mobileRangeMin');
+  const rangeMax = document.getElementById('mobileRangeMax');
+  const inputMin = document.getElementById('mobilePriceMin');
+  const inputMax = document.getElementById('mobilePriceMax');
+
+  if (!rangeMin || !rangeMax || !inputMin || !inputMax) return;
+
+  // Initialize track
+  const desktopMin = document.getElementById('rangeMin');
+  const desktopMax = document.getElementById('rangeMax');
+  const minVal = parseInt(desktopMin?.value, 10) || 0;
+  const maxVal = parseInt(desktopMax?.value, 10) || MAX_POSSIBLE;
+  rangeMin.value = minVal;
+  rangeMax.value = maxVal;
+  inputMin.value = minVal.toLocaleString();
+  inputMax.value = maxVal.toLocaleString();
+  updateMobileSliderTrack(minVal, maxVal);
+
+  // Range Min slider
+  rangeMin.addEventListener('input', () => {
+    let min = parseInt(rangeMin.value, 10) || 0;
+    let max = parseInt(rangeMax.value, 10) || MAX_POSSIBLE;
+    if (min > max - MIN_GAP) {
+      min = Math.max(0, max - MIN_GAP);
+      rangeMin.value = min;
+    }
+    inputMin.value = min.toLocaleString();
+    syncDesktopPriceRange(min, max);
+    updateMobileSliderTrack(min, max);
+    applyFilters();
+  });
+
+  // Range Max slider
+  rangeMax.addEventListener('input', () => {
+    let min = parseInt(rangeMin.value, 10) || 0;
+    let max = parseInt(rangeMax.value, 10) || MAX_POSSIBLE;
+    if (max < min + MIN_GAP) {
+      max = Math.min(MAX_POSSIBLE, min + MIN_GAP);
+      rangeMax.value = max;
+    }
+    inputMax.value = max.toLocaleString();
+    syncDesktopPriceRange(min, max);
+    updateMobileSliderTrack(min, max);
+    applyFilters();
+  });
+
+  // Type in Min input
+  inputMin.addEventListener('input', () => {
+    const rawVal = parsePriceInput(inputMin.value);
+    const min = Math.min(rawVal, MAX_POSSIBLE);
+    const max = parseInt(rangeMax.value, 10) || MAX_POSSIBLE;
+    rangeMin.value = min;
+    syncDesktopPriceRange(min, max);
+    updateMobileSliderTrack(min, max);
+    applyFilters();
+  });
+
+  // Type in Max input
+  inputMax.addEventListener('input', () => {
+    const rawVal = parsePriceInput(inputMax.value);
+    const max = Math.min(rawVal, MAX_POSSIBLE);
+    const min = parseInt(rangeMin.value, 10) || 0;
+    rangeMax.value = max;
+    syncDesktopPriceRange(min, max);
+    updateMobileSliderTrack(min, max);
+    applyFilters();
+  });
+
+  // Finalize / format on blur or Enter
+  const handleFinalize = (isMin) => {
+    let min = parsePriceInput(inputMin.value);
+    let max = parsePriceInput(inputMax.value);
+
+    min = Math.max(MIN_POSSIBLE, Math.min(min, MAX_POSSIBLE));
+    max = Math.max(MIN_POSSIBLE, Math.min(max, MAX_POSSIBLE));
+
+    if (min > max) {
+      if (isMin) min = max;
+      else max = min;
+    }
+
+    rangeMin.value = min;
+    rangeMax.value = max;
+    inputMin.value = min.toLocaleString();
+    inputMax.value = max.toLocaleString();
+    syncDesktopPriceRange(min, max);
+    updateMobileSliderTrack(min, max);
+    applyFilters();
+  };
+
+  inputMin.addEventListener('change', () => handleFinalize(true));
+  inputMin.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      inputMin.blur();
+      handleFinalize(true);
+    }
+  });
+
+  inputMax.addEventListener('change', () => handleFinalize(false));
+  inputMax.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      inputMax.blur();
+      handleFinalize(false);
+    }
+  });
+}
+
+function updateMobileSliderTrack(minVal, maxVal) {
+  const track = document.getElementById('mobileSliderTrack');
+  if (!track) return;
+  const minPercent = Math.max(0, Math.min(100, (minVal / MAX_POSSIBLE) * 100));
+  const maxPercent = Math.max(0, Math.min(100, (maxVal / MAX_POSSIBLE) * 100));
+  track.style.background = `linear-gradient(to right, var(--gray-200) 0%, var(--gray-200) ${minPercent}%, var(--blue) ${minPercent}%, var(--blue) ${maxPercent}%, var(--gray-200) ${maxPercent}%, var(--gray-200) 100%)`;
+}
+
+function syncDesktopPriceRange(min, max) {
+  const desktopMin = document.getElementById('rangeMin');
+  const desktopMax = document.getElementById('rangeMax');
+  const desktopInputMin = document.getElementById('priceMin');
+  const desktopInputMax = document.getElementById('priceMax');
+  if (desktopMin) desktopMin.value = min;
+  if (desktopMax) desktopMax.value = max;
+  if (desktopInputMin) desktopInputMin.value = min.toLocaleString();
+  if (desktopInputMax) desktopInputMax.value = max.toLocaleString();
+  updateSliderTrack(min, max);
+}
+
+function syncMobilePriceRange(min, max) {
+  const mobileMin = document.getElementById('mobileRangeMin');
+  const mobileMax = document.getElementById('mobileRangeMax');
+  const mobileInputMin = document.getElementById('mobilePriceMin');
+  const mobileInputMax = document.getElementById('mobilePriceMax');
+  if (mobileMin) mobileMin.value = min;
+  if (mobileMax) mobileMax.value = max;
+  if (mobileInputMin) mobileInputMin.value = min.toLocaleString();
+  if (mobileInputMax) mobileInputMax.value = max.toLocaleString();
+  updateMobileSliderTrack(min, max);
+}
+
+// Make functions globally accessible
+window.toggleFilterDrawer = toggleFilterDrawer;
+window.openFilterDrawer = openFilterDrawer;
+window.closeFilterDrawer = closeFilterDrawer;
+window.setTab = setTab;
+window.clearFilters = clearFilters;
 
 // =========================================
 // SEARCH INTEGRATION (handled by shared.js)
