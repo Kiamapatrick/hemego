@@ -67,11 +67,11 @@ function applyFilters() {
 }
 
 function sortProducts(val) {
-  const grid = document.getElementById('productsGrid');
-  if (!grid) return;
-  const cards = Array.from(grid.querySelectorAll('[data-cat]'));
+  const sortCards = (container) => {
+    if (!container) return;
+    const cards = Array.from(container.querySelectorAll('[data-cat]'));
 
-  cards.sort((a, b) => {
+    cards.sort((a, b) => {
     const pa = parseInt(a.dataset.price, 10) || 0;
     const pb = parseInt(b.dataset.price, 10) || 0;
     if (val === 'price-asc') return pa - pb;
@@ -83,9 +83,13 @@ function sortProducts(val) {
       return (a.classList.contains('pcard-hero') ? 0 : 1) - (b.classList.contains('pcard-hero') ? 0 : 1);
     }
     return 0;
-  });
+    });
 
-  cards.forEach(card => grid.appendChild(card));
+    cards.forEach(card => container.appendChild(card));
+  };
+
+  sortCards(document.querySelector('.featured-strip'));
+  sortCards(document.getElementById('productsGrid'));
   applyFilters();
 }
 

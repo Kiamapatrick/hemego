@@ -2450,7 +2450,7 @@ footer {
   .pcard-hero,
   .pcard-feat,
   .pcard-sm {
-    display: inline-block !important;
+    display: inline-block;
     width: 100% !important;
     margin-bottom: 1rem !important;
   }
