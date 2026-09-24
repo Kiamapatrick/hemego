@@ -1096,6 +1096,45 @@ footer {
   }
   .sidebar {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .sidebar-section-title {
+    font-size: .75rem;
+  }
+  .price-range {
+    gap: .75rem;
+  }
+  .range-slider {
+    margin: 8px 0 4px;
+    height: 8px;
+  }
+  .slider-track {
+    border-radius: 6px;
+  }
+  .range-slider input[type="range"] {
+    height: 8px;
+  }
+  .range-slider input[type="range"]::-webkit-slider-thumb {
+    height: 22px;
+    width: 22px;
+  }
+  .range-slider input[type="range"]::-moz-range-thumb {
+    height: 22px;
+    width: 22px;
+  }
+  .price-inputs {
+    gap: .75rem;
+  }
+  .price-input {
+    padding: .6rem .75rem;
+    font-size: .85rem;
+  }
+  .sidebar-clear {
+    font-size: .8rem;
+    padding: .5rem 0;
+    width: 100%;
+    text-align: center;
   }
   .page-hero-meta {
     gap: 1.25rem;
@@ -1145,6 +1184,27 @@ footer {
     flex-wrap: wrap;
     gap: .5rem;
   }
+  /* Make filter tabs horizontally scrollable on mobile */
+  .filter-inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: .5rem;
+    scrollbar-width: none;
+  }
+  .filter-inner::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-tabs {
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+  .ftab {
+    flex-shrink: 0;
+  }
+  .filter-right {
+    flex-shrink: 0;
+  }
   /* Sort/filter buttons full width on screens */
   .sort-select,
   .filter-btn {
@@ -1154,11 +1214,6 @@ footer {
   /* Hide floating action buttons — redundant on mobile with bottom nav bar */
   .float-wa,
   .cart-toggle {
-    display: none !important;
-  }
-
-  /* Hide desktop sidebar on mobile — use filter drawer instead */
-  .sidebar {
     display: none !important;
   }
 
